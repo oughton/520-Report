@@ -1,6 +1,9 @@
 \documentclass{article}
 
 \usepackage{graphicx}
+\usepackage{url}
+\usepackage{appendix}
+
 
 \title{Improved Network Map Display}
 \author{Joel Oughton}
@@ -12,35 +15,325 @@
 %\tableofcontents
 
 \begin{abstract}
-% Adjust my old abstract to reflect overall project state.
+  % Adjust my old abstract to reflect overall project state.
 
 \end{abstract}
 
 \section{Introduction}
 \label{sec:introduction}
+  % Motivation for my project
+  % List the achievements (refer to sections)
 
 \section{Related Work}
 \label{sec:related-work}
+  % ** General Related Work Topics **
+  %   Web graphics sclability 
+  %   Web based visualisation issues
+  %   Computer network visualisation issues
+  %   Published implementations
+  %
+  % Talk about these areas how there is no work that combines all this.
+  %
+  % 
+
+  % Computer network visualisation (key issues)
+  % 
+  % Key Issues: 
+  %   * Why use them
+  %   * Core visualisation issues 
+  %   * Why should it be interactive? 
+  %   * How to use hierachy to our advantage
+  %
+  %  -> Set the scene in terms of - why visualise networks
+  %  -> Core visual issues (Eick 1996)
+  %  -> The importance and possibility of interactivity in visuals over the web (Alves, Becker)
+  %  -> Hierachies (Eick) X
+% why use them...
+
+The related work to this project can be divided into three sections. Issues
+relating to computer network visulisation, web based displays and actual network
+map implementations. Computer network visualisation work includes the key issues
+relating to computer network visualisation such as presentation ideas,
+techniques to address network scalability problems and interactivity
+considerations.
+
+Eick describes aspects of network visualisation and identifies stengths and
+weaknesses of graph based displays.\cite{Eick_1996} Network maps are most
+commonly visualised using node and link graphs. It is noted that these maps are
+particularly effective for small and sparse networks. Problems arrise with
+larger networks such as display clutter, node positioning difficulties and
+perceptual tension. Eick presents three strategies to address these problems.
+Dynamic parameter focussing, node positioning and the use of a 3D layout. This
+project considers the first two but only uses 2D layouts. While it is possible
+that the visualisation techniques that are presented could be applied to a 3D
+layout, it is considered outside the scope of this project and left to future
+work.
+
+% interactive Difficult to follow flows through network.  Many intersecting
+% lines - difficult to interpret Hard to come up with good heuristic for
+% visualisation parameters such as line width, node size etc
+Becker, \emph{et al.} look in to the limitations of static network maps and
+explain the benefits of adding dynamic features.\cite{Becker_1990} They recognise the difficulty
+of comming up with good hueristics for determining visual parameters such as
+line width and node sizing. Dynamic maps have the advantage of incoporating
+sliders or other controls that allow parameters to be adjusted and viewed in
+real time. It is often useful to follow paths through an network. This becomes
+very hard to do for larger, more cluttered networks using a static map. The
+design of the network map for this project considers these advantages as well as
+the benefits from being able to make use latest interactivity technologys
+available in the browser.
+
+
+  % Web Visualisation
+  %  
+  % Why visualise on the web?  What to look out for?  Whats out there? (or is
+  % this too similar to published implementations?)
+  %
+  % 
+  % VMRL - similar ideas (detail added on zoom etc) Rohrer (1997)
+  %
+Rohrer and Swing saw the benefits of web based visualisations back in
+1997.\cite{Rohrer_1997} They state that the loose coupling between data, users
+and web applications is likely to provide a flexible medium for information
+visualisation applications.  A side project mentioned in the paper is a web
+based network visualisation tool that uses translucency for detail abstraction
+and hyperlinks to explorer nodes in more detail. This tool was developed over 10
+years ago and does not include the advanced HTML5 features available today.
+
+
+  % \cite{Johnson_2008}
+  %
+  % HTML Native, Canvas, SVG.  Why do I need to consider this?  What do their
+  % results show?  What does this mean for me?
+  % 
+It is important to pick a web graphics technology that scales well as the number
+of nodes and edges increases in a network map. Johnson and Kelly performed a
+scalability study on web-native information visualisation.\cite{Johnson_2008}
+They test and analyse the scalability performance of the three most popular 2D
+web graphics technologies which are SVG, Canvas and native HTML. The results
+show that Canvas performs the best out of all three technologies. The authors
+also note that neither SVG or Canvas perform well on large visualisation
+datasets. This paper was published in 2008 and browser support is anticipated to
+increase over time. Therefore as a part of this project it was deemed necessary
+to conduct a new set of tests tailored to benchmark network visualisation in the
+browser.
+
+
+  % Pulished implementations Becker 1995, Paul 2000.
+Paul, et al. produced a Java 3D implementation of a network weather map and a
+performance data poller.\cite{Paul_2000} The map incorporates an idea of
+subnetworks having specific layout types such as star, ring and sphere. More
+node detail is made available as the user moves through the 3D space. This
+solution suffers from portability issues as it is reliant the software being
+installed on various machines with connectivity.
+
+Becker, et al. present a geographical network mapping tool.\cite{Becker_1995}
+The visualisation is static with controls loctted around the map to look at
+different aspects of the data. They struggle with ideas to manage navigation
+when zoomed in. They suggest fish eye navigation may be useful to manage such
+case. They also look at ways of showing a large network in a compact display
+through aggregation of links and geographic omission. However, aggregation
+decreases the information about particular links. This tool is quite dated and
+is not web based.
+
+  % Fat and thin client work discussion.
+  % Where does my project fit in here?
+
 
 \section{Background}
 \label{sec:background}
+  % Background section
+  % What can't I assume that people will have as a general background
+  % Overview of background section???
+  %
+  % Datasets, Technologies, Libraries
+
+\subsection{Datasets}
+\label{sec:datasets}
+  %
+  % * What datasets did I use?
+  % * Why did I choose/use those?
+  %   > real network data
+  %   > good for evaluation
+  % * How did I use those datasets?
+  %   > raw networking -> adapter -> generic JSON
+  %   > possibly refer implementation section for further detail
+
+Example datasets were required in order to be able to evaluate network map
+designs and to support test driven development in the implementation. For this
+project, two main datasets were made use of for this purpose. Both of the
+datasets describe real networks currently in active service and both networks
+have an existing network map tool. This is particularly useful for this project
+because we can be sure that we are getting a good representation of an actual
+network and it makes for effective evaluation when it is possible to get
+comparative feedback from network engineers. 
+
+  % Karen About, PHP weathermap 
+The first dataset used was from the Karen network. \cite{Karen_website} Karen is
+a high capacity network that links together education and research institutions
+throughout New Zealand. Their network consists of points-of-presence (PoPs)
+strategically placed in regions in the North and South Island and with
+connections to Sydney and Los Angeles. Each PoP can be thought of as a
+subnetwork of Karen that may contain distribution devices, and connections to
+institutions and other PoPs.  Performance data such as bytes and packets per
+second for a given device port is split over a series of round-robin database
+(RRD) files. Device information such as name and location are stored in a
+database and also available on their online weathermap.
+
+Karen currently uses the network map generation tool called PHP Network
+Weathermap. \cite{PHP_Network_Weathermap_website} See Appendix
+\ref{app:karenphp} for a snapshot of the map. This tool reads in common network
+data files on the server side and generates an image representation of the
+network topology. The image that is sent to the client side includes some
+interaction through the use of HTML image maps but requires a complete
+regeneration for a change of view. This limits interactivity and makes it
+difficult for a user to effectively navigate into deeper subnetworks. This
+project attempts to address these shortcomings by using techniques described in
+Section \ref{sec:visual-design}. 
+
+  % Crcnet
+The second dataset was sourced from Rural Link's wireless network based in both
+rural and city areas across Waikato. The network's core is located in Hamilton
+city and branches out across wireless access points in a tree like structure.
+The dataset obtained includes device information and relationships without
+performance data. Rural Link uses a network management system called Nagios that
+also includes its own network map tool. \cite{Nagio_website} See Appendix
+\ref{app:crcnetnagios} for an example of what their current map looks like. This
+network mapping tool only supports networks laid out in a tree structure, does
+not support interaction of any kind and does not visualise performance data. It
+does have a good way of visualising whether or not a link between devices is up
+or down by highlighting areas of the tree green or red. 
+
+
+  % Adapters Why use them. How did I use them. Relate to Datasets TODO: maybe
+  % define adapter if used elsewhere
+It is useful keep code dealing with the raw network configuration and
+performance data separate from the visualisation. This project used a generic
+graph data structure on the visualisation side try to handle any type of map.
+The data structure simply defines a set of nodes each with their own set of
+adjacencies. Nodes and adjacencies both may have data included which allows for
+the addition of any number of parameters. Raw networking data, perhaps stored in
+RRDs or other databases, can be processed on the server side by an adapter and
+converted into the generic form that the visualisation understands.  The generic
+visualisation structure is done in Javascript Object Notation (JSON) which makes
+it trivial to transmit between the server and client side. \cite{rfc4627}  For
+example, to get the Rural Link configuration files to the generic visualisation
+form, a python script was written to act as an adapter between the two formats. 
+
+
+\subsection{Technologies}
+\label{sec:technologies}
+  % Go over the key technologies used
+  %   > eg Javascript, Canvas, HTML/CSS
+  % Why did I choose to use these technologies
+  % How did I pick them?
+  %   > browser scalability tests
+  %     - overview of my testing tool
+  %     - show and explain implications of results
+  %     - refer back to the scalability paper
+
+\subsection{Libraries}
+\label{sec:libraries}
+  % Go over the key libraries used
+  %   > eg jQuery, Javascript Infovis Toolkit, arbor
+  % Why did I choose these libraries
+  % How did I pick them?
 
 \section{Visual Design}
 \label{sec:visual-design}
+  % Overview of visual design
+
+\subsection{Nodes}
+\label{sec:nodes}
+  % Design considerations for nodes
+  % Nodes can be sub networks
+  %   > Helps for scalability
+  % Grouping, hiding nodes
+  % Combining with symantic zooming
+  % Screenshots
+
+\subsection{Edges}
+\label{sec:edges}
+  % Simple line between two nodes
+  % Can make use of this space more effectively
+  % Explain the visual design of my way
+  %   > visualisation principles included
+  %   > Quantitative vs qualitative
+  % Screenshots
+
+\subsection{Layouts}
+\label{sec:layouts}
+  % Explain importance of node layout
+  %   > Different subgroups - different layouts
+  %   > Groups have layouts
+  % Which layouts did I implement and why
+  % Screenshots
+
+\subsection{Navigation}
+\label{sec:navigation}
+  % Details of navigation
+  % Why is getting it right important
+  % Issues relating to navigation
+  % Zoom, pan, zoom/center nodes, follow edges
+  % Screenshots
+
+\subsection{Overviews}
+\label{sec:overviews}
+  %
+  %
+  %
 
 \section{Implementation} 
 \label{sec:implementation}
+
+\subsection{Nodes and Edges}
+\label{sec:nodes-and-edges}
+
+\subsection{Groups}
+\label{sec:groups}
+
+\subsection{Layouts}
+\label{sec:layouts}
+
+\subsubsection{Editor}
+\label{sec:editor}
+
+\subsection{Navigation}
+\label{sec:navigation}
+
+\subsection{Overviews}
+\label{sec:overviews}
+
+\subsection{Overlays}
+\label{sec:overlays}
+
+\section{Deployment Examples}
+\label{sec:deployment-examples}
 
 \section{Evaluation}
 \label{sec:evaluation}
 
 \section{Future Work}
 \label{sec:future-work}
+  % Discuss possible branches of future work
+  %   > Incorporate the map as part of a network management system
+  %   > Experiment with more layout algorithms
+  %   > Look into the posibility of effectively incorporating layers
+  %   > Generate adapters to take common network data types such as RRD
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 \bibliographystyle{plain}
 \bibliography{}
+
+\appendix
+\appendixpage
+
+\section{Karen PHP Network Weathermap}
+\label{app:karenphp}
+
+\section{Rural Link Nagios Network Map}
+\label{app:crcnetnagios}
 
 \end{document}
