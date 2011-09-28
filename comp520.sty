@@ -1,0 +1,110 @@
+% COMP520 commands. Original by Tony McGregor.  Oct 2010.
+
+% Include this file in your latex source directory then add:
+% \usepackage{comp520} after your \documentclass command and before
+% \begin{document}
+% Just after your \begin{document} include
+% \innertitle{Your Name}{Your Report's Title}
+% If your title is long for one line and you want to control how it's
+% wrapped, insert \\ or \\[3mm] where you want it to be broken.
+
+%---------------------------------------------------------------------------
+% Your report will probably look a bit like this:
+% \documentclass[a4paper,10pt]{report}
+% \usepackage{epsfig}
+% \usepackage{comp520}
+% \begin{document}
+% \innertitle{Tony McGregor}{How to Write\\ {\Large a}\\ COMP520
+%   Report\\ {\Large in}\\ LaTeX2e}
+% \abs{
+%   If you invest the time to read this report you'll discover an
+%   outline of how to write a report.
+%  }
+% \ack{ Thank you, gentle reader, for your time. }
+% \tableofcontents
+% \listoffigures
+% \chapter{Introduction}
+% 
+% \begin{figure}
+% \begin{center}
+% \epsfig{figure=afigure.eps, width=\textwidth}
+% \caption{My First Figure}
+% \label{My First Figure}
+% \end{center}
+% \end{figure}
+% 
+% Very little can be seen in figure~\ref{My First Figure}. 
+% \chapter{Introduction}
+% This is my introduction
+% \section{A sub section in chapter 1}
+%
+% The rest of this report is structured as follows ...
+% 
+% \chapter{Background}
+% 
+% \chapter{Implementation}
+% 
+% \chapter{Results}
+% 
+% \chapter{Conclusions and Future Work}
+% 
+% \appendix
+% \chapter{First Appendix}
+% 
+% \end{document}
+%---------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{comp520}[2010/10/26 v1.0 COMP520 cover page]
+
+% Exit if the style file is already loaded
+\ifx \compfivetwentystyloaded\relax \endinput\else\let\compfivetwentystyloaded\relax\fi
+
+\usepackage{epsfig}
+
+%---------------------------------------------------------------------------
+\newcommand{\innertitle}[2]{
+\pagebreak[3]
+\thispagestyle{empty}
+\begin{centering}
+\epsfig{figure=Waik_Print_CMYK_H.eps,width=7cm}
+\vfill
+{\LARGE \bf #2\\}
+
+\vspace{2.5cm}
+{\Large \em #1\\}
+
+\vfill
+This report is in partial fulfilment of the requirements for the
+degree of Bachelor of Computing and Mathematical Sciences with Honours
+(BCMS(Hons)) at The University of Waikato.\\
+\vspace{2.5ex}
+\copyright \the\year ~#1\\
+\end{centering}
+\newpage
+}
+
+%---------------------------------------------------------------------------
+\newcommand{\abs}[1]{
+\pagebreak[3]
+\vspace*{\fill}
+\centerline{\bf Abstract}
+\vspace{8mm}
+
+#1
+\vspace*{\fill} \vspace*{\fill} \vspace*{\fill} \vspace*{\fill} \vspace*{\fill}
+\newpage
+}
+
+%---------------------------------------------------------------------------
+\newcommand{\ack}[1]{
+\pagebreak[3]
+\vspace*{\fill}
+\centerline{\bf Acknowledgements}
+\vspace{8mm}
+
+#1
+\vspace*{\fill} \vspace*{\fill} \vspace*{\fill} \vspace*{\fill} \vspace*{\fill}
+\newpage
+}
+\endinput
