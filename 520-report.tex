@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper]{article}
+\documentclass[11pt, a4paper]{report}
 
 \usepackage{graphicx}
 \usepackage{url}
@@ -24,7 +24,7 @@
   % Adjust my old abstract to reflect overall project state.
 }
 
-\section{Introduction}
+\chapter{Introduction}
 \label{sec:introduction}
   % Motivation for my project
   % List the achievements (refer to sections)
@@ -120,7 +120,7 @@ details about how the visual design was implemented are found in Section
 evaluation by network engineers are discussed. Finally, some possible directions
 of future work are mentioned in Section \ref{sec:future-work}.
 
-\section{Related Work}
+\chapter{Related Work}
 \label{sec:related-work}
   % ** General Related Work Topics **
   %   Web graphics sclability 
@@ -151,7 +151,7 @@ network graphing issues and published implementations is analysed. Section
 \ref{sec:current-implementations} looks at some of the popular network map
 implementations and how this project attempts to address the weaknesses of them.
 
-\subsection{Research}
+\section{Research}
 \label{sec:research}
 
 The related work to this project can be divided into three areas. Issues
@@ -253,7 +253,7 @@ decreases the information about particular links. This tool is quite dated and
 is not web based.
 
 
-\subsection{Current Implementations}
+\section{Current Implementations}
 \label{sec:current-implementations}
   % 
   %  * Add PHP Network weathermap, Nagios etc into this section
@@ -295,7 +295,7 @@ smaller networks and in cases where a specific area of interest is known. In
 this project, zooming and panning is presented as a more effective way of
 navigating the information space of large computer networks.
 
-\section{Background}
+\chapter{Background}
 \label{sec:background}
   % Background section
   % What can't I assume that people will have as a general background
@@ -310,7 +310,7 @@ producing network maps. Sections \ref{sec:technologies} and \ref{sec:libraries}
 note the technologies and libraries used and the reasons behind why they were
 chosen.
 
-\subsection{Datasets}
+\section{Datasets}
 \label{sec:datasets}
   %
   % * What datasets did I use?
@@ -372,7 +372,7 @@ example, to get the Rural Link configuration files to the generic visualisation
 form, a python script was written to act as an adapter between the two formats. 
 
 
-\subsection{Technologies}
+\section{Technologies}
 \label{sec:technologies}
   % Go over the key technologies used
   %   > eg Javascript, Canvas, HTML/CSS
@@ -488,7 +488,7 @@ library plug-in for jQuery. This assisted with test driven development during
 the implementation stage of the project.
 
 
-\section{Visual Design} 
+\chapter{Visual Design} 
 \label{sec:visual-design}
   % Overview of visual design
 
@@ -496,7 +496,7 @@ In this section, the most significant design aspects of NetMapJs are explained.
 Justification for each of the design decisions is given along with example
 screen shots taken from NetMapJs views.
 
-\subsection{Nodes}
+\section{Nodes}
 \label{sec:nodes.vis}
   % Design considerations for nodes
   % Nodes can be sub networks
@@ -550,7 +550,7 @@ node.}
 \label{fig:nodes1.1}
 \end{figure}
 
-\subsection{Edges}
+\section{Edges}
 \label{sec:edges.vis}
   % Simple line between two nodes
   % Can make use of this space more effectively
@@ -623,7 +623,7 @@ Wellington and Palmerston North PoPs in the Karen network.}
 \label{fig:edges1.2}
 \end{figure}
 
-\subsection{Layouts}
+\section{Layouts}
 \label{sec:layouts.vis}
   % Explain importance of node layout
   %   > Different subgroups - different layouts
@@ -684,7 +684,7 @@ a star layout applied.}
 \end{figure}
 
 
-\subsection{Navigation}
+\section{Navigation}
 \label{sec:navigation.vis}
   % Details of navigation
   % Why is getting it right important
@@ -774,7 +774,7 @@ view shows where they would end up after the animated movement.}
 \label{fig:nav1.2}
 \end{figure}
 
-\subsection{Overviews}
+\section{Overviews}
 \label{sec:overviews.vis}
   % The problem - 
   % How is it solved - 
@@ -811,7 +811,7 @@ and the view port boxes change size and position accordingly.}
 \label{fig:overviews1.0}
 \end{figure}
 
-\section{Implementation} 
+\chapter{Implementation} 
 \label{sec:implementation}
   % Overall implementation
   % Client side / server side
@@ -826,7 +826,7 @@ aspects of the visual design were implemented. Supporting functions such as
 overlays and an editor are discussed in sections \ref{sec:overlays.impl} and
 \ref{sec:editor.impl} respectively.
 
-\subsection{Client / Server Model}
+\section{Client / Server Model}
 \label{sec:client-server-model.impl}
   % Give diagram of the over all structure of application
   %   * How the client side works in a lot of detail
@@ -887,7 +887,7 @@ client through the use of the web API.
 \label{fig:implementation-overview}
 \end{figure}
 
-\subsection{Nodes and Edges}
+\section{Nodes and Edges}
 \label{sec:nodes-and-edges.impl}
   % How were nodes and edges implemented
   %   * Both have display method and contains method
@@ -949,7 +949,7 @@ central pivot point and then the final pipe is drawn.
 
 % image nodes
 
-\subsection{Groups}
+\section{Groups}
 \label{sec:groups.impl}
   % How were groups implemented?
   %   * Nodes can have parents
@@ -989,7 +989,7 @@ applies the specified layout algorithm to it or the default if none has been
 chosen. 
 
 
-\subsection{Layouts}
+\section{Layouts}
 \label{sec:layouts.impl}
   % Overview of layout system
   %   How it is designed to be extendible
@@ -1043,7 +1043,7 @@ the particle system and the compute method transfers the positions from Arbor to
 the node objects. This way, the compute method can be continuously called in
 order to give an animated effect as the nodes move toward their ideal positions.
 
-\subsection{Navigation}
+\section{Navigation}
 \label{sec:navigation.impl}
   % How is navigation implemented overall:
   %   > Canvas translate/scale offset methods
@@ -1123,7 +1123,7 @@ Bederson \cite{Furnas_1995}.) }
 \label{fig:nav2.0} 
 \end{figure}
 
-\subsection{Overviews}
+\section{Overviews}
 \label{sec:overviews.impl}
   % How are overviews implemented?
   %
@@ -1155,7 +1155,7 @@ the main network map. When the event is triggered, the overview calculates new
 coordinates and dimensions for the view port box, and then redraws it.
 
 
-\subsection{Overlays}
+\section{Overlays}
 \label{sec:overlays.impl}
   % Similar to overviews in that there is an overlay manager and overlays
   % 
@@ -1203,7 +1203,7 @@ functionality.}
 \label{fig:overlays1.0} 
 \end{figure}
 
-\subsection{Editor}
+\section{Editor}
 \label{sec:editor.impl}
   % Overview of the editor
   %   Why do we need it?
@@ -1251,19 +1251,19 @@ the editor.
 \end{figure}
 
 %TODO
-%\subsection{Layers}
+%\section{Layers}
 % how I tried and failed (Network descriptor language) how somewhat allow for
 % manual layering
 % Maybe just add a Problems Faced section?? - No add Discussion section just
 % before conclusion
 
-%\subsection{Debugger}
+%\section{Debugger}
 %\label{sec:debugger.impl}
 
 %\section{Deployment Examples}
 %\label{sec:deployment-examples}
 
-\section{Evaluation}
+\chapter{Evaluation}
 \label{sec:evaluation}
   %
   % How was the evaluation conducted:
@@ -1365,7 +1365,7 @@ that the user interface polished up. This is particularly important because a
 big screen is used in their office for viewing visualisations. 
 
 
-\section{Future Work}
+\chapter{Future Work}
 \label{sec:future-work}
   % What were my results? (Don't state here, but important to think about)
   %   * Network Map Implementation (HTML5)
@@ -1427,7 +1427,7 @@ extension to allow NetMapJs to be used with a minimal installation and setup
 overhead.
 
 
-\section{Conclusion}
+\chapter{Conclusion}
 \label{sec:conclusion}
 
   % used web technologies such as Canvas and JavaScript (identified and used c).
@@ -1482,12 +1482,12 @@ systems.
 \appendix
 \appendixpage
 
-\section{Karen PHP Network Weathermap}
+\chapter{Karen PHP Network Weathermap}
 \label{app:karenphp}
 \centering
 \includegraphics[width=170mm,height=90.76mm]{assets/karen-phpweathermap.eps}
 
-\section{Rural Link Nagios Network Map}
+\chapter{Rural Link Nagios Network Map}
 \label{app:crcnetnagios}
 \centering
 \includegraphics[width=170mm,height=136mm]{assets/rurallink-nagios.eps}
