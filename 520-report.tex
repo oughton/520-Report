@@ -156,7 +156,7 @@ implementations and how this project attempts to address the weaknesses of them.
 \subsection{Research}
 \label{sec:research}
 
-The related work to this project can be divided into three areas. Issues
+The related work to this project can be divided into three areas: issues
 relating to computer network visualisation, web based displays and actual
 network map implementations. Computer network visualisation work includes the
 related key issues such as presentation ideas, techniques to address network
@@ -165,27 +165,35 @@ scalability problems and interactivity considerations.
 Eick describes aspects of network visualisation and identifies strengths and
 weaknesses of graph based displays \cite{Eick_1996}. Network maps are most
 commonly visualised using node and link graphs. It is noted that these maps are
-particularly effective for small and sparse networks. Problems arrise with
-larger networks such as display clutter, node positioning difficulties and
-perceptual tension. Eick presents three strategies to address these problems.
-Dynamic parameter focussing, node positioning and the use of a 3D layout. This
-project considers the first two but only uses 2D layouts. While it is possible
-that the visualisation techniques that are presented could be applied to a 3D
-layout, it is considered outside the scope of this project and left to future
-work.
+particularly effective for small and sparse networks. Problems arise with larger
+networks such as display clutter, node positioning difficulties and perceptual
+tension. Display clutter is the situation where displays become overwhelmed with
+too much information. This may cause the viewer to become confused with the
+display. Node positioning effects the way that viewers interpret the map.
+Different node positions may lead to other interpretations of the same
+underlying data. Finally, the distance between nodes cause viewers to perceive
+relationships between nodes differently. For example, nodes positioned closely
+will be joined by a short line and will appear to be related to each other. An
+effective network map layout takes advantage of the perceptual tension effect.
+
+Eick presents three strategies to address these problems: dynamic
+parameter focussing, node positioning and the use of a 3D layout. This project
+considers the first two but only uses 2D layouts. While it is possible that the
+visualisation techniques that are presented could be applied to a 3D layout, it
+is considered outside the scope of this project and left to future work.
 
 % interactive Difficult to follow flows through network.  Many intersecting
 % lines - difficult to interpret Hard to come up with good heuristic for
 % visualisation parameters such as line width, node size etc
-Becker, \emph{et al.} look in to the limitations of static network maps and
-explain the benefits of adding dynamic features \cite{Becker_1990}. They
-recognise the difficulty of coming up with good heuristics for determining
-visual parameters such as line width and node sizing. Dynamic maps have the
-advantage of incorporating sliders or other controls that allow parameters to be
-adjusted and viewed in real time. It is often useful to follow paths through an
-network. This becomes very hard to do for larger, more cluttered networks using
+Becker, \emph{et al.} examine the limitations of static network maps and explain
+the benefits of adding dynamic features \cite{Becker_1990}. They recognise the
+difficulty of deriving good heuristics for determining visual parameters such as
+line width and node sizing. Dynamic maps have the advantage of incorporating
+sliders or other controls that allow parameters to be adjusted and viewed in
+real time. They recognise that it is often useful to follow paths through an
+network. This becomes difficult for larger, more cluttered networks using
 a static map. The design of the network map for this project considers these
-advantages as well as the benefits from being able to make use of the latest
+advantages as well as the benefits from being able to utilise the latest
 interactivity technologies available in the browser.
 
 
@@ -211,48 +219,54 @@ There are publications that consider `thin' and `fat' clients as the two
 extremes of client to server application interactions
 \cite{Eick_2007}\cite{Jern_1998}. A thin client has most of the work done on the
 server side and a fat client is the opposite. Thin clients cause more load on
-the server and are limited in the amount of interactive that is possible. A fat
-client however, allows for sophisticated user interaction and imposes less of a
+the server and are limited in the amount of interactivity that is possible. A
+fat client, however, allows for sophisticated user interaction and imposes less
 load on the server. This project takes advantage of recent improvements to
-browser technologies by producing an application that in the most part runs
-inside the browser. Only network data storage and processing is handled on the
-server side. The application therefore falls on the middle ground between the
-thin and fat client types.
+browser technologies by producing an application that primarily runs inside the
+browser. Only network data storage and processing is handled on the server side.
+The implementation of NetMapJs therefore falls between the thin and fat client
+types.
 
   % \cite{Johnson_2008}
   %
   % HTML Native, Canvas, SVG.  Why do I need to consider this?  What do their
   % results show?  What does this mean for me?
   % 
-It is important to pick a web graphics technology that scales well as the number
-of nodes and edges increases in a network map. Johnson and Kelly performed a
-scalability study on web-native information visualisation \cite{Johnson_2008}.
-They test and analyse the scalability performance of the three most popular 2D
-web graphics technologies. SVG, Canvas and native HTML. The results
-show that Canvas performs the best out of all three technologies. The authors
-also note that neither SVG or Canvas perform well on large visualisation
-datasets. This paper was published in 2008 and browser support is anticipated to
-increase over time. Therefore as a part of this project it was deemed necessary
-to conduct a new set of tests, tailored to benchmark network visualisation in the
-browser.
+It is important to select a web graphics technology that is scalable as the
+number of nodes and edges increases in a network map so that larger networks can
+be visualised. Johnson and Kelly performed a scalability study on web-native
+information visualisation \cite{Johnson_2008}.  They test and analyse the
+scalability of the three most popular 2D web graphics technologies.  SVG, Canvas
+and native HTML. The results show that Canvas performs the best out of the three
+technologies. The authors also note that neither SVG or Canvas perform well on
+large visualisation datasets. This paper was published in 2008 and browser
+support is anticipated to improve over time. Therefore as a part of this project
+it was deemed necessary to conduct a new set of tests, tailored to benchmark
+network visualisation in the browser.
 
 
   % Pulished implementations Becker 1995, Paul 2000.
 Paul, et al. produced a Java 3D implementation of a network weather map and a
 performance data poller \cite{Paul_2000}. The map incorporates an idea of
 subnetworks having specific layout types such as star, ring and sphere. More
-node detail is made available as the user moves through the 3D space. This
-solution suffers from portability issues as it is reliant the software being
-installed on various machines with connectivity.
+node detail is made available as the user moves through the 3D space.
+Complicated graphs displayed using three dimensions make depth perception
+difficult due to occlusion. Movement through the space is good at understanding
+such displays. The Java 3D implementation suffered from low frame rates that
+reduces the movement effectiveness.
+
 
 Becker, et al. present a geographical network mapping tool \cite{Becker_1995}.
 The visualisation is static with controls located around the map to look at
 different aspects of the data. They struggle with ideas to manage navigation
-when zoomed in. They suggest fish eye navigation may be useful to manage such
-case. They also look at ways of showing a large network in a compact display
-through aggregation of links and geographic omission. However, aggregation
-decreases the information about particular links. This tool is quite dated and
-is not web based.
+when zoomed in. In this project, stacked overview maps are used to overcome this
+problem. They also look at ways of showing a large network in a compact display
+through aggregation of links and geographic omission. This is effective at
+reducing the display clutter resulting from too many overlapping edges. However,
+aggregation decreases the information about particular links. If the links are
+not disaggregated when zooming in, some of this information will be lost. This
+tool demonstrates useful concepts but is quite dated, so there are many
+improvements possible.
 
 
 \subsection{Current Implementations}
@@ -282,7 +296,7 @@ not visualise performance data. Networks that include redundant, non tree like
 links are visualised by multiple paths to compensate. The map does have a good
 way of visualising whether or not a link between devices is up or down by
 highlighting areas of the tree green or red. An advantage of visualisations that
-are integrated into network management systems, is that no additional
+are integrated into network management systems is that no additional
 installation is required because all of the networking data storage and
 processing is taken care of.
 
@@ -309,7 +323,7 @@ navigating the information space of large computer networks.
 
 This section includes discussion about the datasets, technologies and libraries
 used in the development of NetMapJs. Section \ref{sec:datasets} describes the
-networks that data was sourced from and the current tools that they use for
+networks that data was sourced from and the current tools that operators use for
 producing network maps. Sections \ref{sec:technologies} and \ref{sec:libraries}
 note the technologies and libraries used and the reasons behind why they were
 chosen.
@@ -328,11 +342,10 @@ chosen.
 Example datasets were required to evaluate network map designs and to support
 test driven development in the implementation stages. For this project, two main
 datasets were used for this purpose. Both of the datasets describe real networks
-currently in active service and networks have an existing network map tool.
+currently in active service and the networks have an existing network map tool.
 This is particularly useful for this project because we can be sure that we are
-getting a good representation of an actual network and it makes for an effective
-evaluation when it is possible to get comparative feedback from network
-engineers. 
+getting a good representation of an actual network and allows for an effective
+evaluation by receiving comparative feedback from the network engineers. 
 
   % KAREN About, PHP weathermap 
 The first dataset used was from the KAREN network \cite{KAREN_website}. KAREN is
@@ -353,26 +366,28 @@ map can be viewed in Appendix \ref{app:karenphp}.
 The second dataset was sourced from Rural Link's wireless network based in both
 rural and city areas across Waikato. The network core is located in Hamilton
 city and branches out across wireless access points in a tree like structure
-with some redundant links. The dataset obtained, includes device information and
+with some redundant links. The dataset obtained includes device information and
 relationships without performance data. Rural Link uses a network management
-system called Nagios that also includes its own network map tool. See Appendix
-\ref{app:crcnetnagios} for an example of what their current map looks like. The
-Nagios tool produces a tree map layout that handles redundant links by
-replicating paths.
+system called Nagios that also includes its own network map tool. Appendix
+\ref{app:crcnetnagios} contains an example of what the Rural Link network map
+looks like. The Nagios tool produces a tree map layout that handles redundant
+links by replicating paths.
 
 
   % Adapters Why use them. How did I use them. Relate to Datasets
-It is useful keep code dealing with the raw network configuration and
-performance data separate from the visualisation. This project used a generic
-graph data structure on the visualisation side to try to handle any type of map.
-The data structure simply defines a set of nodes each with their own set of
-adjacencies. Nodes and adjacencies both may have data included which allows for
-the addition of any number of parameters. Raw networking data, perhaps stored in
-RRDs or other databases, can be processed on the server side by an adapter and
-converted into the generic form that the visualisation understands.  The generic
-visualisation structure is done in JavaScript Object Notation (JSON) which makes
-it trivial to transmit between the server and client side \cite{rfc4627}. For
-example, to get the Rural Link configuration files to the generic visualisation
+It is useful to separate code dealing with the raw network configuration and
+performance data from the visualisation. This means that when network data
+collection practices or data structures change the visualisation can continue to
+function without alterations. This project uses a generic graph data structure
+on the visualisation side, which will support any type of map. The data
+structure simply defines a set of nodes each with their own set of adjacencies.
+Nodes and adjacencies both may have data attached which allows for the addition
+of any number of parameters. Raw networking data, perhaps stored in RRDs or
+other databases, can be processed on the server side by an adapter and converted
+into the generic form that the visualisation understands. The generic
+visualisation structure uses JavaScript Object Notation (JSON) which makes it
+trivial to transmit between the server and client side \cite{rfc4627}. For
+example, to convert the Rural Link configuration files to the generic visualisation
 form, a python script was written to act as an adapter between the two formats. 
 
 
@@ -389,22 +404,21 @@ form, a python script was written to act as an adapter between the two formats.
 
 % implementation overview
 In order to explain the choices of technologies, it is helpful have a general
-overview of the implementation of the visualisation. See Section
-\ref{sec:implementation} for complete implementation details. This projects
-application, NetMapsJs, was built to run mostly on the client side with only the
-network data processing done on the server side. The visualisation code and
-network datasets are loaded from server to client side where the web browser
-then loads in the application and displays something to the user. NetMapJs
-allows interaction with the user as well as additional requests to the server
-side for extra data such as the latest bandwidth measurements. As described in
-Section \ref{sec:related-work}, this somewhere between a thin and thick client
+overview of the implementation of the visualisation. The implementation of
+NetMapJs, was built to run mostly on the client side with only the network data
+processing done on the server side. The visualisation code and network datasets
+are loaded from server to client side where the web browser then loads in the
+application and displays the network map to the user. NetMapJs allows
+interaction with the user as well as additional requests to the server side for
+extra data such as the latest bandwidth measurements. As described in Section
+\ref{sec:related-work}, this lies somewhere between a thin and thick client
 design.
 
 % technologies
 The NetMapJs application is implemented using JavaScript as the client side
 programming language. It was chosen because it is implemented in all modern web
 browsers, it does not require any third party plug-ins to run and its popularity
-has lead to advances in its efficiency and performance. The JavaScript code
+has led to advances in its efficiency and performance. The JavaScript code
 handles client to server communication, user interaction and the actual
 visualisation generation. Topology and networking data is exchanged with the
 server using JSON. The visualisation is displayed to the user through the use of
@@ -436,17 +450,17 @@ different browsers are tested using both SVG and Canvas.}
 % Scalability issues
 The two most widely supported and popular browser native technologies are
 Scalable Vector Graphics (SVG) \cite{Ferraiolo_2003} and Canvas
-\cite{Canvas_website}. SVG uses vector based graphics where as Canvas is a
-bitmap system. SVG allows vector objects to be created and added to the HTML
-DOM. User interaction such as mouse clicks can be easily added to one of these
-objects and vector sets can be changed. Canvas on the other hand requires the
-programmer to set up their only user interaction system and the entire canvas
-must be redrawn when any change is required. It would therefore appear that
-SVG was the most natural choice to go with for network maps that require user
-interaction for nodes and edges.  However, previous tests have shown scalability
-performance problems with SVG \cite{Johnson_2008}. These tests are four years
-old relative to this project so it was deemed necessary to develop a benchmark
-tool to produce new results.
+\cite{Canvas_website}. SVG uses vector based graphics whereas Canvas is a bitmap
+system. SVG allows vector objects to be created and added to the HTML Document
+Object Model (DOM). User interaction such as mouse clicks can be easily added to
+one of these objects and vector sets can be changed. Canvas on the other hand
+requires the programmer to develop their own user interaction system and the
+entire canvas must be redrawn when any change is required. It would therefore
+appear that SVG was the most natural choice to go with for network maps that
+require user interaction for nodes and edges. However, previous tests have shown
+scalability performance problems with SVG \cite{Johnson_2008}. These tests are
+four years old relative to this project so it was deemed necessary to develop a
+benchmark tool to produce updated results.
 
 The benchmark tool was developed using JavaScript to run across all modern
 browsers. It generates a given number of rectangles and begins moving them
@@ -461,11 +475,11 @@ The results of the tests are shown in Figure \ref{fig:benchmark-graph}. At the
 500 particle mark the top three lines are all Canvas based frame rates. SVG
 performance is shown to drop significantly in the first 50 to 100 particles
 where as Canvas achieves a much more level gradient. NetMapJs needs to be able
-to visualise networks that will potentially have many more nodes that the
-performance limits of SVG allows for and as a result Canvas was chosen as the
-web graphics technology for this project. While this is the case, the graphics
-generation system was kept separated from the rest of the code. This means that
-if performance of these technologies shift in the future, a new graphic system
+to visualise networks that will potentially have many more nodes than the
+performance limits of SVG allow for. As a result, Canvas was chosen as the web
+graphics technology for this visualisation. However, the graphics generation
+system was kept separate from the rest of the code. This means that if
+performance of these technologies shift in the future, a new graphic system
 could be implemented and slotted in to reflect the change.
 
 
@@ -478,22 +492,24 @@ could be implemented and slotted in to reflect the change.
 
 NetMapJs makes use of the jQuery, JavaScript InfoVis Toolkit and Arbor libraries
 in its design. JQuery was used for several reasons \cite{jQuery_website}. Cross
-browser support is important such that each user gets the same experience across
-different systems. JQuery functions handle all of this for you and is especially
+browser support is important to ensure that each user gets the same experience
+across different systems. JQuery functions are portable and are especially
 useful for eliminating browser specific code. JQuery also simplifies HTML
 document manipulation, event handling and AJAX interactions. The JavaScript
-InfoVis Toolkit provides a framework for producing interactive visualisations
-based in the web \cite{thejit_website}. The toolkit includes many useful
-features such as node-edge graph manipulation functions, complex number
-arithmetic, animation transitions and so on.
+InfoVis Toolkit provides a framework for producing interactive, web based
+visualisations \cite{thejit_website}. The toolkit includes many useful features
+such as node-edge graph manipulation functions, complex number arithmetic,
+animation transitions and so on, which are needed for this project.
 
-NetMapJs includes some automatic layout algorithms for initially deciding
-where to position nodes in the network map. One of these layouts is a force
-directed algorithm.  The Arbor JavaScript library was used for this as it
-performs well and provides mechanisms for changing physics parameters such as
-gravity and friction \cite{Arbor_website}. The QUnit library is a unit testing
-library plug-in for jQuery. This assisted with test driven development during
-the implementation stage of the project.
+NetMapJs includes some automatic layout algorithms for initially deciding where
+to position nodes in the network map. One of these layouts is a force directed
+algorithm. These are a class of algorithms that lay out the graph in an
+aesthetically pleasing way by applying forces to nodes and edges. The Arbor
+JavaScript library was used for this as it performs well and provides mechanisms
+for changing physics parameters such as gravity and friction
+\cite{Arbor_website}. The QUnit library is a unit testing library plug-in for
+jQuery. This assisted with test driven development during the implementation
+stage of the project.
 
 \newpage
 
