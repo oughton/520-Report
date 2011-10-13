@@ -4,6 +4,7 @@
 \usepackage{url}
 \usepackage{appendix}
 \usepackage{comp520}
+\usepackage{pseudocode}
 
 \usepackage[hmargin=2cm,vmargin=2.5cm]{geometry}
 
@@ -11,7 +12,6 @@
 %\addtolength{\evensidemargin}{-.875in}
 %\addtolength{\textwidth}{1.75in}
 \linespread{1.5}
-
 
 \begin{document}
 \innertitle{Joel Oughton}{Improved Network Map Display}
@@ -28,6 +28,97 @@
 \label{sec:introduction}
   % Motivation for my project
   % List the achievements (refer to sections)
+  %
+  %
+  % Introduce my project:
+  %   > Start with overview of project
+  %     * improve introduction from interim report?
+  %   > Motivate your project - topic is important and worth reading
+  %     and something new to the field
+  %   > What is my research question?
+  %   > How did I solve it?
+  %   > What sort of results will the paper present? 
+
+  % what is the general topic?
+  %   - HTML 5 technologies
+  %   - modern computer network map display
+  %   - what is a network map
+
+Computer network maps are an effective way of visualising complex network
+systems. They consist of nodes and edges, where nodes represent devices and edges
+show the physical relationship between them. In this project, techniques and
+technologies are explored with the goal of producing an improved network map
+display over existing implementations. NetMapJs, a web based network map
+visualisation application, was designed and developed as part of this project to
+present the ideas discussed in this report.
+
+  % problems with current network maps (Motivation):
+  %   > Net very dynamic or interactive, often just static images
+  %   > Lack of portability
+  %   > Don't scale well to large networks
+  %   > Don't consider layers???
+  %
+  % Design goals
+  %   > web based
+  %   > Scalable
+  %   > Interactive 
+  %   > Mutli layered???
+ 
+There are some notable weaknesses of existing tools that this project aims to
+address. Network maps often generate static images that provide little or no
+user interaction. This project looks into the use zooming, panning and other
+advanced navigation functionality to give users more control over the
+information space. An easy to use event system encourages developers to make use
+of more user input. Existing tools also usually do not scale well for large
+networks. Views become overwhelming and overlapping edges obscure parts of the
+network. This project considers the use of hierarchy to reduce the overall
+complexity of maps by grouping together sub networks. The idea of groups coupled
+with semantic zooming enables detail to be abstracted until the user indicates
+that they are interested in a more specific area of the network.
+
+Current computer network visualisation tools in the network industry do not take
+full advantage of the latest web technologies. Visualisations built and
+presented using HTML5 technologies in general are becoming a lot more popular.
+This is because of the benefits of using browsers for presenting information.
+Web applications reduce the requirement for installing and maintaining special
+software on multiple machines. Views can be shared and discussed between users
+easier as everyone has a browser. Mobile devices also come with browsers which
+give viewers instant portability. This project focusses on taking advantage of
+these technologies in order to produce a highly interactive computer network
+map.
+
+Network administrators and engineers use topology and performance information
+for various tasks. They may for example base decisions relating to where traffic
+is routed to minimise bandwidth costs. Performance coupled with an idea of
+topology is useful for capacity management. A link may not be using all of its
+available bandwidth and so there would be a possibility of adding additional
+clients. The opposite is also useful, an indication of high bandwidth
+utilisation lets administrators known that more links or load balancing may be
+beneficial to their clients. Existing network map implementations sometimes
+attempt to display this information in edges or by other means. In this project,
+a new way of displaying quantitative data within edges is presented and
+implemented in NetMapJs with good results.
+
+  % The achievements and section breakdowns
+  %
+
+The datasets used in this project for testing NetMapJs were sourced from two
+real and currently running networks, Rural Link and Karen. Both of these
+networks have current network mapping tools in place. A brief comparison of
+these tools with NetMapJs are included. In the evaluation section, network
+engineers from within Rural Link and Karen are also asked to compare the tools
+and provide other feedback. 
+
+This report is divided into the following sections. Section
+\ref{sec:related-work} gives the necessary background information used for the
+rest of the report. The datasets are described in detail and the technologies
+and libraries used in this project are listed. The visual design considerations
+are described in Section \ref{sec:visual-design}. Each of the design aspects
+are motivated, justified and an example from NetMapJs is given. The technical
+details about how the visual design was implemented are found in Section
+\ref{sec:implementation}. In Section \ref{sec:evaluation}, the results of
+evaluation by network engineers are discussed. Finally, some possible directions
+of future work are mentioned in Section \ref{sec:future-work}.
 
 \section{Related Work}
 \label{sec:related-work}
@@ -39,9 +130,6 @@
   %
   % Talk about these areas how there is no work that combines all this.
   %
-  % TODO: split this section up into 'Research' and 'Current Implementations'
-  %         * Add PHP Network weathermap, Nagios etc into this section
-
   % Computer network visualisation (key issues)
   % 
   % Key Issues: 
@@ -56,14 +144,23 @@
   %  -> Hierachies (Eick) X
 % why use them...
 
-The related work to this project can be divided into three sections. Issues
+In this section, work relevant to this project is discussed. The work is divided
+into two categories, research and current implementations. In Section
+\ref{sec:research}, published literature focussing on web based visualisation,
+network graphing issues and published implementations is analysed. Section
+\ref{sec:current-implementations} looks at some of the popular network map
+implementations and how this project attempts to address the weaknesses of them.
+
+\subsection{Research}
+\label{sec:research}
+
+The related work to this project can be divided into three areas. Issues
 relating to computer network visualisation, web based displays and actual
 network map implementations. Computer network visualisation work includes the
-key issues relating to computer network visualisation such as presentation
-ideas, techniques to address network scalability problems and interactivity
-considerations.
+related key issues such as presentation ideas, techniques to address network
+scalability problems and interactivity considerations.
 
-Eick describes aspects of network visualisation and identifies stengths and
+Eick describes aspects of network visualisation and identifies strengths and
 weaknesses of graph based displays \cite{Eick_1996}. Network maps are most
 commonly visualised using node and link graphs. It is noted that these maps are
 particularly effective for small and sparse networks. Problems arrise with
@@ -79,15 +176,15 @@ work.
 % lines - difficult to interpret Hard to come up with good heuristic for
 % visualisation parameters such as line width, node size etc
 Becker, \emph{et al.} look in to the limitations of static network maps and
-explain the benefits of adding dynamic features \cite{Becker_1990}. They recognise the difficulty
-of coming up with good heuristics for determining visual parameters such as
-line width and node sizing. Dynamic maps have the advantage of incorporating
-sliders or other controls that allow parameters to be adjusted and viewed in
-real time. It is often useful to follow paths through an network. This becomes
-very hard to do for larger, more cluttered networks using a static map. The
-design of the network map for this project considers these advantages as well as
-the benefits from being able to make use latest interactivity technologies
-available in the browser.
+explain the benefits of adding dynamic features \cite{Becker_1990}. They
+recognise the difficulty of coming up with good heuristics for determining
+visual parameters such as line width and node sizing. Dynamic maps have the
+advantage of incorporating sliders or other controls that allow parameters to be
+adjusted and viewed in real time. It is often useful to follow paths through an
+network. This becomes very hard to do for larger, more cluttered networks using
+a static map. The design of the network map for this project considers these
+advantages as well as the benefits from being able to make use of the latest
+interactivity technologies available in the browser.
 
 
   % Web Visualisation
@@ -98,27 +195,27 @@ available in the browser.
   % 
   % VMRL - similar ideas (detail added on zoom etc) Rohrer (1997)
   %
-Rohrer and Swing saw the benefits of web based visualisations back in
-1997 \cite{Rohrer_1997}. They state that the loose coupling between data, users
-and web applications is likely to provide a flexible medium for information
+Rohrer and Swing saw the benefits of web based visualisations back in 1997
+\cite{Rohrer_1997}. They state that the loose coupling between data, users and
+web applications is likely to provide a flexible medium for information
 visualisation applications.  A side project mentioned in the paper is a web
 based network visualisation tool that uses translucency for detail abstraction
-and hyperlinks to explorer nodes in more detail. This tool was developed over 10
+and hyperlinks to explore nodes in more detail. This tool was developed over 10
 years ago and does not include the advanced HTML5 features available today.
 
   
   % Fat and thin client work discussion.  Where does my project fit in here?
-There are publications that consider 'thin' and 'fat' clients as the two
+There are publications that consider `thin' and `fat' clients as the two
 extremes of client to server application interactions
 \cite{Eick_2007}\cite{Jern_1998}. A thin client has most of the work done on the
 server side and a fat client is the opposite. Thin clients cause more load on
 the server and are limited in the amount of interactive that is possible. A fat
-client however allows for sophisticated user interaction and imposes less of a
+client however, allows for sophisticated user interaction and imposes less of a
 load on the server. This project takes advantage of recent improvements to
 browser technologies by producing an application that in the most part runs
-inside the browser. Only network data storage and processing is to be handles on
-the server side. The application therefore falls on the middle ground between
-the thin and fat client types.
+inside the browser. Only network data storage and processing is handled on the
+server side. The application therefore falls on the middle ground between the
+thin and fat client types.
 
   % \cite{Johnson_2008}
   %
@@ -129,12 +226,12 @@ It is important to pick a web graphics technology that scales well as the number
 of nodes and edges increases in a network map. Johnson and Kelly performed a
 scalability study on web-native information visualisation \cite{Johnson_2008}.
 They test and analyse the scalability performance of the three most popular 2D
-web graphics technologies which are SVG, Canvas and native HTML. The results
+web graphics technologies. SVG, Canvas and native HTML. The results
 show that Canvas performs the best out of all three technologies. The authors
 also note that neither SVG or Canvas perform well on large visualisation
 datasets. This paper was published in 2008 and browser support is anticipated to
 increase over time. Therefore as a part of this project it was deemed necessary
-to conduct a new set of tests tailored to benchmark network visualisation in the
+to conduct a new set of tests, tailored to benchmark network visualisation in the
 browser.
 
 
@@ -156,6 +253,47 @@ decreases the information about particular links. This tool is quite dated and
 is not web based.
 
 
+\subsection{Current Implementations}
+\label{sec:current-implementations}
+  % 
+  %  * Add PHP Network weathermap, Nagios etc into this section
+  %  * Zenoss, PHP NW, Nagios, SolarWinds
+  %  * http://en.wikipedia.org/wiki/Network_mapping#Notable_network_mappers
+  %
+
+There are already implementations of web based computer network maps. The PHP
+Network Weathermap reads in common network data files on the server side and
+generates an image representation of the network topology
+\cite{PHP_Network_Weathermap_website}. The image that is sent to the client side
+includes some interaction through the use of HTML image maps but requires a
+complete regeneration for a change of view. This limits interactivity and makes
+it difficult for a user to effectively navigate into deeper subnetworks. A user
+must click on a given node group and then wait for the page to reload completely
+with a new display of the internal nodes. This project attempts to address
+these shortcomings by using techniques described in Section
+\ref{sec:visual-design}. 
+
+Another web based implementation comes as part of the Nagios network management
+system (NMS) \cite{Nagios_website}. This network mapping tool only supports networks
+laid out in a tree structure, does not support interaction of any kind and does
+not visualise performance data. Networks that include redundant, non tree like
+links are visualised by multiple paths to compensate. The map does have a good
+way of visualising whether or not a link between devices is up or down by
+highlighting areas of the tree green or red. An advantage of visualisations that
+are integrated into network management systems, is that no additional
+installation is required because all of the networking data storage and
+processing is taken care of.
+
+The Zenoss NMS also includes networking mapping functionality
+\cite{Zenoss_website}. Their tool takes a different approach to the zooming and
+panning method used in this project. Filters let the user immediately jump to a
+view of the network centered around a particular device. The amount of the
+network shown is adjusted using a slider that controls the number of hops from
+the central node. The automatic layout algorithm used is also adjusted by a
+slider that alters the level of node repulsion. This approach works well for
+smaller networks and in cases where a specific area of interest is known. In
+this project, zooming and panning is presented as a more effective way of
+navigating the information space of large computer networks.
 
 \section{Background}
 \label{sec:background}
@@ -164,6 +302,13 @@ is not web based.
   % Overview of background section???
   %
   % Datasets, Technologies, Libraries
+
+This section includes discussion about the datasets, technologies and libraries
+used in the development of NetMapJs. Section \ref{sec:datasets} describes the
+networks that data was sourced from and the current tools that they use for
+producing network maps. Sections \ref{sec:technologies} and \ref{sec:libraries}
+note the technologies and libraries used and the reasons behind why they were
+chosen.
 
 \subsection{Datasets}
 \label{sec:datasets}
@@ -176,63 +321,52 @@ is not web based.
   %   > raw networking -> adapter -> generic JSON
   %   > possibly refer implementation section for further detail
 
-Example datasets were required in order to be able to evaluate network map
-designs and to support test driven development in the implementation. For this
-project, two main datasets were made use of for this purpose. Both of the
-datasets describe real networks currently in active service and both networks
-have an existing network map tool. This is particularly useful for this project
-because we can be sure that we are getting a good representation of an actual
-network and it makes for effective evaluation when it is possible to get
-comparative feedback from network engineers. 
+Example datasets were required to evaluate network map designs and to support
+test driven development in the implementation stages. For this project, two main
+datasets were used for this purpose. Both of the datasets describe real networks
+currently in active service and networks have an existing network map tool.
+This is particularly useful for this project because we can be sure that we are
+getting a good representation of an actual network and it makes for an effective
+evaluation when it is possible to get comparative feedback from network
+engineers. 
 
   % Karen About, PHP weathermap 
 The first dataset used was from the Karen network \cite{Karen_website}. Karen is
 a high capacity network that links together education and research institutions
-throughout New Zealand. Their network consists of points-of-presence (PoPs)
+throughout New Zealand. Their network consists of point-of-presence (PoP) nodes
 strategically placed in regions in the North and South Island and with
 connections to Sydney and Los Angeles. Each PoP can be thought of as a
 subnetwork of Karen that may contain distribution devices, and connections to
-institutions and other PoPs.  Performance data such as bytes and packets per
+institutions and other PoPs.  Performance data such as bytes or packets per
 second for a given device port is split over a series of round-robin database
 (RRD) files. Device information such as name and location are stored in a
-database and also available on their online weathermap.
+database and are also available on their online weathermap. Karen currently uses
+the network map generation tool called PHP Network Weathermap. A snapshot of the
+map can be viewed in Appendix \ref{app:karenphp}.
 
-Karen currently uses the network map generation tool called PHP Network
-Weathermap \cite{PHP_Network_Weathermap_website}. A snapshot of the map can be
-viewed in Appendix \ref{app:karenphp}. This tool reads in common network data
-files on the server side and generates an image representation of the network
-topology. The image that is sent to the client side includes some interaction
-through the use of HTML image maps but requires a complete regeneration for a
-change of view. This limits interactivity and makes it difficult for a user to
-effectively navigate into deeper subnetworks. This project attempts to address
-these shortcomings by using techniques described in Section
-\ref{sec:visual-design}. 
 
   % Crcnet
 The second dataset was sourced from Rural Link's wireless network based in both
-rural and city areas across Waikato. The network's core is located in Hamilton
-city and branches out across wireless access points in a tree like structure.
-The dataset obtained includes device information and relationships without
-performance data. Rural Link uses a network management system called Nagios that
-also includes its own network map tool \cite{Nagio_website}. See Appendix
-\ref{app:crcnetnagios} for an example of what their current map looks like. This
-network mapping tool only supports networks laid out in a tree structure, does
-not support interaction of any kind and does not visualise performance data. It
-does have a good way of visualising whether or not a link between devices is up
-or down by highlighting areas of the tree green or red. 
+rural and city areas across Waikato. The network core is located in Hamilton
+city and branches out across wireless access points in a tree like structure
+with some redundant links. The dataset obtained, includes device information and
+relationships without performance data. Rural Link uses a network management
+system called Nagios that also includes its own network map tool. See Appendix
+\ref{app:crcnetnagios} for an example of what their current map looks like. The
+Nagios tool produces a tree map layout that handles redundant links by
+replicating paths.
 
 
-  % Adapters Why use them. How did I use them. Relate to Datasets TODO: maybe
-  % define adapter if used elsewhere??
+  % Adapters Why use them. How did I use them. Relate to Datasets
 It is useful keep code dealing with the raw network configuration and
 performance data separate from the visualisation. This project used a generic
-graph data structure on the visualisation side try to handle any type of map.
+graph data structure on the visualisation side to try to handle any type of map.
 The data structure simply defines a set of nodes each with their own set of
 adjacencies. Nodes and adjacencies both may have data included which allows for
 the addition of any number of parameters. Raw networking data, perhaps stored in
 RRDs or other databases, can be processed on the server side by an adapter and
 converted into the generic form that the visualisation understands.  The generic
-visualisation structure is done in Javascript Object Notation (JSON) which makes
+visualisation structure is done in JavaScript Object Notation (JSON) which makes
 it trivial to transmit between the server and client side \cite{rfc4627}. For
 example, to get the Rural Link configuration files to the generic visualisation
 form, a python script was written to act as an adapter between the two formats. 
@@ -250,7 +384,7 @@ form, a python script was written to act as an adapter between the two formats.
   %     - refer back to the scalability paper
 
 % implementation overview
-In order to explain the choices of technologies it is helpful have a general
+In order to explain the choices of technologies, it is helpful have a general
 overview of the implementation of the visualisation. See Section
 \ref{sec:implementation} for complete implementation details. This projects
 application, NetMapsJs, was built to run mostly on the client side with only the
@@ -271,23 +405,24 @@ handles client to server communication, user interaction and the actual
 visualisation generation. Topology and networking data is exchanged with the
 server using JSON. The visualisation is displayed to the user through the use of
 native HTML, CSS and Canvas. HTML and CSS were a natural choice for laying out
-elements on a web page as browser support is great and the standards are well
+elements on a web page as browser support is native and the standards are well
 defined. The choice of the web graphics technology however required some
 deliberation. 
 
 % Scalability issues
 The two most widely supported and popular browser native technologies are
-Scalable Vector Graphics (SVG) and Canvas \cite{Ferraiolo_2002}\cite{Canvas}.
-SVG uses vector based graphics where as Canvas is a bitmap system. SVG allows
-vector objects to be created and added to the HTML DOM. User interaction such as
-mouse clicks can be easily added to one of these objects and vector sets can be
-changed. Canvas on the other hand requires the programmer to set up their only
-user interaction system and the entire canvas must be redrawn in when any change
-is required. It would therefore appear that SVG was the most natural choice to
-go with for network maps that require user interaction for nodes and edges.
-However, previous tests have shown scalability performance problems with
-SVG \cite{Johnson_2008}. These tests are four years old relative to this project
-so it was deemed necessary to develop a benchmark tool to produce new results.
+Scalable Vector Graphics (SVG) \cite{Ferraiolo_2003} and Canvas
+\cite{Canvas_website}. SVG uses vector based graphics where as Canvas is a
+bitmap system. SVG allows vector objects to be created and added to the HTML
+DOM. User interaction such as mouse clicks can be easily added to one of these
+objects and vector sets can be changed. Canvas on the other hand requires the
+programmer to set up their only user interaction system and the entire canvas
+must be redrawn when any change is required. It would therefore appear that
+SVG was the most natural choice to go with for network maps that require user
+interaction for nodes and edges.  However, previous tests have shown scalability
+performance problems with SVG \cite{Johnson_2008}. These tests are four years
+old relative to this project so it was deemed necessary to develop a benchmark
+tool to produce new results.
 
 The benchmark tool was developed using JavaScript to run across all modern
 browsers. It generates a given number of rectangles and begins moving them
@@ -303,23 +438,26 @@ The results of the tests are shown in Figure \ref{fig:benchmark-graph}. At the
 performance is shown to drop significantly in the first 50 to 100 particles
 where as Canvas achieves a much more level gradient. NetMapJs needs to be able
 to visualise networks that will potentially have many more nodes that the
-performance limits of SVG and as a result Canvas was chosen as the web graphics
-technology for this project. While this is the case, the graphics generation
-code was kept separated from the rest of NetMapJs's code. This means that if
-performance of these technologies shift in the future, a new graphic system
+performance limits of SVG allows for and as a result Canvas was chosen as the
+web graphics technology for this project. While this is the case, the graphics
+generation system was kept separated from the rest of the code. This means that
+if performance of these technologies shift in the future, a new graphic system
 could be implemented and slotted in to reflect the change.
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=130.08mm]{assets/benchmark-tool.eps}
-\caption{}
+\caption{The browser graphics benchmarking tool currently rendering 200
+particles using Canvas and running in Safari. The potential frame rate using
+this setup is shown to be 123.}
 \label{fig:benchmark-tool}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=91.67mm]{assets/benchmark-graph.eps}
-\caption{}
+\caption{The results of the graphic benchmark run on a windows 7 host. Three
+different browsers are tested using both SVG and Canvas.}
 \label{fig:benchmark-graph}
 \end{figure}
 
@@ -330,18 +468,18 @@ could be implemented and slotted in to reflect the change.
   % Why did I choose these libraries
   % How did I pick them?
 
-NetMapJs makes use of the jQuery, JavaScript Infovis Toolkit and Abor libraries
-in its design. jQuery was used for several reasons \cite{jQuery_website}. Cross
+NetMapJs makes use of the jQuery, JavaScript InfoVis Toolkit and Arbor libraries
+in its design. JQuery was used for several reasons \cite{jQuery_website}. Cross
 browser support is important such that each user gets the same experience across
-different systems.  jQuery functions handles all of this for you an is
-especially useful for eliminating browser specific code. jQuery also simplifies
-HTML Document manipulation, event handling and AJAX interactions. The JavaScript
-Infovis Toolkit provides a framework for producing interactive visualisations
-based in the web \cite{thejit_website}. The toolkit includes many very useful
+different systems. JQuery functions handle all of this for you and is especially
+useful for eliminating browser specific code. JQuery also simplifies HTML
+document manipulation, event handling and AJAX interactions. The JavaScript
+InfoVis Toolkit provides a framework for producing interactive visualisations
+based in the web \cite{thejit_website}. The toolkit includes many useful
 features such as node-edge graph manipulation functions, complex number
 arithmetic, animation transitions and so on.
 
-NetMapJs includes a some automatic layout algorithms for initially deciding
+NetMapJs includes some automatic layout algorithms for initially deciding
 where to position nodes in the network map. One of these layouts is a force
 directed algorithm.  The Arbor JavaScript library was used for this as it
 performs well and provides mechanisms for changing physics parameters such as
@@ -350,8 +488,13 @@ library plug-in for jQuery. This assisted with test driven development during
 the implementation stage of the project.
 
 
-\section{Visual Design} \label{sec:visual-design}
+\section{Visual Design} 
+\label{sec:visual-design}
   % Overview of visual design
+
+In this section, the most significant design aspects of NetMapJs are explained.
+Justification for each of the design decisions is given along with example
+screen shots taken from NetMapJs views.
 
 \subsection{Nodes}
 \label{sec:nodes.vis}
@@ -382,12 +525,12 @@ The outer circle marks the HLZ node and the smaller, solid circles inside
 illustrate the sub nodes of that PoP. This grouped effect causes the viewer the
 assume that the sub nodes are related to each other through a common parent
 node. Figure \ref{fig:nodes1.1} shows a more zoomed in view of the same HLZ
-group node. The parent node and edges are now faded out so the focus is now on
-the sub nodes and edges. This idea of zooming and adding detail is explained in
-Section \ref{sec:navigation.vis}. There needs to be way of laying out the sub node
-within a group. Different group nodes may make sense to be laid out differently.
-The HLZ group node is using a star layout. Layout considerations are discussed
-in Section \ref{sec:layouts.vis}.
+group node. The parent node and edges are now faded out so that the focus is now
+on the sub nodes and edges. This idea of zooming and adding detail is explained
+in Section \ref{sec:navigation.vis}. There needs to be way of laying out the sub
+node within a group. Different group nodes may make sense to be laid out
+differently.  The HLZ group node is using a star layout. Layout considerations
+are discussed in Section \ref{sec:layouts.vis}.
 
   % May want to see nodes only at a given level...
   % How have I done this?
@@ -395,14 +538,15 @@ in Section \ref{sec:layouts.vis}.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=107.58mm]{assets/nodes1-0.eps}
-\caption{}
+\caption{A section of the Karen network map that shows the Hamilton (HLZ) PoP
+node.}
 \label{fig:nodes1.0}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=101.93mm]{assets/nodes1-1.eps}
-\caption{}
+\caption{A zoomed in view of the HLZ PoP that shows its children nodes.}
 \label{fig:nodes1.1}
 \end{figure}
 
@@ -418,7 +562,7 @@ in Section \ref{sec:layouts.vis}.
 Edges between nodes in a network map indicate that two or more devices are
 connected to each other by some medium. A single line between two nodes is
 enough to show this relationship. If this line is thin then it reduces the
-amount of clutter for the same number of edges \cite{Tufte_2001}. Figure
+amount of clutter for the same number of edges \cite{Tufte_2007}. Figure
 \ref{fig:edges1.0} shows the display of a network with many nodes, displayed in
 a clear way.
 % TODO: fill out paragraph more?
@@ -429,22 +573,22 @@ accessed through a separate view in the visualisation but there are advantages
 to showing this directly on map. For example, if something goes wrong with a
 link then an indication on the main view on the visualisation will attract the
 users attention immediately opposed to if the user had to follow some
-interaction sequence to get at the data. For his project a new way of
+interaction sequence to get at the data. For this project, a new way of
 visualising quantitative variables describing a bidirectional network connection
 was developed. In particular, variables which have some sort of limit such as
 the bandwidth or packet loss of a link.
 
 Figure \ref{fig:edges1.1} gives an overview of how the connection visualisation
 works by using bandwidth as an example. A rectangle is drawn between two nodes
-and split into two at the mid point. The side of the split rectangle closest to
-a given node represents the direction from that node to the destination. The
-height of each of the rectangular sections indicates the total quantity of the
-variable. For bandwidth, this would be the total for that direction of the link
-and may be different to the other direction in the case of asymmetric
-connections. Arrows extend from a given node towards another with the length
-being relative to the percentage of the variable's proximity to its upper limit.
-The colour of the arrow is defines some user defined categorical variable such
-as the health of the network link.
+and split at the mid point. The side of the split rectangle closest to a given
+node represents the direction from that node to the destination. The height of
+each of the rectangular sections indicates the total quantity of the variable.
+For bandwidth, this would be the total for that direction of the link and may be
+different to the other direction in the case of asymmetric connections. Arrows
+extend from a given node towards another with the length being relative to the
+percentage of the variable's proximity to its upper limit.  The colour of the
+arrow is based on some user defined categorical variable such as the health of
+the network link.
 
 The design for this graphic took careful consideration of information
 visualisation principles. Position and length are the most accurate methods for
@@ -453,27 +597,29 @@ show total and percentage utilisation. The use of position is also shown in the
 arrow as a proportion of the total rectangular section. Colour hue is effective
 at displaying categorical variables which is how it is being used in the
 visualisation. Figure \ref{fig:edges1.2} shows this design implemented in
-NetMapJs and is being used to show that bandwidth between the Palmerston North
+NetMapJs and is being used to show the bandwidth between the Palmerston North
 and Wellington PoPs in the Karen map.
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=102.54mm]{assets/edges1-0.eps}
-\caption{}
+\caption{An overall view of the Rural Link network. Nodes are positioned to
+reduce edge crossings using a force directed layout.}
 \label{fig:edges1.0}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=59.03mm]{assets/edges1-1.eps}
-\caption{}
+\caption{A diagram showing how edge data can be visualised effectively.}
 \label{fig:edges1.1}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=70.21mm]{assets/edges1-2.eps}
-\caption{}
+\caption{The new edge design shown within NetMapJs. The edge is connecting the
+Wellington and Palmerston North PoPs in the Karen network.}
 \label{fig:edges1.2}
 \end{figure}
 
@@ -500,14 +646,14 @@ and Wellington PoPs in the Karen map.
 % Graph Visualization and Navigation in Information Visualization
 % 
 
-A good layout of nodes in a network map is important to maximise the insigt and
-undestanding possible to the user. A bad layout can lead to cluttering of nodes
-and edges or worse, a misunderstanding of the underlying data. The use of 3D
-layouts effectively give more available space for positioning nodes but can
+A good layout of nodes in a network map is important to maximise the insight and
+understanding possible to the user. A bad layout can lead to the cluttering of
+nodes and edges or worse, a misunderstanding of the underlying data. The use of
+3D layouts effectively give more available space for positioning nodes but can
 introduce new problems. Nodes and edges in a 3D layout may occlude other objects
-and it is hard to choose an ideal perspective within the 3D
-space \cite{Eades_1998}. 2D layouts are used in this project which simplifies the
-use of semantic zooming as described in Section \ref{sec:navigation.vis}. 
+and it is hard to choose an ideal perspective within the 3D space
+\cite{Lai_1998}. 2D layouts are used in this project which simplifies the use of
+semantic zooming as described in Section \ref{sec:navigation.vis}. 
 
 Two basic 2D layout algorithms were used in this project in addition to
 statically defining node positions. A force directed and star algorithm. These
@@ -531,7 +677,9 @@ distribution router, connects to all the other devices in that PoP.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=49.34mm]{assets/layouts1-1.eps}
-\caption{}
+\caption{An overall view of the Karen network is on the left that uses a static
+layout. On the right is a zoomed in view that shows the Massey sub group having 
+a star layout applied.}
 \label{fig:layouts1.1}
 \end{figure}
 
@@ -544,14 +692,14 @@ distribution router, connects to all the other devices in that PoP.
   % Zoom, pan, zoom/center nodes, follow edges
   % Screenshots
 
-Layout algorithms can be good at laying out large graphs properly but there is a
+Layout algorithms can be good at laying out large graphs clearly but there is a
 limit to their effectiveness. At some level of network size or density the
 limits of these algorithms will be reached and ideal layouts will no longer be
 guaranteed. It is also likely that a user can not even decipher information and
 patterns from such large networks. It is therefore useful to combine layout
-algorithms with other techniques in order to remain scalable \cite{Herman_1998}.
-Grouping devices into subnetworks is a reduction technique as described in
-Section \ref{sec:nodes.vis}. 
+algorithms with other techniques in order to remain scalable \cite{Herman_2000}.
+Grouping devices into subnetworks is a reduction technique that is further
+described in Section \ref{sec:nodes.vis}. 
 
 Another technique for reducing networks is semantic zooming \cite{Perlin_1993}.
 This is different from geometric zooming in that changes are made to the level
@@ -571,7 +719,7 @@ point, the group node graphic and its external edges become faded out which
 allows the user to focus more on the current groups detail while still being
 aware of what group the nodes are apart of.
 
-While implementing the design of NetMapJs it became apparent that it got
+While implementing the design of NetMapJs, it became apparent that it got
 increasingly difficult to navigate between nodes in the map as you zoomed deeper
 into sub groups. For example, when zoomed into the Hamilton PoP in the Karen
 map, it would require a lot of user interaction to view the directly connected
@@ -587,12 +735,12 @@ to notify the user of what node lies on the other end of it. This is shown in
 Figure \ref{fig:nav1.1}. The addition of animated transitions between view
 changes allow users to keep context and to absorb the change
 \cite{Lamping_1995}.  NetMapJs uses animation this way to transport the user to
-the new view such that they get an sense of where in the network they are moving
+the new view such that they get a sense of where in the network they are moving
 to. A direct jump from the source to destination node, risks confusing their
 perceived location in the overall network.
 
 The other feature for improving navigation is zooming and centering nodes. When
-a user knows that they want to view a particular group node normally they would
+a user knows that they want to view a particular group node normally, they would
 perform a sequence of zooming and panning actions to bring it into focus. This
 feature allows the user to simply right click on a group node to automatically
 bring it into focus again using animation to change the views. Figure
@@ -604,21 +752,25 @@ make minor adjustments to the view and to zoom back out.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=53mm]{assets/nav1-0.eps}
-\caption{}
+\caption{The view on the left shows an indication of more detail within the
+Wellington PoP. The zoomed in view shows the addition of more details such 
+as edges and labels}
 \label{fig:nav1.0}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=88.01mm]{assets/nav1-1.eps}
-\caption{}
+\caption{A tooltip is shown by the mouse pointer that indicated where the user
+will end up if they click on the edge.}
 \label{fig:nav1.1}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=173.22mm]{assets/nav1-2.eps}
-\caption{}
+\caption{The top view of the Karen map shows where a user is clicking. The bottom
+view shows where they would end up after the animated movement.}
 \label{fig:nav1.2}
 \end{figure}
 
@@ -629,23 +781,23 @@ make minor adjustments to the view and to zoom back out.
   % What does it look like - 
   %   > 
 
-As a user zooms in to deeper levels of the network map it becomes easy for them
+As a user zooms in to deeper levels of the network map, it becomes easy for them
 lose context about where in the overall network they are. It is not preferred
 for the user to have to zoom out just to regain this context. To address this,
 NetMapJs makes use of multiple overview maps that each display a particular
 level of the network. Where a level refers to a zoom range in which no detail is
 added or removed. Starting from an initial zoomed out view, as the user zooms
-in to a sub group of the network, a separate overview map for that level is
-added to a stack of overviews. As the view port gets deeper into the map, more
-and more overviews are added in to this stack. When the user zooms back out, the
+into a sub group of the network, a separate overview map for that level is added
+to a stack of overviews. As the view port gets deeper into the map, more and
+more overviews are added into this stack. When the user zooms back out, the
 reverse happens and overviews are removed from the stack.
 
 Figure \ref{fig:overviews1.0} demonstrates this stacking effect. Also visible in
-the screen shot, is yellow rectangles that have a cross-hair intersecting the
-middle. The outline of the rectangles show were exactly the user's view port is
+the screen shot, are yellow rectangles that have cross-hairs intersecting the
+middle. The outline of the rectangles show where exactly the user's view port is
 situated in the map as a whole as well as in each individual level. A cross-hair
-was used to make sure the view port location can still be identified on higher
-levels in which the rectangle becomes too small to see. The overviews are also
+was used to make sure the view port location can still be identified at higher
+levels where the rectangle becomes too small to see. The overviews are also
 linked to the main visualisation such that the user can click and drag the
 rectangles to move the main view port accordingly. This allows for large
 movements across the map while in a zoomed in view.
@@ -653,7 +805,9 @@ movements across the map while in a zoomed in view.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=197.95mm]{assets/overviews1-0.eps}
-\caption{}
+\caption{Three stacked screen shots of the Karen map, each at different levels
+of zoom. At deeper levels, more overviews are shown to be added in to the stack
+and the view port boxes change size and position accordingly.}
 \label{fig:overviews1.0}
 \end{figure}
 
@@ -665,63 +819,665 @@ movements across the map while in a zoomed in view.
   %   * Interact with user to request more server side data
   %   * Or just change visualisation parameters
 
+Details of the implementation of NetMapJs are described in this section. An
+overview of how the tool works overall is given in Section
+\ref{sec:client-server-model.impl}. The rest of the sections describe how
+aspects of the visual design were implemented. Supporting functions such as
+overlays and an editor are discussed in sections \ref{sec:overlays.impl} and
+\ref{sec:editor.impl} respectively.
+
+\subsection{Client / Server Model}
+\label{sec:client-server-model.impl}
+  % Give diagram of the over all structure of application
+  %   * How the client side works in a lot of detail
+  %   * How the Server side works in a lot of detail
+  %       > Also state how much of server side was implemented
+  %       > Not big focus of this project as specific to network
+
+NetMapJs was implemented to run mostly on the client side with only some of the
+work done on the server side. Figure \ref{fig:implementation-overview} shows the
+main aspects of both the client and server side, and how they interact to
+produce the final application. The NetMapJs application, shown in the client
+side, is loaded from the server and then run. Initial map layout data is then
+requested, visualisation data structures and events are initialised, and a
+display is generated for the user. At this point the user has full control to
+explore the visualisation.
+
+The underlying network topology, performance values or other data may change
+over time. For example, bandwidth data for links is likely to change frequently
+throughout the course of a day. NetMapJs uses a data poller which is built using
+JavaScript intervals, that periodically and asynchronously polls for updated
+data from the server side. This is done using AJAX methods to ensure that the
+visualisation remains responsive and can be updated without refreshing the
+browser page \cite{Paulson_2005}.
+
+NetMapJs allows features of the maps to be manually adjusted, such as the node
+positions. In a purely client side JavaScript application, user state is lost
+when the web page is refreshed. To be able to make manual adjustments that can
+be saved and reloaded, there must be a server side function with privileges to
+read and write files to disk. If map configuration needs to be saved, then the
+NetMapJs JSON data structures are passed to a state storage utility. This
+utility handles asynchronously transmitting the JSON data to the server. On the
+other hand, when configuration needs to be retrieved, the storage utility
+requests the JSON file from the server and proceeds to pass it back to NetMapJs
+where it will used to rebuild the network map.
+
+In this project, the main focus was on designing and producing the NetMapJs
+client application. Only parts of the server side were implemented in order to
+get a working application. The server side in Figure
+\ref{fig:implementation-overview} shows how the parts would fit together if
+implemented completely. A web abstract programming interface (API) separates the
+client and server functions to allow for visualisation design freedom which is
+independent of web service constraints \cite{Wood_2008}. It also means that the
+client is dependant on the API calls opposed to any given server implementation.
+
+The server side application handles saving and loading stored network map states
+as well as gathering raw networking data through interactions with an adapter.
+Adapters know about a specific networking data format such as RRD and how to
+transform this into the generic JSON format that NetMapJs understands. As an
+example, an adapter was made for Rural Link, that took their device
+configuration file and produced a valid JSON structure that can be read and
+visualised on the client side. The state and networking data is passed to the
+client through the use of the web API.
+
+\begin{figure}
+\centering
+\includegraphics[width=170mm,height=133.26mm]{assets/implementation-overview.pdf}
+\caption{Overview of the client to server side architecture.}
+\label{fig:implementation-overview}
+\end{figure}
+
 \subsection{Nodes and Edges}
 \label{sec:nodes-and-edges.impl}
   % How were nodes and edges implemented
   %   * Both have display method and contains method
   %   * Display: ..., Contains: ...
+  %     > Dispay AND contains needs to scale in proportion with zoom
+  %     > How did I do this?
   %   * People producing a view may implement their own functions
   %   * Pipe-edges are one of these.
   %     > How did I implement these
+  %     > Look at edge data structures
   %     > rotated rectangular pipes, broken up into two sections
   %     > with height proportional to total bandwidth, length ...
 
+The JavaScript InfoVis Toolkit has a built in system for handling the drawing of
+nodes and edges. They each have a set of helpers which are objects that include
+a display and contains method. The display method describes how a node or edge
+should be drawn to the canvas and is called each time the map needs to be
+redrawn. The contains method decides whether or not a point lies within the
+bounds of the graphic once drawn onto the canvas. This is used as part of the
+event system which loops over all contains methods to find a node or edge that a
+user is interacting with. The helpers interface allows new edges and nodes types
+to be easily implemented.
+
+NetMapJs implements several different node and edge types to cater for various
+functions. In particular, group nodes need to visually contain sub nodes and
+edges need to consider the current level of zoom. As the user zooms into the
+network map, edge widths are scaled in proportion such that they always remain
+the same. This is required because in NetMapJs, quantitative variables may be
+encoded by the edge widths. If the scale for the widths changed as the user
+zoomed in, it would be difficult maintain an understanding of quantity. As more
+edges are added at greater zoom levels, multiple scales would have to coexist
+which would cause more confusion.
+
+The main edge type that was implemented for NetMapJs was the bidirectional
+divided pipe as described in Section \ref{sec:edges.vis}. Figure
+\ref{fig:nodesedges1.0} shows how the edges are built using bandwidth as an
+example. A rectangle is drawn between two nodes with arrows facing in both
+directions. Sizes are calculated as shown, the canvas is rotated around a
+central pivot point and then the final pipe is drawn.
+
+% TODO: talk about label issues
+% Canvas labels vs Div Labels relative to scaling
+
+%\begin{verbatim}
+%Metrics = {
+%   bandwidth:   number,
+%   capacity:    number,
+%   latency:     number,
+%   ...
+%}
+%\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics[width=170mm,height=63.24mm]{assets/nodesedges1-0.pdf}
+\caption{A diagram showing how map edges that include bandwidth data are implemented.}
+\label{fig:nodesedges1.0}
+\end{figure}
+
+% image nodes
+
 \subsection{Groups}
 \label{sec:groups.impl}
+  % How were groups implemented?
+  %   * Nodes can have parents
+  %   * Parent nodes are group nodes
+  %   * All the nodes that have a group node as a parent become its children
+  %   * Functions
+  %       > BuildGroups
+  %           - Recursively build groups from top down
+  %           - Extract all nodes that belong to the top group
+  %           - On reduced set of nodes, extract all nodes that belong there
+  %       > ComputeLayouts
+  %           - Set the root of group if given (some layouts may use this)
+  %           - Apply layouts to each group
+
+Nodes can be assigned to a parent. If a node does not have a parent then it is
+considered to be one of the top level nodes. The top level is the highest level
+of the network map which serves as a starting point for grouping and depth
+algorithms begin. All of the nodes that do have a parent, become part of a group.
+Three methods handle the group functionality. BuildGroups, ComputeDimensions and
+ComputeLayouts.
+
+BuildGroups recursively build groups by assigning nodes and a depth level to a
+parent. A depth level is the distance, in groups, from the top to the bottom
+level. The function starts with the top level set of nodes and reduces it until
+all of the nodes have been assigned a group and depth level. The
+ComputeDimensions function loops through all of the groups and adjusts the node
+edge sizes. Node dimensions are scaled by a factor of its group's depth such
+that deeper nodes appear smaller. Edges are assigned the line width of its
+parent which scales according to the current zoom level.
+
+Groups can be assigned different layout algorithms for distributing nodes. The
+ComputeLayouts function first sets the root of a group if this has been
+specified in the initial JSON configuration. This is useful for algorithms that
+require a root to be specified such as the star layout described in Section
+\ref{sec:layouts.impl}. ComputeLayouts then loops through all of the groups and
+applies the specified layout algorithm to it or the default if none has been
+chosen. 
+
 
 \subsection{Layouts}
 \label{sec:layouts.impl}
-  % 
-  % Basic overview of star layout (because I implemented it myself)
-  % Overview of layout system interface
+  % Overview of layout system
+  %   How it is designed to be extendible
+  %     > Implement generic interface
+  %         - What does the Layout interface look like?
+  %         - Methods etc, how they provide generic way - separating from data
+  %         - Only know about node positions
+  %     > Assign layout to group node
+  %     > Allow to be changed at run time
   %
+  % What layouts have I implemented?
+  %   > Static (I did), Star (I did), ForceDirected (Arbor)
+  %     - static - takes node ids mapping to x,y coordinates and loads them in
+  %   > Basic overview of star layout (because I implemented it myself)
+  %     - maybe include pseudo code for it
+  %   > ForceDirected
+  %     - describe how Arbor is integrated easily using a Layout implementation
   %
 
+Nodes need a way of being positioned on the screen. In computer networks there
+are many different layout styles that may make sense. For this reason, the
+layout system was designed to be easy to extend. Layout algorithms take an
+input, which is usually just a set of nodes and adjacencies, and output a set of
+positions for each node. NetMapJs defines a layout interface as an object that
+has initialise and compute methods. The layout is first initialised to set up
+any initial parameters and then the compute method is called to calculate node
+positions whenever they are required. The compute method may be called multiple
+times for algorithms that change over time such as the force directed layout.
+This system allows layout types to be changed at run time which could be used to
+give the user the control to switch algorithms to achieve a different view.
 
-\subsubsection{Editor}
-\label{sec:editor.impl}
+NetMapJs currently has three layout types implemented. Static, star and force
+directed. The static layout takes a set of node IDs that map to x and y
+coordinates and loads them into the nodes objects. The positions are sourced
+from the server that is keeping the state. The editor which is presented in
+Section \ref{sec:editor.impl} can be used to create these static coordinates and
+save them to the server.
+
+The star layout algorithm places a given root node into the center of the screen
+and then places the rest of the nodes, evenly spaced, around the circumference
+of an invisible circle. The radius of the circle is a specified fraction of the
+parent group's width. This layout is limited by the amount of space it uses due
+to the circular positioning of nodes. It is only appropriate to use when the
+underlying network structure is star like.
+
+The final layout algorithm, force directed, uses the Arbor library for
+maintaining the particle system. The purpose of force directed algorithms is to
+position nodes such that edges are similar lengths and there are as few
+crossings as possible.  The initialise method of the layout interface creates
+the particle system and the compute method transfers the positions from Arbor to
+the node objects. This way, the compute method can be continuously called in
+order to give an animated effect as the nodes move toward their ideal positions.
 
 \subsection{Navigation}
 \label{sec:navigation.impl}
-  
+  % How is navigation implemented overall:
+  %   > Canvas translate/scale offset methods
+  %   > At user defined level of scale, depth variable changes
+  %   > nodes/edges that have depths less or equal to are shown. Others hidden
+  %   > Mention labels
+  %   > nodes/edges that have depth less than are drawn with lower alpha.
+  %   > RenderFactory takes care of what to draw and what not to draw + alpha
+  %   
+  %   > Nav also effects edges with diff src and dst types
+  %   > If edge connects an inner group node to another group with a lower
+  %   depth...
+  %
+  %
+  % Follow edges, zoom/center nodes
+  %   > how are these implemented?
+  %   > Follow edges:
+  %     * For a given edge that the user has hovered over
+  %     * Are both nodes in the canvas bounds - then do nothing if clicked
+  %     * Are no nodes in the canvas bound - then do nothing if clicked
+  %     * If one node is visible on the screen then set the other node as dest
+  %     * Follow linear path towards dest node until it is in screen centre
+  %
+  %   > zoom / center nodes
+  %     * If user clicks on a single node
+  %     * calculate translation difference to center it
+  %     * calculate scale difference to zoom in on it
+  %     * Set an interval that performs small interations to produce animated
+  %     look
+  %
   % Pan and Zoom + Space Scale diagrams - Space–scale Diagrams:Understanding Multiscale Interfaces
   % Pans are linear, zoom is logarithmic
 
+Navigation is implemented through the use of the Canvas translate and scale
+offset functions. The scale offset function performs a geometric zoom on the
+canvas and which allows for full space-scale navigation in 2D
+\cite{Furnas_1995}. In order to achieve semantic zooming, where the information
+content changes based on the scaling, there needs to be a way of matching
+aspects of the network map to levels of zoom. In NetMapJs, when a view is
+created it is assigned a set of scale offsets which define the points where
+information content should change. These offsets are computed with the depths of
+nodes to determine when they should be displayed as shown in Figure
+\ref{fig:nav2.0}. Group nodes are automatically assigned a depth based on the
+number parent nodes between them and the top level and manual assigned of depth
+values is also possible. 
+
+A rendering function handles when and how each visualisation aspect should be
+displayed. Nodes, labels and edges that have a depth value that is less than or
+equal to the zoom offset are visible in the map. Nodes and edges that just have
+a depth less than the offset are drawn with a lower alpha value. This creates
+the desired effect of fading out higher up nodes that we are less interested in
+compared to the current levels items. Edges have an additional condition that
+handles the case when edges join nodes of different groups. Those edges that
+extend from one group to another deeper group's node should only be partially
+displayed. That is, the edge should start from the displayed node and extend
+only to the edge of the group that contains the deeper node.
+
+As described in Section \ref{sec:navigation.vis}, there are two navigation support
+features to assist the user in moving around the network map. The follow edges
+feature allows the user to click on an edge to be transported to the node on the
+other end. This is implemented by following a set of conditions. For a given
+edge that the user has clicked on, if both or none of the source and destination
+nodes are within the visual map space, the do nothing. If however, one of the
+nodes is in the visual space then this becomes the source and the destination
+node is on the other end of the edge. The view port then follows a linear path
+towards the destination by translating the canvas until the node is centered on
+the screen. The zoom and center feature allows the view port to quickly focus on
+a node. This was implemented by calculating the translation difference required
+for centering and the sale offset to zoom in on the node. An interval is set to
+animate the view port into the new position.
+
+\begin{figure} \centering
+\includegraphics[width=120mm,height=87.2mm]{assets/nav2-0.pdf}
+\caption{A space-scale diagram showing different levels of magnification being
+mapped to depth levels where the detail changes. (Adapted from Furnas and
+Bederson \cite{Furnas_1995}.) } 
+\label{fig:nav2.0} 
+\end{figure}
+
 \subsection{Overviews}
 \label{sec:overviews.impl}
+  % How are overviews implemented?
+  %
+  %   > Based on scale offsets - add/remove more overviews
+  %   > Two classes - overview manager and overview.
+  %   > Instances of an actual network map
+  %   > Draw crosshair and view port box over top of it
+  %   > Update this by listening to plot redraw events fired by the main map
+  %   
+
+Overviews help the user to maintain overall context as they zoom and move around
+the network map. At higher levels of zoom, additional overviews are required to
+show each depth level of the network. An overview manager class handles the
+adding and removing of overviews when the main network map is navigated. An
+overview consists of a DOM container, a minimalistic network map instance and set
+of functions that handle the interaction with the main view. Overviews are added
+when the current depth level of the network map increases and removed when it
+decreases. The depth level is defined by the current level of zoom compared with
+the user defined scale offset values.
+
+Overviews require a two way interaction with the main network map instance. If
+the user clicks on the overview to move the view port box to another position,
+then the main map needs to be translated accordingly. This translation
+difference is calculated by converting the overview coordinates of the mouse
+click into the main network maps geometric space and then subtracting the two.
+When the user navigates in the main view, the overview view port boxes need to
+move to reflect the change. Overviews listen for the redraw event to be fired by
+the main network map. When the event is triggered, the overview calculates new
+coordinates and dimensions for the view port box, and then redraws it.
+
 
 \subsection{Overlays}
 \label{sec:overlays.impl}
+  % Similar to overviews in that there is an overlay manager and overlays
+  % 
+  % Overlays contain an update method which is passed:
+  %   > The visualisation object, graph object and the canvas
+  % Overlays can be started and stopped and redrawn
+  %
+  % The overlay manager attached to a visualisation object
+  % Overlays are drawn onto its canvas
+  % The manager listens to redraw events
+  %   > and refreshes the overlay instances when necessary. 
+  % 
+  % TODO: add overlay screenshot here
 
-\section{Deployment Examples}
-\label{sec:deployment-examples}
+Overlays provide a way of adding additional visual features on top of the
+network map after it has been drawn. An overlay instance contains an update
+method that is called each time the overlay needs to be drawn. The method is
+passed a reference to the main visualisation object, the node and edge graph
+structure and the HTML canvas. These three references give the update method
+access to enough data to render overlays positioned relative to the network map
+elements. Overlays also contain methods to be started, stopped and redrawn.
+
+A manager class is used to keep track of all of the overlays. It is assigned a
+network map object and uses it to pass the appropriate parameters to the overlay
+update methods. Overlay objects may be added or removed from the manager.
+Network map redraw events are bound in the same way as for overviews. When this
+event is fired, the manager loops through all of its overlays and calls their
+update method. 
+
+One of the uses for the overlay functionality that was identified early on in
+the project and later requested for the Karen map, is the displaying of virtual
+local area networks (VLANs). Different VLANs may take separate paths through a
+given network and may have their own set of performance metrics. An overlay that
+visualises VLAN flows separately for the Karen network is shown in Figure
+\ref{fig:overlays1.0}. The purple lines shows the edges that the VLAN is
+attached to. Zooming into the map further would show the connections within sub
+groups. VLANs can be changed or turned off using the drop down box on the right
+hand side on the display.
+
+\begin{figure} 
+\centering
+\includegraphics[width=170mm,height=85.71mm]{assets/overlays1-0.pdf}
+\caption{VLAN 910 for the Karen network visualised using the overlay
+functionality.}
+\label{fig:overlays1.0} 
+\end{figure}
+
+\subsection{Editor}
+\label{sec:editor.impl}
+  % Overview of the editor
+  %   Why do we need it?
+  %     - touch up positions, apply layout algorithms, set nodes parameters
+  %     - Save/load
+  %   How does it work?
+  %     - Built using HTML, CSS, + a special network map view
+  %     - View allows moving nodes and should allow applying parameters etc
+  %     - Saving / Loading. JSON. Then loaded by a main map view
+  %   How far did I get with it?
+  %     - Ideally integrate layout algorithms with manual positioning for more
+  %    control 
+  %   
+
+A visual editor that allows map views to be defined in real time is particularly
+useful for getting visualisation parameters right. Ideally the editor should be
+able to perform minor alterations to node positions, apply layout algorithms to
+groups and set node and edge parameters. For example, different layout
+algorithms may need to be compared to find the best fit and then some nodes may
+need minor position adjustments. The view, including all of the set
+configuration, needs to be able to be saved and loaded back later or into a
+normal view.
+
+NetMapJs includes a basic editor that currently only supports nodes being moved
+around a grid. More work is required to produce a complete editing system. The
+editor was built using a combination of HTML, CSS, JavaScript and a special
+network map view. The view is an instance of the NetMapJs visualisation class
+that adds extra functionality to load and update node positions as they are
+clicked and dragged. When the view needs to be saved, the JSON data is taken
+from NetMapJs and sent to the server using AJAX. Views are loaded in by
+reversing this process.
+
+The editor was used to make the Karen network map which is shown in Figure
+\ref{fig:editor1.0}. An image showing one possible map design was copied by
+manually positioning nodes using the editor until a similar layout was achieved.
+The editor figure shows grids being used effectively for accurate node
+positioning and spacing. Zooming and panning functionality is also supported in
+the editor.
+
+\begin{figure}
+\centering
+\includegraphics[width=170mm,height=120.16mm]{assets/editor1-0.pdf}
+\caption{A screen shot of the Karen network map loaded into the view editor.}
+\label{fig:editor1.0}
+\end{figure}
+
+%TODO
+%\subsection{Layers}
+% how I tried and failed (Network descriptor language) how somewhat allow for
+% manual layering
+% Maybe just add a Problems Faced section?? - No add Discussion section just
+% before conclusion
+
+%\subsection{Debugger}
+%\label{sec:debugger.impl}
+
+%\section{Deployment Examples}
+%\label{sec:deployment-examples}
 
 \section{Evaluation}
 \label{sec:evaluation}
+  %
+  % How was the evaluation conducted:
+  %   > send designs along with some evaluations questions
+  %
+  % Karen
+  %   > Strengths
+  %     * VLAN traffic can be viewed separately
+  %     * At high level, can see what PoPs have the most connected sites
+  %     * Pipe widths are good
+  %   > Weaknesses
+  %     * Zooming should have limits
+  %     * Some design choices such as fonts make label readability hard and
+  %     colours such as red on black
+  %     * Zooming - should be based off mouse position not screen center
+  %     * Want to be able to resize the window
+  %   > Comparison to PHP network weathermap
+  %     * Once some the discussed weaknesses ironed out, will make a nice
+  %     looking upgrade.
+  %   > Would they consider using it
+  %     * Yes.
+  %     * Zoom functionality and ability to view VLANs separately
+  %     * But need to be able have Karen branding with colours and fonts
+  %   > Any other feedback
+  %     * Nice looking start
+  %     * provoked thought within the Karen team.
+  %
+  % Same for Rural Link
+  %
+
+An evaluation with network engineers from Rural Link and Karen was performed to
+analyse the strengths and weaknesses of NetMapJs. The redesigns of their network
+maps were sent along with a set of questions to people in the respective
+networks. Karen liked that at a high level of the map, you can still see what
+PoPs have the most connected sites due to distant nodes being shown in basic
+detail. They found that the pipe edge widths are effective at showing
+differences in bandwidth between nodes. Being able to view VLAN traffic
+separately is another advantage.  Karen also identified weaknesses of the map.
+Zooming in and out should have hard limits such that the user can not
+accidentally scale too far in either direction. Some of the design choices such
+as font and colours make some parts of the map hard to see. 
+
+When asked to compare NetMapJs to PHP Network Weathermap, Karen stated that some
+of the zoom functionality and the ability to view VLANs separately are the most
+significant advantages over their current implementation. Once the discussed
+weaknesses were ironed out that it would make a good upgrade to their current
+tool. They would consider using NetMapJs as a replacement network map. They note
+that the ability to add specific branding aspects such as colours and fonts
+would be required. Overall, they like the look of the network map and mentioned
+that it has provoked some thought within the Karen team.
+
+  % Strengths 
+  %   > Also think dynamic sizes for links and nodes could be really interesting
+  % given live data.
+  %   > Navigation combined with the overview plots produce really good
+  % interactivity.
+  %   > Sub groups work well at hiding structure
+  %   > VLAN very good 
+  %
+  % Weaknesses 
+  %   > Just looking nicer - UI around sub groups could be improved, more visual
+  %   hints for moving between sub groups.
+  %   > Manual layout is often still great to get a good, useful map. Multiple
+  %   selectable layout nodes could allow you to switch between defined
+  %   layouts. Eg geographical, logical or automatic.
+  %
+  % Comparison to Nagios
+  %   > Much more interactive. Even more so that than the new Icinga NMS (cite).
+  %   > Nagios doesn't deal with loops, its layouts are not very stable
+  %   > No integration of performance data at all.
+  %
+  % Would they consider using it?
+  %   > Yes
+  %   > Would need to see how live data looks using the link utilisation
+  %   graphics.
+  %   > Also UI needs to be polished - they use a big screen for their
+  %   monitoring visualisations.
+  %
+  % Any other feedback?
+  %
+
+Rural Link commented that the dynamic sizes for links and nodes could be really
+interesting given live networking data to view them with. They thought
+navigation combined with the overview plots supported effective interactivity.
+Viewing VLANs separately were also seen as a strength of NetMapJs. It was
+suggested, like with Karen, that the overall user interface needs some
+improving. For example, more visual hints for moving between sub groups along
+the edges would make that feature more obvious. Rural Link suggested using
+multiple, selectable layout types to allow the user to decide on the best
+positioning. Geographic, logical and automatic are possible layouts types. 
+
+Rural link was also asked to compare NetMapJs to their existing Nagios network
+mapping tool. They found it to be much more interactive, even more so than the
+new Icinga network management system \cite{Icinga_website}. Nagios does not deal
+with loops, its layouts are not very stable and there is no integration of
+performance data in the maps. They would consider using it as a replacement to
+their current map given that it is easy enough to import networking data and
+that the user interface polished up. This is particularly important because a
+big screen is used in their office for viewing visualisations. 
+
 
 \section{Future Work}
 \label{sec:future-work}
+  % What were my results? (Don't state here, but important to think about)
+  %   * Network Map Implementation (HTML5)
+  %   * Semantic zoom functionality
+  %   * An extensible layout system
+  %   * New edge design
+  %   * The beginnings of an editor
+  %   * An overlay system
+  %   * Navigation support features such as interactive overviews
+  %
+  % Where the results can lead you?
+  %   * NetMap implementation - incorporate as part of NMS
+  %   * Semantic zoom could be investigated further such as loading only visible
+  %   data at a time. Link to network layers somehow
+  %   * Layout system - include many more layout algorithms, particularly those
+  %   that are effective at displaying networks
+  %   * 
+  %
+  % What are the next steps to take?
+  %   * Incorporate graphs of metrics, triggered by events
+  %
+  %
+  % What other questions do my results raise?
+  %   * New node design - is there other, better ways doing it
+  %   * 
+  %
   % Discuss possible branches of future work
   %   > Incorporate the map as part of a network management system
   %   > Experiment with more layout algorithms
-  %   > Look into the posibility of effectively incorporating layers
+  %   > Look into the possibility of effectively incorporating layers
   %   > Generate adapters to take common network data types such as RRD
+
+So far, NetMapJs has been developed and provides improvements to network maps
+over other tools. There are several possible paths to take for future work
+resulting from this project. Semantic zoom could be investigated further to
+explore more of its uses with respect to network maps. Early on in this project,
+the ability to relate different network layers together through the use of zoom
+was considered but little progress made. Very large networks, such as an entire
+autonomous system, may require that zooming splits up data requests and only
+displays currently visible depth levels. 
+
+This project only considered two automatic layout algorithms out of the many
+that are found in literature \cite{Battista_1994}. Including more layout
+algorithms, particularly those that are known to be effective for computer
+network visualisation, would allow a more diverse set of networks to use the
+tool. One notable feature included in some network mapping tools that NetMapJs
+does not, is the inclusion of graphs of relevant metrics. For example, graphs of
+bandwidth over time are useful to help network engineers identify when anomalies
+occur. These graphs could be included as part of the visualisation itself
+through the use of user interaction triggered events.
+
+NetMapJs includes a rich design for displaying network metrics between two nodes
+as part of the actual edge graphics. A survey of node and edge designs for
+computer networks would support the development of further network map displays.
+In this project, NetMapJs was developed as a stand alone application.
+Incorporating the tool into a network management system such as
+Nagios \cite{Nagios_website} or OpenNMS \cite{OpenNMS_website} would be a good
+extension to allow NetMapJs to be used with a minimal installation and setup
+overhead.
+
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-%\bibliographystyle{plain}
-%\bibliography{520-report}
+  % used web technologies such as Canvas and JavaScript (identified and used c).
+  % used lots of libraries
+  % scalability - network hierachies + semantic zooming
+  % grouping - specific layouts and depth
+  % overlays - a generic way of allowing developers to add additional drawings
+  % overtop of the existing display.
+  % overview - maintain sense of positioning in the overall network
+  %
+  % Results *
+  % Actual implementation - NetMapJs
+  % Real examples using real datasets
+  % successful evaluation (they want to use it)
+
+
+The goal of this project was to produce an improved computer network map
+display. This was achieved by identifying weaknesses in existing implementations
+and looking at ways of addressing them. A web based application called NetMapJs
+was developed to generate and control interactive network map displays. Data
+adapters keep the raw data collection and processing separate from the actual
+visualisation. Sub network hierarchies were used along with semantic zooming and
+panning to provide a way of abstracting detail into levels which allows for much
+larger networks to be displayed. The inclusion of automatic layout algorithms
+also assist with scalability issues and can be applied to specific sub network
+groups. 
+
+Stacked overview boxes display thumbnails of each of the network map
+levels such that users can maintain a sense of positioning in the overall
+network as they zoom in. Overlays provide a generic way for developers to add in
+additional graphics over the network map. This was shown to be particularly
+effective at visualising VLANs.
+
+NetMapJs was tested using real topology data sourced from the Rural Link and
+Karen networks. An evaluation with these two networks was successful and pointed
+out the strengths and weakness of NetMapJs. Engineers from both of the networks
+indicated that this network map would be an improvement over their current tool
+in use and that they would consider using it once certain aspects have been
+ironed out. In particular, with a more polished user interface, a more complete
+set of layout algorithms and a completed client/server side model
+implementation, NetMapJs will be ready for live deployment in real world
+systems.
+
+
+%TODO
+%\section{Acknowledgements}
+%\label{Acknowlements}
+
+\bibliographystyle{plain}
+\bibliography{520-report}
 
 \appendix
 \appendixpage
