@@ -103,10 +103,10 @@ implemented in NetMapJs with good results.
   %
 
 The datasets used in this project for testing NetMapJs were sourced from two
-real and currently running networks, Rural Link and Karen. Both of these
+real and currently running networks, Rural Link and KAREN. Both of these
 networks have current network mapping tools in place. A brief comparison of
 these tools with NetMapJs are included. In the evaluation section, network
-engineers from within Rural Link and Karen are also asked to compare the tools
+engineers from within Rural Link and KAREN are also asked to compare the tools
 and provide other feedback. 
 
 This report is divided into the following sections. Section
@@ -334,17 +334,17 @@ getting a good representation of an actual network and it makes for an effective
 evaluation when it is possible to get comparative feedback from network
 engineers. 
 
-  % Karen About, PHP weathermap 
-The first dataset used was from the Karen network \cite{Karen_website}. Karen is
+  % KAREN About, PHP weathermap 
+The first dataset used was from the KAREN network \cite{KAREN_website}. KAREN is
 a high capacity network that links together education and research institutions
 throughout New Zealand. Their network consists of point-of-presence (PoP) nodes
 strategically placed in regions in the North and South Island and with
 connections to Sydney and Los Angeles. Each PoP can be thought of as a
-subnetwork of Karen that may contain distribution devices, and connections to
+subnetwork of KAREN that may contain distribution devices, and connections to
 institutions and other PoPs.  Performance data such as bytes or packets per
 second for a given device port is split over a series of round-robin database
 (RRD) files. Device information such as name and location are stored in a
-database and are also available on their online weathermap. Karen currently uses
+database and are also available on their online weathermap. KAREN currently uses
 the network map generation tool called PHP Network Weathermap. A snapshot of the
 map can be viewed in Appendix \ref{app:karenphp}.
 
@@ -529,7 +529,7 @@ to apply this concept to nodes when designing a visualisation. Nodes can
 visually contain sub nodes and so on for a given number of depth levels. Nodes
 that fall into this category will be referred to as group nodes.
 
-Figure \ref{fig:nodes1.0} shows the Hamilton (HLZ) PoP for the Karen network.
+Figure \ref{fig:nodes1.0} shows the Hamilton (HLZ) PoP for the KAREN network.
 The outer circle marks the HLZ node and the smaller, solid circles inside
 illustrate the sub nodes of that PoP. This grouped effect causes the viewer the
 assume that the sub nodes are related to each other through a common parent
@@ -547,7 +547,7 @@ are discussed in Section \ref{sec:layouts.vis}.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=107.58mm]{assets/nodes1-0.eps}
-\caption{A section of the Karen network map that shows the Hamilton (HLZ) PoP
+\caption{A section of the KAREN network map that shows the Hamilton (HLZ) PoP
 node.}
 \label{fig:nodes1.0}
 \end{figure}
@@ -607,7 +607,7 @@ arrow as a proportion of the total rectangular section. Colour hue is effective
 at displaying categorical variables which is how it is being used in the
 visualisation. Figure \ref{fig:edges1.2} shows this design implemented in
 NetMapJs and is being used to show the bandwidth between the Palmerston North
-and Wellington PoPs in the Karen map.
+and Wellington PoPs in the KAREN map.
 
 \begin{figure}
 \centering
@@ -628,7 +628,7 @@ reduce edge crossings using a force directed layout.}
 \centering
 \includegraphics[width=170mm,height=70.21mm]{assets/edges1-2.eps}
 \caption{The new edge design shown within NetMapJs. The edge is connecting the
-Wellington and Palmerston North PoPs in the Karen network.}
+Wellington and Palmerston North PoPs in the KAREN network.}
 \label{fig:edges1.2}
 \end{figure}
 
@@ -677,7 +677,7 @@ connections are shown clearly by branches that join up to form a loop.
 
 Sub groups may make sense to have separate layout algorithm applied to them when
 the underlying network structures are different. An example of this is
-demonstrated in Figure \ref{fig:layouts1.1}. The overall view of the Karen map
+demonstrated in Figure \ref{fig:layouts1.1}. The overall view of the KAREN map
 contains statically defined node positions that are based of layout designs by a
 graphic designer. When the user zooms in to a particular PoP, it can be seen
 that the layout of that group is a star layout. One central node, the
@@ -686,7 +686,7 @@ distribution router, connects to all the other devices in that PoP.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=49.34mm]{assets/layouts1-1.eps}
-\caption{An overall view of the Karen network is on the left that uses a static
+\caption{An overall view of the KAREN network is on the left that uses a static
 layout. On the right is a zoomed in view that shows the Massey sub group having 
 a star layout applied.}
 \label{fig:layouts1.1}
@@ -719,7 +719,7 @@ particular subsection of a network. NetMapJs uses this type of zooming along
 with panning to effectively navigate throughout large networks. 
 
 Figure \ref{fig:nav1.0} shows more detail being revealed to the user as they
-zoom in to a sub group of the Karen network. In the fully zoomed out view it is
+zoom in to a sub group of the KAREN network. In the fully zoomed out view it is
 important to indicate that there is distant content so that the user is aware
 that they can zoom in for further detail \cite{Spence_2007}. Sub groups indicate
 that they contain more detail by using small dots and as the user zooms in to
@@ -730,7 +730,7 @@ aware of what group the nodes are apart of.
 
 While implementing the design of NetMapJs, it became apparent that it got
 increasingly difficult to navigate between nodes in the map as you zoomed deeper
-into sub groups. For example, when zoomed into the Hamilton PoP in the Karen
+into sub groups. For example, when zoomed into the Hamilton PoP in the KAREN
 map, it would require a lot of user interaction to view the directly connected
 Auckland PoP. Several drags of the mouse would be required to pan towards
 Auckland or zooming back out and in again even made sense. To eliminate this
@@ -778,7 +778,7 @@ will end up if they click on the edge.}
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=173.22mm]{assets/nav1-2.eps}
-\caption{The top view of the Karen map shows where a user is clicking. The bottom
+\caption{The top view of the KAREN map shows where a user is clicking. The bottom
 view shows where they would end up after the animated movement.}
 \label{fig:nav1.2}
 \end{figure}
@@ -814,7 +814,7 @@ movements across the map while in a zoomed in view.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=197.95mm]{assets/overviews1-0.eps}
-\caption{Three stacked screen shots of the Karen map, each at different levels
+\caption{Three stacked screen shots of the KAREN map, each at different levels
 of zoom. At deeper levels, more overviews are shown to be added in to the stack
 and the view port boxes change size and position accordingly.}
 \label{fig:overviews1.0}
@@ -1197,10 +1197,10 @@ event is fired, the manager loops through all of its overlays and calls their
 update method. 
 
 One of the uses for the overlay functionality that was identified early on in
-the project and later requested for the Karen map, is the displaying of virtual
+the project and later requested for the KAREN map, is the displaying of virtual
 local area networks (VLANs). Different VLANs may take separate paths through a
 given network and may have their own set of performance metrics. An overlay that
-visualises VLAN flows separately for the Karen network is shown in Figure
+visualises VLAN flows separately for the KAREN network is shown in Figure
 \ref{fig:overlays1.0}. The purple lines shows the edges that the VLAN is
 attached to. Zooming into the map further would show the connections within sub
 groups. VLANs can be changed or turned off using the drop down box on the right
@@ -1209,7 +1209,7 @@ hand side on the display.
 \begin{figure} 
 \centering
 \includegraphics[width=170mm,height=85.71mm]{assets/overlays1-0.pdf}
-\caption{VLAN 910 for the Karen network visualised using the overlay
+\caption{VLAN 910 for the KAREN network visualised using the overlay
 functionality.}
 \label{fig:overlays1.0} 
 \end{figure}
@@ -1247,7 +1247,7 @@ clicked and dragged. When the view needs to be saved, the JSON data is taken
 from NetMapJs and sent to the server using AJAX. Views are loaded in by
 reversing this process.
 
-The editor was used to make the Karen network map which is shown in Figure
+The editor was used to make the KAREN network map which is shown in Figure
 \ref{fig:editor1.0}. An image showing one possible map design was copied by
 manually positioning nodes using the editor until a similar layout was achieved.
 The editor figure shows grids being used effectively for accurate node
@@ -1257,7 +1257,7 @@ the editor.
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=120.16mm]{assets/editor1-0.pdf}
-\caption{A screen shot of the Karen network map loaded into the view editor.}
+\caption{A screen shot of the KAREN network map loaded into the view editor.}
 \label{fig:editor1.0}
 \end{figure}
 
@@ -1282,7 +1282,7 @@ the editor.
   % How was the evaluation conducted:
   %   > send designs along with some evaluations questions
   %
-  % Karen
+  % KAREN
   %   > Strengths
   %     * VLAN traffic can be viewed separately
   %     * At high level, can see what PoPs have the most connected sites
@@ -1299,38 +1299,38 @@ the editor.
   %   > Would they consider using it
   %     * Yes.
   %     * Zoom functionality and ability to view VLANs separately
-  %     * But need to be able have Karen branding with colours and fonts
+  %     * But need to be able have KAREN branding with colours and fonts
   %   > Any other feedback
   %     * Nice looking start
-  %     * provoked thought within the Karen team.
+  %     * provoked thought within the KAREN team.
   %
   % Same for Rural Link
   %
 
-An evaluation with network engineers from Rural Link and Karen was performed to
+An evaluation with network engineers from Rural Link and KAREN was performed to
 analyse the strengths and weaknesses of NetMapJs. The redesigns of their network
 maps were sent along with a set of questions to people in the respective
 networks.
 
-\subsection{Karen}
+\subsection{KAREN}
 
-Karen liked that at a high level of the map, you can still see what
+KAREN liked that at a high level of the map, you can still see what
 PoPs have the most connected sites due to distant nodes being shown in basic
 detail. They found that the pipe edge widths are effective at showing
 differences in bandwidth between nodes. Being able to view VLAN traffic
-separately is another advantage.  Karen also identified weaknesses of the map.
+separately is another advantage.  KAREN also identified weaknesses of the map.
 Zooming in and out should have hard limits such that the user can not
 accidentally scale too far in either direction. Some of the design choices such
 as font and colours make some parts of the map hard to see. 
 
-When asked to compare NetMapJs to PHP Network Weathermap, Karen stated that some
+When asked to compare NetMapJs to PHP Network Weathermap, KAREN stated that some
 of the zoom functionality and the ability to view VLANs separately are the most
 significant advantages over their current implementation. Once the discussed
 weaknesses were ironed out that it would make a good upgrade to their current
 tool. They would consider using NetMapJs as a replacement network map. They note
 that the ability to add specific branding aspects such as colours and fonts
 would be required. Overall, they like the look of the network map and mentioned
-that it has provoked some thought within the Karen team.
+that it has provoked some thought within the KAREN team.
 
   % Strengths 
   %   > Also think dynamic sizes for links and nodes could be really interesting
@@ -1368,7 +1368,7 @@ Rural Link commented that the dynamic sizes for links and nodes could be really
 interesting given live networking data to view them with. They thought
 navigation combined with the overview plots supported effective interactivity.
 Viewing VLANs separately were also seen as a strength of NetMapJs. It was
-suggested, like with Karen, that the overall user interface needs some
+suggested, like with KAREN, that the overall user interface needs some
 improving. For example, more visual hints for moving between sub groups along
 the edges would make that feature more obvious. Rural Link suggested using
 multiple, selectable layout types to allow the user to decide on the best
@@ -1483,7 +1483,7 @@ additional graphics over the network map. This was shown to be particularly
 effective at visualising VLANs.
 
 NetMapJs was tested using real topology data sourced from the Rural Link and
-Karen networks. An evaluation with these two networks was successful and pointed
+KAREN networks. An evaluation with these two networks was successful and pointed
 out the strengths and weakness of NetMapJs. Engineers from both of the networks
 indicated that this network map would be an improvement over their current tool
 in use and that they would consider using it once certain aspects have been
@@ -1506,7 +1506,7 @@ systems.
 \appendix
 \appendixpage
 
-\section{Karen PHP Network Weathermap}
+\section{KAREN PHP Network Weathermap}
 \label{app:karenphp}
 \centering
 \includegraphics[width=170mm,height=90.76mm]{assets/karen-phpweathermap.eps}
