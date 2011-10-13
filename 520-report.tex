@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper]{report}
+\documentclass[11pt, a4paper]{article}
 
 \usepackage{graphicx}
 \usepackage{url}
@@ -24,7 +24,7 @@
   % Adjust my old abstract to reflect overall project state.
 }
 
-\chapter{Introduction}
+\section{Introduction}
 \label{sec:introduction}
   % Motivation for my project
   % List the achievements (refer to sections)
@@ -120,7 +120,9 @@ details about how the visual design was implemented are found in Section
 evaluation by network engineers are discussed. Finally, some possible directions
 of future work are mentioned in Section \ref{sec:future-work}.
 
-\chapter{Related Work}
+\newpage
+
+\section{Related Work}
 \label{sec:related-work}
   % ** General Related Work Topics **
   %   Web graphics sclability 
@@ -151,7 +153,7 @@ network graphing issues and published implementations is analysed. Section
 \ref{sec:current-implementations} looks at some of the popular network map
 implementations and how this project attempts to address the weaknesses of them.
 
-\section{Research}
+\subsection{Research}
 \label{sec:research}
 
 The related work to this project can be divided into three areas. Issues
@@ -253,7 +255,7 @@ decreases the information about particular links. This tool is quite dated and
 is not web based.
 
 
-\section{Current Implementations}
+\subsection{Current Implementations}
 \label{sec:current-implementations}
   % 
   %  * Add PHP Network weathermap, Nagios etc into this section
@@ -295,7 +297,9 @@ smaller networks and in cases where a specific area of interest is known. In
 this project, zooming and panning is presented as a more effective way of
 navigating the information space of large computer networks.
 
-\chapter{Background}
+\newpage
+
+\section{Background}
 \label{sec:background}
   % Background section
   % What can't I assume that people will have as a general background
@@ -310,7 +314,7 @@ producing network maps. Sections \ref{sec:technologies} and \ref{sec:libraries}
 note the technologies and libraries used and the reasons behind why they were
 chosen.
 
-\section{Datasets}
+\subsection{Datasets}
 \label{sec:datasets}
   %
   % * What datasets did I use?
@@ -372,7 +376,7 @@ example, to get the Rural Link configuration files to the generic visualisation
 form, a python script was written to act as an adapter between the two formats. 
 
 
-\section{Technologies}
+\subsection{Technologies}
 \label{sec:technologies}
   % Go over the key technologies used
   %   > eg Javascript, Canvas, HTML/CSS
@@ -409,6 +413,26 @@ elements on a web page as browser support is native and the standards are well
 defined. The choice of the web graphics technology however required some
 deliberation. 
 
+
+\subsubsection{Graphics Technologies}
+
+\begin{figure}
+\centering
+\includegraphics[width=170mm,height=130.08mm]{assets/benchmark-tool.eps}
+\caption{The browser graphics benchmarking tool currently rendering 200
+particles using Canvas and running in Safari. The potential frame rate using
+this setup is shown to be 123.}
+\label{fig:benchmark-tool}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=170mm,height=91.67mm]{assets/benchmark-graph.eps}
+\caption{The results of the graphic benchmark run on a windows 7 host. Three
+different browsers are tested using both SVG and Canvas.}
+\label{fig:benchmark-graph}
+\end{figure}
+
 % Scalability issues
 The two most widely supported and popular browser native technologies are
 Scalable Vector Graphics (SVG) \cite{Ferraiolo_2003} and Canvas
@@ -444,22 +468,6 @@ generation system was kept separated from the rest of the code. This means that
 if performance of these technologies shift in the future, a new graphic system
 could be implemented and slotted in to reflect the change.
 
-\begin{figure}
-\centering
-\includegraphics[width=170mm,height=130.08mm]{assets/benchmark-tool.eps}
-\caption{The browser graphics benchmarking tool currently rendering 200
-particles using Canvas and running in Safari. The potential frame rate using
-this setup is shown to be 123.}
-\label{fig:benchmark-tool}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=170mm,height=91.67mm]{assets/benchmark-graph.eps}
-\caption{The results of the graphic benchmark run on a windows 7 host. Three
-different browsers are tested using both SVG and Canvas.}
-\label{fig:benchmark-graph}
-\end{figure}
 
 \subsection{Libraries}
 \label{sec:libraries}
@@ -487,8 +495,9 @@ gravity and friction \cite{Arbor_website}. The QUnit library is a unit testing
 library plug-in for jQuery. This assisted with test driven development during
 the implementation stage of the project.
 
+\pagebreak
 
-\chapter{Visual Design} 
+\section{Visual Design} 
 \label{sec:visual-design}
   % Overview of visual design
 
@@ -496,7 +505,7 @@ In this section, the most significant design aspects of NetMapJs are explained.
 Justification for each of the design decisions is given along with example
 screen shots taken from NetMapJs views.
 
-\section{Nodes}
+\subsection{Nodes}
 \label{sec:nodes.vis}
   % Design considerations for nodes
   % Nodes can be sub networks
@@ -550,7 +559,7 @@ node.}
 \label{fig:nodes1.1}
 \end{figure}
 
-\section{Edges}
+\subsection{Edges}
 \label{sec:edges.vis}
   % Simple line between two nodes
   % Can make use of this space more effectively
@@ -623,7 +632,7 @@ Wellington and Palmerston North PoPs in the Karen network.}
 \label{fig:edges1.2}
 \end{figure}
 
-\section{Layouts}
+\subsection{Layouts}
 \label{sec:layouts.vis}
   % Explain importance of node layout
   %   > Different subgroups - different layouts
@@ -684,7 +693,7 @@ a star layout applied.}
 \end{figure}
 
 
-\section{Navigation}
+\subsection{Navigation}
 \label{sec:navigation.vis}
   % Details of navigation
   % Why is getting it right important
@@ -774,7 +783,7 @@ view shows where they would end up after the animated movement.}
 \label{fig:nav1.2}
 \end{figure}
 
-\section{Overviews}
+\subsection{Overviews}
 \label{sec:overviews.vis}
   % The problem - 
   % How is it solved - 
@@ -811,7 +820,9 @@ and the view port boxes change size and position accordingly.}
 \label{fig:overviews1.0}
 \end{figure}
 
-\chapter{Implementation} 
+\newpage
+
+\section{Implementation} 
 \label{sec:implementation}
   % Overall implementation
   % Client side / server side
@@ -826,7 +837,7 @@ aspects of the visual design were implemented. Supporting functions such as
 overlays and an editor are discussed in sections \ref{sec:overlays.impl} and
 \ref{sec:editor.impl} respectively.
 
-\section{Client / Server Model}
+\subsection{Client / Server Model}
 \label{sec:client-server-model.impl}
   % Give diagram of the over all structure of application
   %   * How the client side works in a lot of detail
@@ -887,7 +898,7 @@ client through the use of the web API.
 \label{fig:implementation-overview}
 \end{figure}
 
-\section{Nodes and Edges}
+\subsection{Nodes and Edges}
 \label{sec:nodes-and-edges.impl}
   % How were nodes and edges implemented
   %   * Both have display method and contains method
@@ -949,7 +960,7 @@ central pivot point and then the final pipe is drawn.
 
 % image nodes
 
-\section{Groups}
+\subsection{Groups}
 \label{sec:groups.impl}
   % How were groups implemented?
   %   * Nodes can have parents
@@ -989,7 +1000,7 @@ applies the specified layout algorithm to it or the default if none has been
 chosen. 
 
 
-\section{Layouts}
+\subsection{Layouts}
 \label{sec:layouts.impl}
   % Overview of layout system
   %   How it is designed to be extendible
@@ -1043,7 +1054,7 @@ the particle system and the compute method transfers the positions from Arbor to
 the node objects. This way, the compute method can be continuously called in
 order to give an animated effect as the nodes move toward their ideal positions.
 
-\section{Navigation}
+\subsection{Navigation}
 \label{sec:navigation.impl}
   % How is navigation implemented overall:
   %   > Canvas translate/scale offset methods
@@ -1123,7 +1134,7 @@ Bederson \cite{Furnas_1995}.) }
 \label{fig:nav2.0} 
 \end{figure}
 
-\section{Overviews}
+\subsection{Overviews}
 \label{sec:overviews.impl}
   % How are overviews implemented?
   %
@@ -1155,7 +1166,7 @@ the main network map. When the event is triggered, the overview calculates new
 coordinates and dimensions for the view port box, and then redraws it.
 
 
-\section{Overlays}
+\subsection{Overlays}
 \label{sec:overlays.impl}
   % Similar to overviews in that there is an overlay manager and overlays
   % 
@@ -1203,7 +1214,7 @@ functionality.}
 \label{fig:overlays1.0} 
 \end{figure}
 
-\section{Editor}
+\subsection{Editor}
 \label{sec:editor.impl}
   % Overview of the editor
   %   Why do we need it?
@@ -1251,19 +1262,21 @@ the editor.
 \end{figure}
 
 %TODO
-%\section{Layers}
+%\subsection{Layers}
 % how I tried and failed (Network descriptor language) how somewhat allow for
 % manual layering
 % Maybe just add a Problems Faced section?? - No add Discussion section just
 % before conclusion
 
-%\section{Debugger}
+%\subsection{Debugger}
 %\label{sec:debugger.impl}
+
+\newpage
 
 %\section{Deployment Examples}
 %\label{sec:deployment-examples}
 
-\chapter{Evaluation}
+\section{Evaluation}
 \label{sec:evaluation}
   %
   % How was the evaluation conducted:
@@ -1364,8 +1377,9 @@ their current map given that it is easy enough to import networking data and
 that the user interface polished up. This is particularly important because a
 big screen is used in their office for viewing visualisations. 
 
+\newpage
 
-\chapter{Future Work}
+\section{Future Work}
 \label{sec:future-work}
   % What were my results? (Don't state here, but important to think about)
   %   * Network Map Implementation (HTML5)
@@ -1426,8 +1440,9 @@ Nagios \cite{Nagios_website} or OpenNMS \cite{OpenNMS_website} would be a good
 extension to allow NetMapJs to be used with a minimal installation and setup
 overhead.
 
+\newpage
 
-\chapter{Conclusion}
+\section{Conclusion}
 \label{sec:conclusion}
 
   % used web technologies such as Canvas and JavaScript (identified and used c).
@@ -1471,6 +1486,7 @@ set of layout algorithms and a completed client/server side model
 implementation, NetMapJs will be ready for live deployment in real world
 systems.
 
+\newpage
 
 %TODO
 %\section{Acknowledgements}
@@ -1479,15 +1495,19 @@ systems.
 \bibliographystyle{plain}
 \bibliography{520-report}
 
+\newpage
+
 \appendix
 \appendixpage
 
-\chapter{Karen PHP Network Weathermap}
+\section{Karen PHP Network Weathermap}
 \label{app:karenphp}
 \centering
 \includegraphics[width=170mm,height=90.76mm]{assets/karen-phpweathermap.eps}
 
-\chapter{Rural Link Nagios Network Map}
+\newpage
+
+\section{Rural Link Nagios Network Map}
 \label{app:crcnetnagios}
 \centering
 \includegraphics[width=170mm,height=136mm]{assets/rurallink-nagios.eps}
