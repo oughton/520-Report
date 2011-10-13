@@ -442,7 +442,7 @@ this setup is shown to be 123.}
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=91.67mm]{assets/benchmark-graph.eps}
-\caption{The results of the graphic benchmark run on a windows 7 host. Three
+\caption{The results of the graphic benchmark run on a Windows 7 host. Three
 different browsers are tested using both SVG and Canvas.}
 \label{fig:benchmark-graph}
 \end{figure}
@@ -503,7 +503,7 @@ animation transitions and so on, which are needed for this project.
 
 NetMapJs includes some automatic layout algorithms for initially deciding where
 to position nodes in the network map. One of these layouts is a force directed
-algorithm. These are a class of algorithms that lay out the graph in an
+algorithm. This are a class of algorithms that lay out the graph in an
 aesthetically pleasing way by applying forces to nodes and edges. The Arbor
 JavaScript library was used for this as it performs well and provides mechanisms
 for changing physics parameters such as gravity and friction
@@ -538,24 +538,25 @@ screen shots taken from NetMapJs views.
 
 Nodes in network maps are traditionally used to express a particular physical or
 virtual device. Nodes are joined together by edges which represent the
-relationship between then. Subnetworks are a specific group of devices that
-relate to each other in some way. Subnetworks networks may be made up of other
-subnetworks and altogether they can be seen as a single network. It is possible
-to apply this concept to nodes when designing a visualisation. Nodes can
-visually contain sub nodes and so on for a given number of depth levels. Nodes
-that fall into this category will be referred to as group nodes.
+relationship or connection between then. Subnetworks are a specific group of
+devices that relate to each other by a common subnet. Subnetworks may consist of
+other subnetworks of their own and altogether they can be seen as a single
+network. It is possible to apply this concept to nodes when designing a
+visualisation. Nodes can visually contain sub nodes and so on for a given number
+of depth levels. Nodes that fall into this category will be referred to as
+group nodes.
 
 Figure \ref{fig:nodes1.0} shows the Hamilton (HLZ) PoP for the KAREN network.
 The outer circle marks the HLZ node and the smaller, solid circles inside
 illustrate the sub nodes of that PoP. This grouped effect causes the viewer the
 assume that the sub nodes are related to each other through a common parent
-node. Figure \ref{fig:nodes1.1} shows a more zoomed in view of the same HLZ
-group node. The parent node and edges are now faded out so that the focus is now
-on the sub nodes and edges. This idea of zooming and adding detail is explained
-in Section \ref{sec:navigation.vis}. There needs to be way of laying out the sub
-node within a group. Different group nodes may make sense to be laid out
-differently.  The HLZ group node is using a star layout. Layout considerations
-are discussed in Section \ref{sec:layouts.vis}.
+node. Figure \ref{fig:nodes1.1} shows a zoomed in view of the same HLZ group
+node. The parent node and edges are now faded out so that the focus is now on
+the sub nodes and edges. This idea of zooming and adding detail is explained in
+Section \ref{sec:navigation.vis}. The layout of the sub nodes within a group is
+also an important design decision as different group nodes may make sense to be
+laid out differently. The HLZ group node is using a star layout. Layout
+considerations are discussed in Section \ref{sec:layouts.vis}.
 
   % May want to see nodes only at a given level...
   % How have I done this?
@@ -588,8 +589,8 @@ Edges between nodes in a network map indicate that two or more devices are
 connected to each other by some medium. A single line between two nodes is
 enough to show this relationship. If this line is thin then it reduces the
 amount of clutter for the same number of edges \cite{Tufte_2007}. Figure
-\ref{fig:edges1.0} shows the display of a network with many nodes, displayed in
-a clear way.
+\ref{fig:edges1.0} shows the display of a network with many nodes using thin
+lines.
 % TODO: fill out paragraph more?
 
 In the case of network maps, there is often monitoring data available that
@@ -597,11 +598,11 @@ directly relates to the performance of a given edge medium. This data could be
 accessed through a separate view in the visualisation but there are advantages
 to showing this directly on map. For example, if something goes wrong with a
 link then an indication on the main view on the visualisation will attract the
-users attention immediately opposed to if the user had to follow some
-interaction sequence to get at the data. For this project, a new way of
+user's attention immediately as opposed to the case where the user had to follow
+some interaction sequence to access the data. For this project, a new way of
 visualising quantitative variables describing a bidirectional network connection
-was developed. In particular, variables which have some sort of limit such as
-the bandwidth or packet loss of a link.
+was developed. In particular, this method suits variables which have an upper
+limit such as the bandwidth or packet loss of a link.
 
 Figure \ref{fig:edges1.1} gives an overview of how the connection visualisation
 works by using bandwidth as an example. A rectangle is drawn between two nodes
@@ -673,12 +674,12 @@ Wellington and Palmerston North PoPs in the KAREN network.}
 
 A good layout of nodes in a network map is important to maximise the insight and
 understanding possible to the user. A bad layout can lead to the cluttering of
-nodes and edges or worse, a misunderstanding of the underlying data. The use of
-3D layouts effectively give more available space for positioning nodes but can
-introduce new problems. Nodes and edges in a 3D layout may occlude other objects
-and it is hard to choose an ideal perspective within the 3D space
-\cite{Lai_1998}. 2D layouts are used in this project which simplifies the use of
-semantic zooming as described in Section \ref{sec:navigation.vis}. 
+nodes and edges or, worse, a misunderstanding of the underlying data. The use of
+3D layouts provide more available space for positioning nodes but can introduce
+new problems. Nodes and edges in a 3D layout may occlude other objects and it is
+hard to choose an ideal perspective within the 3D space \cite{Lai_1998}. 2D
+layouts are used in this project which simplifies the use of semantic zooming as
+described in Section \ref{sec:navigation.vis}. 
 
 Two basic 2D layout algorithms were used in this project in addition to
 statically defining node positions. A force directed and star algorithm. These
@@ -694,10 +695,12 @@ connections are shown clearly by branches that join up to form a loop.
 Sub groups may make sense to have separate layout algorithm applied to them when
 the underlying network structures are different. An example of this is
 demonstrated in Figure \ref{fig:layouts1.1}. The overall view of the KAREN map
-contains statically defined node positions that are based of layout designs by a
+contains statically defined node positions that are based on layout designs by a
 graphic designer. When the user zooms in to a particular PoP, it can be seen
 that the layout of that group is a star layout. One central node, the
-distribution router, connects to all the other devices in that PoP.
+distribution router, connects to all the other devices in that PoP, making the
+star layout particularly appropriate for displaying subnetworks at the PoP
+level.
 
 \begin{figure}
 \centering
@@ -717,7 +720,7 @@ a star layout applied.}
   % Zoom, pan, zoom/center nodes, follow edges
   % Screenshots
 
-Layout algorithms can be good at laying out large graphs clearly but there is a
+Layout algorithms can be good displaying large graphs clearly but there is a
 limit to their effectiveness. At some level of network size or density the
 limits of these algorithms will be reached and ideal layouts will no longer be
 guaranteed. It is also likely that a user can not even decipher information and
@@ -730,8 +733,8 @@ Another technique for reducing networks is semantic zooming \cite{Perlin_1993}.
 This is different from geometric zooming in that changes are made to the level
 of information displayed while moving towards a specific area of a graph. What
 would perhaps be visually overwhelming if presented all at once, can instead be
-trickled out to the user as they indicate that they are more interested in a
-particular subsection of a network. NetMapJs uses this type of zooming along
+drip fed to the user as they indicate that they are more interested in a
+particular subsection of a network. NetMapJs uses semantic zooming along
 with panning to effectively navigate throughout large networks. 
 
 Figure \ref{fig:nav1.0} shows more detail being revealed to the user as they
@@ -741,38 +744,38 @@ that they can zoom in for further detail \cite{Spence_2007}. Sub groups indicate
 that they contain more detail by using small dots and as the user zooms in to
 that group, more detail such as labels and edges between nodes appear. At this
 point, the group node graphic and its external edges become faded out which
-allows the user to focus more on the current groups detail while still being
-aware of what group the nodes are apart of.
+allows the user to focus more on the current group's detail while still being
+aware of the group that the nodes belong to.
 
-While implementing the design of NetMapJs, it became apparent that it got
+While implementing the design of NetMapJs, it became apparent that it was
 increasingly difficult to navigate between nodes in the map as you zoomed deeper
 into sub groups. For example, when zoomed into the Hamilton PoP in the KAREN
 map, it would require a lot of user interaction to view the directly connected
 Auckland PoP. Several drags of the mouse would be required to pan towards
-Auckland or zooming back out and in again even made sense. To eliminate this
-problem, two navigation features were added.
+Auckland. To eliminate this problem, two navigation features were added.
 
 The first feature enables the user to follow an edge to the node on the other
-end of it in one click. For example, if the user is currently zoomed in to the
-Hamilton PoP and wants to go to the Auckland PoP, they must simply click the
-edge that connects the two. An event triggered tooltip is displayed over an edge
-to notify the user of what node lies on the other end of it. This is shown in
+end in one click. For example, if the user is currently zoomed in to the
+Hamilton PoP and wants to go to the Auckland PoP, they can simply click the edge
+that connects the two. An event triggered tooltip is displayed over an edge to
+notify the user of the node that lies on the other end of it. This is shown in
 Figure \ref{fig:nav1.1}. The addition of animated transitions between view
 changes allow users to keep context and to absorb the change
 \cite{Lamping_1995}.  NetMapJs uses animation this way to transport the user to
 the new view such that they get a sense of where in the network they are moving
-to. A direct jump from the source to destination node, risks confusing their
+to. A direct jump from the source to destination node risks confusing their
 perceived location in the overall network.
 
-The other feature for improving navigation is zooming and centering nodes. When
-a user knows that they want to view a particular group node normally, they would
-perform a sequence of zooming and panning actions to bring it into focus. This
-feature allows the user to simply right click on a group node to automatically
-bring it into focus again using animation to change the views. Figure
-\ref{fig:nav1.2} demonstrates this effect. Combining these two features actually
-makes zooming and panning not necessary. The user is able to freely move around
-the network map quickly and effectively. The manual controls are still useful to
-make minor adjustments to the view and to zoom back out.
+The other feature for improving navigation is zooming and centering nodes.
+Originally, when a user knows that they want to view a particular group node
+normally, they would perform a sequence of zooming and panning actions to bring
+it into focus. This feature allows the user to simply right click on a group
+node to automatically bring it into focus again using animation to change the
+views. Figure \ref{fig:nav1.2} demonstrates this effect. Combining the two
+features means that zooming and panning are not strictly necessary and allow the
+user to freely move around the network map quickly and effectively. The manual
+controls are still useful to make minor adjustments to the view and to zoom back
+out.
 
 \begin{figure}
 \centering
@@ -807,10 +810,10 @@ view shows where they would end up after the animated movement.}
   %   > 
 
 As a user zooms in to deeper levels of the network map, it becomes easy for them
-lose context about where in the overall network they are. It is not preferred
+lose context about where in the overall network they are. It is not ideal
 for the user to have to zoom out just to regain this context. To address this,
 NetMapJs makes use of multiple overview maps that each display a particular
-level of the network. Where a level refers to a zoom range in which no detail is
+level of the network. A level is defined as a zoom range in which no detail is
 added or removed. Starting from an initial zoomed out view, as the user zooms
 into a sub group of the network, a separate overview map for that level is added
 to a stack of overviews. As the view port gets deeper into the map, more and
@@ -818,7 +821,7 @@ more overviews are added into this stack. When the user zooms back out, the
 reverse happens and overviews are removed from the stack.
 
 Figure \ref{fig:overviews1.0} demonstrates this stacking effect. Also visible in
-the screen shot, are yellow rectangles that have cross-hairs intersecting the
+the screen shot are yellow rectangles that have cross-hairs intersecting the
 middle. The outline of the rectangles show where exactly the user's view port is
 situated in the map as a whole as well as in each individual level. A cross-hair
 was used to make sure the view port location can still be identified at higher
