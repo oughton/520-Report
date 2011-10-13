@@ -1333,23 +1333,23 @@ networks.
 
 \subsection{KAREN}
 
-KAREN liked that at a high level of the map, you can still see what
-PoPs have the most connected sites due to distant nodes being shown in basic
-detail. They found that the pipe edge widths are effective at showing
-differences in bandwidth between nodes. Being able to view VLAN traffic
-separately is another advantage.  KAREN also identified weaknesses of the map.
-Zooming in and out should have hard limits such that the user can not
-accidentally scale too far in either direction. Some of the design choices such
-as font and colours make some parts of the map hard to see. 
+KAREN liked that, at a high level of the map, they could still see which PoPs
+have the most connected sites due to distant nodes being shown in basic detail.
+They found that the pipe edge widths were effective at showing differences in
+bandwidth between nodes. Being able to view VLAN traffic separately was another
+advantage. KAREN also identified weaknesses of the map. Zooming in and out
+should have hard limits such that the user can not accidentally scale too far in
+either direction. Some of the design choices such as font and colours also make
+some parts of the map hard to see. 
 
 When asked to compare NetMapJs to PHP Network Weathermap, KAREN stated that some
-of the zoom functionality and the ability to view VLANs separately are the most
-significant advantages over their current implementation. Once the discussed
-weaknesses were ironed out that it would make a good upgrade to their current
-tool. They would consider using NetMapJs as a replacement network map. They note
-that the ability to add specific branding aspects such as colours and fonts
-would be required. Overall, they like the look of the network map and mentioned
-that it has provoked some thought within the KAREN team.
+of the zoom functionality and the ability to view VLANs separately were the most
+significant advantages over their current implementation. They reported that
+once the discussed weaknesses were ironed out, NetMapJs would make a good upgrade
+to their current tool and they would consider using NetMapJs as a replacement
+network map. They noted that the ability to add specific branding aspects such as
+colours and fonts would be required. Overall, they liked the look of the network
+map and mentioned that it has provoked some thought within the KAREN team.
 
   % Strengths 
   %   > Also think dynamic sizes for links and nodes could be really interesting
@@ -1388,19 +1388,20 @@ interesting given live networking data to view them with. They thought
 navigation combined with the overview plots supported effective interactivity.
 Viewing VLANs separately were also seen as a strength of NetMapJs. It was
 suggested, like with KAREN, that the overall user interface needs some
-improving. For example, more visual hints for moving between sub groups along
+improvement. For example, more visual hints for moving between sub groups along
 the edges would make that feature more obvious. Rural Link suggested using
 multiple, selectable layout types to allow the user to decide on the best
-positioning. Geographic, logical and automatic are possible layouts types. 
+positioning. Geographic, logical and automatic are possible layouts types that
+were suggested.
 
-Rural link was also asked to compare NetMapJs to their existing Nagios network
+Rural Link was also asked to compare NetMapJs to their existing Nagios network
 mapping tool. They found it to be much more interactive, even more so than the
 new Icinga network management system \cite{Icinga_website}. Nagios does not deal
 with loops, its layouts are not very stable and there is no integration of
 performance data in the maps. They would consider using it as a replacement to
-their current map given that it is easy enough to import networking data and
-that the user interface polished up. This is particularly important because a
-big screen is used in their office for viewing visualisations. 
+their current map provided that it is easy to import networking data and that
+the user interface is suitably improved. This is particularly important because
+a large screen is used in their office for viewing visualisations. 
 
 \newpage
 
@@ -1437,24 +1438,23 @@ big screen is used in their office for viewing visualisations.
   %   > Look into the possibility of effectively incorporating layers
   %   > Generate adapters to take common network data types such as RRD
 
-So far, NetMapJs has been developed and provides improvements to network maps
-over other tools. There are several possible paths to take for future work
-resulting from this project. Semantic zoom could be investigated further to
-explore more of its uses with respect to network maps. Early on in this project,
-the ability to relate different network layers together through the use of zoom
-was considered but little progress made. Very large networks, such as an entire
-autonomous system, may require that zooming splits up data requests and only
-displays currently visible depth levels. 
+There are several possible paths to take for future work resulting from this
+project. Semantic zoom could be investigated further to explore possible uses
+with respect to network maps. Early on in this project, the ability to relate
+different network layers together through the use of zoom was considered but
+little progress made. Very large networks, such as an entire autonomous system,
+may require that zooming splits up data requests and only displays currently
+visible depth levels. 
 
 This project only considered two automatic layout algorithms out of the many
 that are found in literature \cite{Battista_1994}. Including more layout
 algorithms, particularly those that are known to be effective for computer
 network visualisation, would allow a more diverse set of networks to use the
-tool. One notable feature included in some network mapping tools that NetMapJs
-does not, is the inclusion of graphs of relevant metrics. For example, graphs of
-bandwidth over time are useful to help network engineers identify when anomalies
-occur. These graphs could be included as part of the visualisation itself
-through the use of user interaction triggered events.
+tool. One notable feature included in some other network mapping tools is the
+inclusion of graphs of relevant metrics. For example, graphs of bandwidth over
+time are useful to help network engineers identify when anomalies occur.  These
+graphs could be included as part of the visualisation itself through the use of
+user interaction triggered events.
 
 NetMapJs includes a rich design for displaying network metrics between two nodes
 as part of the actual edge graphics. A survey of node and edge designs for
