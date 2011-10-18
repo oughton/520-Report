@@ -115,12 +115,13 @@ This report is divided into the following sections. Section
 \ref{sec:related-work} gives the necessary background information used for the
 rest of the report. The datasets are described in detail and the technologies
 and libraries used in this project are listed. The visual design considerations
-are described in Section \ref{sec:visual-design}. Each of the design aspects
-are motivated, justified and an example from NetMapJs is given. The technical
+are described in Section \ref{sec:visual-design}. Each of the design aspects are
+motivated, justified and an example from NetMapJs is given. The technical
 details about how the visual design was implemented are found in Section
 \ref{sec:implementation}. In Section \ref{sec:evaluation}, the results of
-evaluation by network engineers are discussed. Finally, some possible directions
-of future work are mentioned in Section \ref{sec:future-work}.
+evaluation by network engineers are discussed. Finally, conclusions are drawn
+and some possible directions of future work are mentioned in Section
+\ref{sec:conclusion}.
 
 \newpage
 
@@ -425,8 +426,9 @@ other databases, can be processed on the server side by an adapter and converted
 into the generic form that the visualisation understands. The generic
 visualisation structure uses JavaScript Object Notation (JSON) which makes it
 trivial to transmit between the server and client side \cite{rfc4627}. For
-example, to convert the Rural Link configuration files to the generic visualisation
-form, a python script was written to act as an adapter between the two formats. 
+example, to convert the Rural Link configuration files to the generic
+visualisation form, a python script was written to act as an adapter between the
+two formats. 
 
 % technologies
 The NetMapJs application is implemented using JavaScript as the client side
@@ -1430,8 +1432,13 @@ a large screen is used in their office for viewing visualisations.
 
 \newpage
 
-\section{Future Work}
-\label{sec:future-work}
+%\section{Future Work}
+%\label{sec:future-work}
+%\newpage
+
+\section{Conclusions and Future Work}
+\label{sec:conclusion}
+
   % What were my results? (Don't state here, but important to think about)
   %   * Network Map Implementation (HTML5)
   %   * Semantic zoom functionality
@@ -1489,11 +1496,6 @@ Incorporating the tool into a network management system such as
 Nagios \cite{Nagios_website} or OpenNMS \cite{OpenNMS_website} would be a good
 extension to allow NetMapJs to be used with a minimal installation and setup
 overhead.
-
-\newpage
-
-\section{Conclusion}
-\label{sec:conclusion}
 
   % used web technologies such as Canvas and JavaScript (identified and used c).
   % used lots of libraries
