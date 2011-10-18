@@ -389,23 +389,6 @@ looks like. The Nagios tool produces a tree map layout that handles redundant
 links by replicating paths.
 
 
-  % Adapters Why use them. How did I use them. Relate to Datasets
-It is useful to separate code dealing with the raw network configuration and
-performance data from the visualisation. This means that when network data
-collection practices or data structures change the visualisation can continue to
-function without alterations. This project uses a generic graph data structure
-on the visualisation side, which will support any type of map. The data
-structure simply defines a set of nodes each with their own set of adjacencies.
-Nodes and adjacencies both may have data attached which allows for the addition
-of any number of parameters. Raw networking data, perhaps stored in RRDs or
-other databases, can be processed on the server side by an adapter and converted
-into the generic form that the visualisation understands. The generic
-visualisation structure uses JavaScript Object Notation (JSON) which makes it
-trivial to transmit between the server and client side \cite{rfc4627}. For
-example, to convert the Rural Link configuration files to the generic visualisation
-form, a python script was written to act as an adapter between the two formats. 
-
-
 \subsection{Technologies}
 \label{sec:technologies}
   % Go over the key technologies used
@@ -428,6 +411,22 @@ interaction with the user as well as additional requests to the server side for
 extra data such as the latest bandwidth measurements. As described in Section
 \ref{sec:related-work}, this lies somewhere between a thin and thick client
 design.
+
+  % Adapters Why use them. How did I use them. Relate to Datasets
+It is useful to separate code dealing with the raw network configuration and
+performance data from the visualisation. This means that when network data
+collection practices or data structures change the visualisation can continue to
+function without alterations. This project uses a generic graph data structure
+on the visualisation side, which will support any type of map. The data
+structure simply defines a set of nodes each with their own set of adjacencies.
+Nodes and adjacencies both may have data attached which allows for the addition
+of any number of parameters. Raw networking data, perhaps stored in RRDs or
+other databases, can be processed on the server side by an adapter and converted
+into the generic form that the visualisation understands. The generic
+visualisation structure uses JavaScript Object Notation (JSON) which makes it
+trivial to transmit between the server and client side \cite{rfc4627}. For
+example, to convert the Rural Link configuration files to the generic visualisation
+form, a python script was written to act as an adapter between the two formats. 
 
 % technologies
 The NetMapJs application is implemented using JavaScript as the client side
