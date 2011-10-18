@@ -47,12 +47,49 @@
   %   - what is a network map
 
 Computer network maps are an effective way of visualising complex network
-systems. They consist of nodes and edges, where nodes represent devices and edges
-show the physical relationship between them. In this project, techniques and
-technologies are explored with the goal of producing an improved network map
-display over existing implementations. NetMapJs, a web based network map
-visualisation application, was designed and developed as part of this project to
-present the ideas discussed in this report.
+systems. Network maps consist of nodes and edges, where nodes represent devices
+and edges show the physical or logical relationship between them. The
+positioning of nodes throughout a map, displays the topology of the network that
+it is visualising. It is important to get the positioning right because the maps
+may be used to gain insight into the shape and structure of network devices.
+Automatic layout algorithms may be used to attempt a good layout or users may
+want to define static positions for nodes when there is already some idea about
+the underlying topology. Also, various users of a network map may need to view
+it from different perspectives depending on their roll. For example, a support
+desk worker may just need to see whether or not very general areas of the
+network are functional, where as a network engineer may need to see a specific
+area with a lot of detail.
+
+In network maps, the edges connecting nodes indicate a relationship between two
+devices. Networks often monitor and store performance metrics of a link that can
+be directly related to a single edge. It is therefore, possible to visualise the
+metrics as part of the edge graphics or to include them through user
+interaction. This idea assists with two uses of network maps: monitoring and
+dimensioning. Network maps can be used to monitor the health of the devices and
+links, and visually indicate the user when a problem is detected. With an
+effective layout in place, areas of the network that are affected by the problem
+can be easily identified and passed on to engineers to look into. Dimensioning
+in networks is finding the minimum capacity of a link to service the peak
+capacity \cite{Girard_1990}. Network maps which show bandwidth usage on links
+effectively can assist network engineers at determining what the peak capacity
+of links are and whether there is more bandwidth available that can be sold to
+customers.
+
+
+
+In this project, techniques and technologies are explored with the goal of
+producing an improved network map display over existing implementations.
+NetMapJs, a web based network map visualisation application, was designed and
+developed as part of this project to present the ideas discussed in this report.
+There are some notable weaknesses of existing network maps that this project
+aims to address.
+
+\begin{itemize}
+  \item Lack of interactivity
+  \item Scalability issues with large networks
+  \item Specialised software requirements
+  \item Limited visual display of quantitative information
+\end{itemize}
 
   % problems with current network maps (Motivation):
   %   > Net very dynamic or interactive, often just static images
@@ -66,50 +103,52 @@ present the ideas discussed in this report.
   %   > Interactive 
   %   > Mutli layered???
  
-There are some notable weaknesses of existing tools that this project aims to
-address. Network maps often generate static images that provide little or no
-user interaction. This project looks into the use zooming, panning and other
-advanced navigation functionality to give users more control over the
-information space. An easy to use event system encourages developers to make use
-of more user input. Existing tools also usually do not scale well for large
-networks. Views become overwhelming and overlapping edges obscure parts of the
-network. This project considers the use of hierarchy to reduce the overall
-complexity of maps by grouping together sub networks. The idea of groups coupled
-with semantic zooming enables detail to be abstracted until the user indicates
-that they are interested in a more specific area of the network.
+Network maps often generate static images that provide little or no user
+interaction. This project looks into the use of zooming, panning and other
+interactive navigation functionality to give users more control over the
+information space. A user-friendly event system encourages developers to make
+use of user input. Clicking or hovering over nodes and edges for example, calls
+event functions that can be customised to add to the visual display without
+needing an understanding about how the internals of NetMapJs works. Existing
+tools also usually do not scale well for large networks, as views become
+overwhelming and overlapping edges obscure parts of the network. This project
+considers the use of hierarchy to reduce the overall complexity of maps by
+grouping sub networks together. The idea of groups coupled with semantic zooming
+enables detail to be abstracted until the user indicates that they are
+interested in a more specific area of the network.
 
 Current computer network visualisation tools in the network industry do not take
 full advantage of the latest web technologies. Visualisations built and
-presented using HTML5 technologies in general are becoming a lot more popular.
-This is because of the benefits of using browsers for presenting information.
-Web applications reduce the requirement for installing and maintaining special
-software on multiple machines. Views can be shared and discussed between users
-easier as everyone has a browser. Mobile devices also come with browsers which
-give viewers instant portability. This project focusses on taking advantage of
-these technologies in order to produce a highly interactive computer network
-map.
+presented using HTML5 technologies in general are becoming more popular because
+the information can be presented in a web browser. This avoids the need to
+develop, maintain and install specialised software for multiple systems. Web
+browsers are ubiquitous so views can be shared and discussed between users.
+Mobile devices also come with browsers which give viewers instant portability.
+This project focusses on taking advantage of these technologies in order to
+produce a highly interactive computer network map that is easily accessible.
 
-Network administrators and engineers use topology and performance information
-for various tasks. They may for example base decisions relating to where traffic
-is routed to minimise bandwidth costs. Performance coupled with an idea of
-topology is useful for capacity management. A link may not be using all of its
-available bandwidth and so there would be a possibility of adding additional
-clients. The opposite is also useful, an indication of high bandwidth
-utilisation lets administrators known that more links or load balancing may be
-beneficial to their clients. Existing network map implementations sometimes
-attempt to display this information in edges or by other means. In this project,
-a new way of displaying quantitative data within edges is presented and
-implemented in NetMapJs with good results.
+The performance of links between devices in a network coupled with an idea of
+topology is useful for capacity management and monitoring. A link may not be
+using all of its available bandwidth and so there would be a possibility of
+adding additional clients. The opposite is also useful; an indication of high
+bandwidth utilisation lets administrators know that more links or load balancing
+may be beneficial to their clients. Existing network map implementations
+sometimes attempt to display this information in edges or by other means. This
+is most commonly either the width line or a set of colours. However, the use of
+colour to is one of the least useful ways to display quantitative variables
+\cite{Spence_2007}. In this project, a new way of displaying quantitative data
+within edges that uses edge width, length, orientation and colouring is
+presented and implemented in NetMapJs with good results.
 
   % The achievements and section breakdowns
   %
 
 The datasets used in this project for testing NetMapJs were sourced from two
-real and currently running networks, Rural Link and KAREN. Both of these
-networks have current network mapping tools in place. A brief comparison of
-these tools with NetMapJs are included. In the evaluation section, network
+real and currently operational networks, Rural Link and KAREN. Both networks
+have mapping tools currently in place. A brief comparison of these tools with
+NetMapJs are included in this report. In the evaluation section, network
 engineers from within Rural Link and KAREN are also asked to compare the tools
-and provide other feedback. 
+and provide feedback. 
 
 This report is divided into the following sections. Section
 \ref{sec:related-work} gives the necessary background information used for the
