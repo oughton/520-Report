@@ -756,9 +756,9 @@ layouts are used in this project which simplifies the use of semantic zooming as
 described in Section \ref{sec:navigation.vis}. 
 
 Two basic 2D layout algorithms were used in this project in addition to
-statically defining node positions. A force directed and star algorithm. These
+statically defining node positions: force directed and star algorithm. These
 two were chosen because they were known to work well with the example datasets
-and provide a good starting point over just static layouts. A complete network
+and provide a good starting point over purely static layouts. A complete network
 map tool would include many more layout algorithms to cope with a wider range of
 network layout structures \cite{Paul_2000}. Figure \ref{fig:edges1.0} shows
 Rural Link's network laid out using the force directed algorithm. The algorithm
@@ -794,30 +794,41 @@ a star layout applied.}
   % Zoom, pan, zoom/center nodes, follow edges
   % Screenshots
 
-Layout algorithms can be good displaying large graphs clearly but there is a
+\begin{figure}[h]
+\centering
+\includegraphics[width=170mm,height=53mm]{assets/nav1-0.eps}
+\caption{The view on the left shows an indication of more detail within the
+Wellington PoP. The zoomed in view shows the addition of more details such 
+as edges and labels.}
+\label{fig:nav1.0}
+\end{figure}
+
+Layout algorithms can be good for displaying large graphs clearly but there is a
 limit to their effectiveness. At some level of network size or density the
 limits of these algorithms will be reached and ideal layouts will no longer be
-guaranteed. It is also likely that a user can not even decipher information and
-patterns from such large networks. It is therefore useful to combine layout
+guaranteed. It is also likely that a user can not easily decipher information
+and patterns from such large networks. It is therefore useful to combine layout
 algorithms with other techniques in order to remain scalable \cite{Herman_2000}.
-Grouping devices into subnetworks is a reduction technique that is further
-described in Section \ref{sec:nodes.vis}. 
+One way this can be done is through reduction techniques which decrease the
+amount of information being presented in the view. Grouping devices into
+subnetworks is one reduction technique that was previously described in Section
+\ref{sec:nodes.vis}. 
 
 Another technique for reducing networks is semantic zooming \cite{Perlin_1993}.
 This is different from geometric zooming in that changes are made to the level
 of information displayed while moving towards a specific area of a graph. What
-would perhaps be visually overwhelming if presented all at once, can instead be
+would perhaps be visually overwhelming, if presented all at once, can instead be
 drip fed to the user as they indicate that they are more interested in a
-particular subsection of a network. NetMapJs uses semantic zooming along
-with panning to effectively navigate throughout large networks. 
+particular subsection of a network. NetMapJs uses semantic zooming along with
+panning to effectively navigate throughout large networks. 
 
 Figure \ref{fig:nav1.0} shows more detail being revealed to the user as they
 zoom in to a sub group of the KAREN network. In the fully zoomed out view it is
 important to indicate that there is distant content so that the user is aware
 that they can zoom in for further detail \cite{Spence_2007}. Sub groups indicate
-that they contain more detail by using small dots and as the user zooms in to
+that they contain more detail by using small dots and, as the user zooms in to
 that group, more detail such as labels and edges between nodes appear. At this
-point, the group node graphic and its external edges become faded out which
+point, the group node graphic and its external edges become transparent which
 allows the user to focus more on the current group's detail while still being
 aware of the group that the nodes belong to.
 
@@ -851,16 +862,7 @@ user to freely move around the network map quickly and effectively. The manual
 controls are still useful to make minor adjustments to the view and to zoom back
 out.
 
-\begin{figure}
-\centering
-\includegraphics[width=170mm,height=53mm]{assets/nav1-0.eps}
-\caption{The view on the left shows an indication of more detail within the
-Wellington PoP. The zoomed in view shows the addition of more details such 
-as edges and labels}
-\label{fig:nav1.0}
-\end{figure}
-
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[width=170mm,height=88.01mm]{assets/nav1-1.eps}
 \caption{A tooltip is shown by the mouse pointer that indicated where the user
