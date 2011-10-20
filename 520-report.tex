@@ -1539,6 +1539,67 @@ a large screen is used in their office for viewing visualisations.
   %   > Experiment with more layout algorithms
   %   > Look into the possibility of effectively incorporating layers
   %   > Generate adapters to take common network data types such as RRD
+  
+  
+  % used web technologies such as Canvas and JavaScript (identified and used c).
+  % used lots of libraries
+  % scalability - network hierachies + semantic zooming
+  % grouping - specific layouts and depth
+  % overlays - a generic way of allowing developers to add additional drawings
+  % overtop of the existing display.
+  % overview - maintain sense of positioning in the overall network
+  %
+  % Results *
+  % Actual implementation - NetMapJs
+  % Real examples using real datasets
+  % successful evaluation (they want to use it)
+
+
+The goal of this project was to produce an improved computer network map
+display. This was achieved by identifying weaknesses in existing implementations
+and looking at ways of addressing them. A web based application called NetMapJs
+was developed to generate and control interactive network map displays. The main
+features of NetMapJs developed for this project are:
+
+\begin{itemize}
+  \item Data adapters that separate raw data from the actual visualisation.
+  \item Semantic zooming and panning combined with sub network hierarchy for
+  improved scalability.
+  \item Automatic layout algorithms that can be applied to sub network groups.
+  \item Stacked overview boxes that help users maintain a sense of positioning
+  as they navigate the map.
+  \item An overlay system that provides a generic way for developers to add in
+  additional graphics over the network map.
+  \item An editor view that allows users to statically position nodes.
+\end{itemize}
+
+Through the use of these features, NetMapJs was able to address some of the
+limitations of existing network map implementations as described in Section
+\ref{sec:introduction}. The outcomes of of this project in terms of network map
+improvements are:
+
+\begin{itemize}
+  \item Rich user interactivity allowing the user significant control over the
+  visualisation.
+  \item Scalable network map design that allows large networks to be displayed
+  without hitting performance limits.
+  \item A web browser based display using HTML5 specification that does not 
+  require specialised software.
+  \item Informative edge graphics incorporated into edges that display
+  network metrics using sound information visualisation theory.
+\end{itemize}
+
+NetMapJs was tested using real topology data sourced from the Rural Link and
+KAREN networks. An evaluation using these two networks was successful and pointed
+out the strengths and weaknesses of NetMapJs. Engineers from both of the
+networks indicated that this network map would be an improvement over their
+current tool in use and that they would consider using it once the software was
+polished and their concerns addressed. In particular, with an improved user
+interface, a more complete set of layout algorithms and a completed
+client/server side model implementation, NetMapJs will be ready for live
+deployment in real world systems.
+
+% future work
 
 There are several possible paths to take for future work resulting from this
 project. Semantic zoom could be investigated further to explore possible uses
@@ -1567,62 +1628,6 @@ Nagios \cite{Nagios_website} or OpenNMS \cite{OpenNMS_website} would be a good
 extension to allow NetMapJs to be used with a minimal installation and setup
 overhead.
 
-  % used web technologies such as Canvas and JavaScript (identified and used c).
-  % used lots of libraries
-  % scalability - network hierachies + semantic zooming
-  % grouping - specific layouts and depth
-  % overlays - a generic way of allowing developers to add additional drawings
-  % overtop of the existing display.
-  % overview - maintain sense of positioning in the overall network
-  %
-  % Results *
-  % Actual implementation - NetMapJs
-  % Real examples using real datasets
-  % successful evaluation (they want to use it)
-
-
-The goal of this project was to produce an improved computer network map
-display. This was achieved by identifying weaknesses in existing implementations
-and looking at ways of addressing them. A web based application called NetMapJs
-was developed to generate and control interactive network map displays. The main
-features of NetMapJs developed for this project are:
-
-\begin{itemize}
-  \item Data adapters that separate raw data from the actual visualisation
-  \item Semantic zooming and panning combined with sub network hierarchy for
-  improved scalability
-  \item Automatic layout algorithms that can be applied to sub network groups
-  \item Stacked overview boxes that help users maintain a sense of positioning
-  as they navigate the map
-  \item An overlay system that provides a generic way for developers to add in
-  additional graphics over the network map
-  \item An editor view that allows users to statically position nodes
-\end{itemize}
-
-Through the use of these features, NetMapJs was able to address some of the
-limitations of existing network map implementations as described in Section
-\ref{sec:introduction}. The outcomes of of this project in terms of network map
-improvements are:
-
-\begin{itemize}
-  \item Rich user interactivity allowing the user a lot of control over the
-  visualisation
-  \item Scalable network map design that allows large networks to be displayed
-  \item A web browser based display using HTML5 specification that doesn't
-  require specialised software
-  \item Informative edge graphics incorporated into edges that effectively show
-  network metrics using sound information visualisation theory 
-\end{itemize}
-
-NetMapJs was tested using real topology data sourced from the Rural Link and
-KAREN networks. An evaluation with these two networks was successful and pointed
-out the strengths and weaknesses of NetMapJs. Engineers from both of the
-networks indicated that this network map would be an improvement over their
-current tool in use and that they would consider using it once the software was
-polished and their concerns addressed. In particular, with an improved user
-interface, a more complete set of layout algorithms and a completed
-client/server side model implementation, NetMapJs will be ready for live
-deployment in real world systems.
 
 \newpage
 
