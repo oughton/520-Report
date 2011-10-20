@@ -236,8 +236,8 @@ particularly effective for small and sparse networks. Problems arise with larger
 networks such as display clutter, node positioning difficulties and perceptual
 tension. Display clutter is the situation where displays become overwhelmed with
 too much information. This may cause the viewer to become confused with the
-display. Node positioning effects the way that viewers interpret the map.
-Different node positions may lead to other interpretations of the same
+display. Node positioning affects the way that viewers interpret the map.
+Different node positions may lead to different interpretations of the same
 underlying data. Finally, the distance between nodes cause viewers to perceive
 relationships between nodes differently. For example, nodes positioned closely
 will be joined by a short line and will appear to be related to each other. An
@@ -326,12 +326,12 @@ performance data poller \cite{Paul_2000}. The map incorporates an idea of
 subnetworks having specific layout types such as star, ring and sphere. More
 node detail is made available as the user moves through the 3D space.
 Complicated graphs displayed using three dimensions make depth perception
-difficult due to occlusion. Movement through the space is good at understanding
-such displays. The Java 3D implementation suffered from low frame rates that
-reduces the movement effectiveness.
+difficult due to occlusion. Movement through the space is helpful for
+interpreting such displays. The Java 3D implementation suffered from low frame
+rates that reduced the effectiveness of the movement.
 
 
-Becker, et al. present a geographical network mapping tool \cite{Becker_1995}.
+Becker, \emph{et al.} present a geographical network mapping tool \cite{Becker_1995}.
 The visualisation is static with controls located around the map to look at
 different aspects of the data. They struggle with ideas to manage navigation
 when zoomed in. In this project, stacked overview maps are used to overcome this
@@ -365,18 +365,18 @@ these shortcomings by using techniques described in Section
 \ref{sec:visual-design}. 
 
 Another web based implementation comes as part of the Nagios network management
-system (NMS) \cite{Nagios_website}. This network mapping tool only supports networks
-laid out in a tree structure, does not support interaction of any kind and does
-not visualise performance data. Networks that include redundant, non tree like
-links are visualised by multiple paths to compensate. The map does have a good
-way of visualising whether or not a link between devices is up or down by
+system (NMS) \cite{Nagios_website}. This network mapping tool only supports
+networks laid out in a tree structure, does not support interaction of any kind
+and does not visualise performance data. Networks that include redundant, non
+tree like links are visualised by multiple paths to compensate. The map does
+have a way of visualising whether or not a link between devices is up or down by
 highlighting areas of the tree green or red. An advantage of visualisations that
 are integrated into network management systems is that no additional
 installation is required because all of the networking data storage and
 processing is taken care of.
 
 The Zenoss NMS also includes networking mapping functionality
-\cite{Zenoss_website}. Their tool takes a different approach to the zooming and
+\cite{Zenoss_website}. This tool takes a different approach to the zooming and
 panning method used in this project. Filters let the user immediately jump to a
 view of the network centered around a particular device. The amount of the
 network shown is adjusted using a slider that controls the number of hops from
