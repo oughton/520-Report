@@ -926,11 +926,10 @@ and the view port boxes change size and position accordingly.}
   %   * Or just change visualisation parameters
 
 Details of the implementation of NetMapJs are described in this section. An
-overview of how the tool works overall is given in Section
-\ref{sec:client-server-model.impl}. The rest of the sections describe how
-aspects of the visual design were implemented. Supporting functions such as
-overlays and an editor are discussed in sections \ref{sec:overlays.impl} and
-\ref{sec:editor.impl} respectively.
+overview of the tool is given in Section \ref{sec:client-server-model.impl}. The
+rest of the sections describe how aspects of the visual design were implemented.
+Supporting functions such as overlays and an editor are discussed in sections
+\ref{sec:overlays.impl} and \ref{sec:editor.impl} respectively.
 
 \subsection{Client / Server Model}
 \label{sec:client-server-model.impl}
@@ -982,7 +981,7 @@ as well as gathering raw networking data through interactions with an adapter.
 Adapters know about a specific networking data format such as RRD and how to
 transform this into the generic JSON format that NetMapJs understands. As an
 example, an adapter was developed for Rural Link that took their device
-configuration file and produced a valid JSON structure that can be read and
+configuration file and produced a valid JSON structure that could be read and
 visualised on the client side. The state and networking data is passed to the
 client through the use of the web API.
 
@@ -1147,11 +1146,11 @@ of an invisible circle centered on the root. The radius of the circle is a
 specified fraction of the parent group's width. This layout is limited by the
 amount of space it uses due to the circular positioning of nodes. The space
 between the center of the circle and the circumference where all the nodes are
-located only used for edges. Also, the space between the circle circumference
-and the parent node's bounds is completely unused. If the parent node was not
-shaped like a circle then there would be gaps at the corners where the
-circumference can not reach. It is also only appropriate to use when the
-underlying network structure is star like.
+located is used for edges. Also, the space between the circle circumference and
+the parent node's bounds is completely unused. If the parent node was not shaped
+like a circle then there would be gaps at the corners where the circumference
+can not reach. It is also only appropriate to use when the underlying network
+structure is star like.
 
 The final layout algorithm, force directed, uses the Arbor library for
 maintaining the node positions. The purpose of force directed algorithms is to
@@ -1209,11 +1208,11 @@ Manual assignment of depth values is also possible.
 
 A rendering function handles when and how each visualisation aspect should be
 displayed. Nodes, labels and edges that have a depth value that is less than or
-equal to the zoom offset are visible in the map. Nodes and edges that just have
-a depth less than the offset are drawn with a lower alpha value. This creates
-the desired effect of fading out nodes above the current level. Edges have an
+equal to the zoom offset are visible in the map. Nodes and edges that have a
+depth less than the offset are drawn with a lower alpha value. This creates the
+desired effect of fading out nodes above the current level. Edges have an
 additional condition that handles the case when edges join nodes of different
-groups. Those edges that extend from one group to another deeper group's node
+groups. Those edges that extend from one group to another, deeper, group's node
 should only be partially displayed. That is, the edge should start from the
 displayed node and extend only to the edge of the group that contains the deeper
 node.
@@ -1230,8 +1229,8 @@ linear path towards the destination by translating the canvas until the node is
 centered on the screen. The zoom and center feature allows the view port to
 quickly focus on a node. This was implemented by calculating the translation
 difference required for centering and the scale offset necessary to zoom in on
-the node. A JavaScript interval is set to animate the view port into the new
-position by incrementing coordinates in each step.
+the destination node. A JavaScript interval is set to animate the view port into
+the new position by incrementing coordinates in each step.
 
 \begin{figure} \centering
 \includegraphics[width=120mm,height=87.2mm]{assets/nav2-0.pdf}
@@ -1304,7 +1303,7 @@ event is fired, the manager loops through all of its overlays and calls their
 update method. 
 
 One of the uses for the overlay functionality that was identified early in the
-project and later requested for the KAREN map, is the displaying of virtual
+project, and later requested for the KAREN map, is the displaying of virtual
 local area networks (VLANs). Different VLANs may take separate paths through a
 given network and may have their own set of performance metrics. An overlay that
 visualises VLAN flows separately for the KAREN network is shown in Figure
