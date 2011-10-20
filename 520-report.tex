@@ -67,31 +67,30 @@ organisations.
 Computer network maps are an effective way of visualising complex network
 systems. Network maps consist of nodes and edges, where nodes represent devices
 and edges show the physical or logical relationship between them. The
-positioning of nodes throughout a map, displays the topology of the network that
-it is visualising. It is important to get the positioning right because the maps
-may be used to gain insight into the shape and structure of network devices.
-Automatic layout algorithms may be used to attempt a good layout or users may
-want to define static positions for nodes when there is already some idea about
-the underlying topology. Also, various users of a network map may need to view
-it from different perspectives depending on their roll. For example, a support
-desk worker may just need to see whether or not very general areas of the
-network are functional, where as a network engineer may need to see a specific
-area with a lot of detail.
+positioning of nodes throughout a map displays the topology of the network that
+is being visualised. It is important to position nodes correctly because the
+maps may be used to gain insight into the shape and structure of network
+devices.  Automatic layout algorithms may be used to attempt a suitable layout or
+users may want to define static positions for nodes when there is already some
+idea about the underlying topology. Also, the various users of a network map may
+need to view it from different perspectives depending on their role. For
+example, a support desk worker may only need to see whether or not very general
+areas of the network are functional, whereas a network engineer may need to see
+a specific area in greater detail.
 
 In network maps, the edges connecting nodes indicate a relationship between two
 devices. Networks often monitor and store performance metrics of a link that can
-be directly related to a single edge. It is therefore, possible to visualise the
+be directly related to a single edge. It is therefore possible to visualise the
 metrics as part of the edge graphics or to include them through user
 interaction. This idea assists with two uses of network maps: monitoring and
 dimensioning. Network maps can be used to monitor the health of the devices and
-links, and visually indicate the user when a problem is detected. With an
-effective layout in place, areas of the network that are affected by the problem
-can be easily identified and passed on to engineers to look into. Dimensioning
+links, and visually indicate to the user when a problem is detected. With an
+effective layout in place, areas of the network that are affected by a problem
+can be easily identified and passed on to engineers to investigate. Dimensioning
 in networks is finding the minimum capacity of a link to service the peak
 capacity \cite{Girard_1990}. Network maps which show bandwidth usage on links
-effectively can assist network engineers at determining what the peak capacity
-of links are and whether there is more bandwidth available that can be sold to
-customers.
+can assist network engineers with determining the peak capacity of links and
+whether there is more bandwidth available that can be sold to customers.
 
 In this project, techniques and technologies are explored with the goal of
 producing an improved network map display over existing implementations.
@@ -119,17 +118,17 @@ aims to address:
   %   > Interactive 
   %   > Mutli layered???
  
-Network maps often generate static images that provide little or no user
+Current network maps often generate static images that provide little or no user
 interaction. This project looks into the use of zooming, panning and other
 interactive navigation functionality to give users more control over the
 information space. A user-friendly event system encourages developers to make
-use of user input. Clicking or hovering over nodes and edges for example, calls
+use of user input. Clicking or hovering over nodes and edges, for example, calls
 event functions that can be customised to add to the visual display without
-needing an understanding about how the internals of NetMapJs works. Existing
-tools also usually do not scale well for large networks, as views become
+needing an understanding about how NetMapJs works internally. Existing tools
+also typically do not scale well for large networks, as views become
 overwhelming and overlapping edges obscure parts of the network. This project
 considers the use of hierarchy to reduce the overall complexity of maps by
-grouping sub networks together. The idea of groups coupled with semantic zooming
+grouping sub-networks together. The idea of groups coupled with semantic zooming
 enables detail to be abstracted until the user indicates that they are
 interested in a more specific area of the network.
 
@@ -142,7 +141,7 @@ browsers are ubiquitous so views can be easily shared and discussed between
 users. Mobile devices also come with browsers which gives web applications
 instant portability to other systems. The latest HTML5 specification provides a
 large step towards a completed standard \cite{HTML5_website}. This allows
-advanced web applications to be produced without the need of special propriety
+advanced web applications to be produced without the need of special proprietary 
 software or plugins and will lead to improved cross browser compatibility
 through the standardisation of the HTML5. This project focusses on taking
 advantage of these technologies in order to produce a highly interactive
@@ -154,10 +153,10 @@ using all of its available bandwidth and so there would be a possibility of
 adding additional clients. The opposite is also useful; an indication of high
 bandwidth utilisation lets administrators know that more links or load balancing
 may be beneficial to their clients. Existing network map implementations
-sometimes attempt to display this information in edges or by other means. This
-is most commonly either the width line or a set of colours. However, the use of
-colour to is one of the least useful ways to display quantitative variables
-\cite{Spence_2007}. In this project, a new way of displaying quantitative data
+sometimes attempt to display this information in edges. This is most commonly
+done using either the width line or a set of colours. However, the use of colour
+is one of the least useful ways to display quantitative variables
+\cite{Spence_2007}.  In this project, a new way of displaying quantitative data
 within edges that uses edge width, length, orientation and colouring is
 presented and implemented in NetMapJs with good results.
 
@@ -167,20 +166,20 @@ presented and implemented in NetMapJs with good results.
 The datasets used in this project for testing NetMapJs were sourced from two
 real and currently operational networks, Rural Link and KAREN. Both networks
 have mapping tools currently in place. A brief comparison of these tools with
-NetMapJs are included in this report. In the evaluation section, network
-engineers from within Rural Link and KAREN are also asked to compare the tools
+NetMapJs is included in this report. In the evaluation section, network
+engineers from within Rural Link and KAREN were also asked to compare the tools
 and provide feedback. 
 
 This report is divided into the following sections. Section
 \ref{sec:related-work} gives the necessary background information used for the
-rest of the report. The datasets are described in detail and the technologies
-and libraries used in this project are listed. The visual design considerations
-are described in Section \ref{sec:visual-design}. Each of the design aspects are
-motivated, justified and an example from NetMapJs is given. The technical
-details about how the visual design was implemented are found in Section
-\ref{sec:implementation}. In Section \ref{sec:evaluation}, the results of
-evaluation by network engineers are discussed. Finally, conclusions are drawn
-and some possible directions of future work are mentioned in Section
+rest of the report. In Section \ref{sec:background}, the datasets are described in
+detail and the technologies and libraries used in this project are listed. The
+visual design considerations are described in Section \ref{sec:visual-design}.
+Each of the design aspects are motivated, justified and an example from NetMapJs
+is given. The technical details about how the visual design was implemented are
+found in Section \ref{sec:implementation}. In Section \ref{sec:evaluation}, the
+results of evaluation by network engineers are discussed. Finally, conclusions
+are drawn and some possible directions of future work are mentioned in Section
 \ref{sec:conclusion}.
 
 \newpage
