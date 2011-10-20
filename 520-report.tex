@@ -425,28 +425,28 @@ evaluation by receiving comparative feedback from the network engineers.
   % KAREN About, PHP weathermap 
 The first dataset used was from the KAREN network \cite{KAREN_website}. KAREN is
 a high capacity network that links together education and research institutions
-throughout New Zealand. Their network consists of point-of-presence (PoP) nodes
+throughout New Zealand. The network consists of point-of-presence (PoP) nodes
 strategically placed in regions in the North and South Island and with
-connections to Sydney and Los Angeles. Each PoP can be thought of as a
-subnetwork of KAREN that may contain distribution devices, and connections to
-institutions and other PoPs.  Performance data such as bytes or packets per
-second for a given device port is split over a series of round-robin database
-(RRD) files. Device information such as name and location are stored in a
-database and are also available on their online weathermap. KAREN currently uses
-the network map generation tool called PHP Network Weathermap. A snapshot of the
-map can be viewed in Appendix \ref{app:karenphp}.
+connections to Sydney and Los Angeles. Each PoP can be treated as a subnetwork
+of KAREN that may contain distribution devices, and connections to institutions
+and other PoPs.  Performance data such as bytes or packets per second for a
+given device port is split over a series of round-robin database (RRD) files.
+Device information such as name and location are stored in a database and are
+also available on their online weathermap. KAREN currently uses the network map
+generation tool called PHP Network Weathermap. A snapshot of the map can be
+viewed in Appendix \ref{app:karenphp}.
 
 
   % Crcnet
 The second dataset was sourced from Rural Link's wireless network based in both
-rural and city areas across Waikato. The network core is located in Hamilton
+rural and urban areas across Waikato. The network core is located in Hamilton
 city and branches out across wireless access points in a tree like structure
 with some redundant links. The dataset obtained includes device information and
 relationships without performance data. Rural Link uses a network management
-system called Nagios that also includes its own network map tool. Appendix
-\ref{app:crcnetnagios} contains an example of what the Rural Link network map
-looks like. The Nagios tool produces a tree map layout that handles redundant
-links by replicating paths.
+system called Nagios that also includes its own network map tool. The Nagios
+tool produces a tree map layout that handles redundant links by replicating
+paths. Appendix \ref{app:crcnetnagios} contains an example of the Rural Link
+network map. 
 
 
 \subsection{Technologies}
@@ -461,9 +461,9 @@ links by replicating paths.
   %     - refer back to the scalability paper
 
 % implementation overview
-In order to explain the choices of technologies, it is helpful have a general
+In order to explain the choices of technologies, it is helpful to have a general
 overview of the implementation of the visualisation. The implementation of
-NetMapJs, was built to run mostly on the client side with only the network data
+NetMapJs was built to run mostly on the client side with only the network data
 processing done on the server side. The visualisation code and network datasets
 are loaded from server to client side where the web browser then loads in the
 application and displays the network map to the user. NetMapJs allows
@@ -477,17 +477,16 @@ It is useful to separate code dealing with the raw network configuration and
 performance data from the visualisation. This means that when network data
 collection practices or data structures change the visualisation can continue to
 function without alterations. This project uses a generic graph data structure
-on the visualisation side, which will support any type of map. The data
-structure simply defines a set of nodes each with their own set of adjacencies.
-Nodes and adjacencies both may have data attached which allows for the addition
-of any number of parameters. Raw networking data, perhaps stored in RRDs or
-other databases, can be processed on the server side by an adapter and converted
-into the generic form that the visualisation understands. The generic
-visualisation structure uses JavaScript Object Notation (JSON) which makes it
-trivial to transmit between the server and client side \cite{rfc4627}. For
-example, to convert the Rural Link configuration files to the generic
-visualisation form, a python script was written to act as an adapter between the
-two formats. 
+on the visualisation side which will support any type of map. The data structure
+simply defines a set of nodes each with their own set of adjacencies.  Nodes and
+adjacencies both may have data attached which allows for the addition of any
+number of parameters. Raw networking data, perhaps stored in RRDs or other
+databases, can be processed on the server side by an adapter and converted into
+the generic form that the visualisation understands. The generic visualisation
+structure uses JavaScript Object Notation (JSON) which makes it trivial to
+transmit between the server and client side \cite{rfc4627}. For example, to
+convert the Rural Link configuration files to the generic visualisation form, a
+python script was written to act as an adapter between the two formats. 
 
 % technologies
 The NetMapJs application is implemented using JavaScript as the client side
@@ -531,11 +530,11 @@ Object Model (DOM). User interaction such as mouse clicks can be easily added to
 one of these objects and vector sets can be changed. Canvas on the other hand
 requires the programmer to develop their own user interaction system and the
 entire canvas must be redrawn when any change is required. It would therefore
-appear that SVG was the most natural choice to go with for network maps that
-require user interaction for nodes and edges. However, previous tests have shown
-scalability performance problems with SVG \cite{Johnson_2008}. These tests are
-four years old relative to this project so it was deemed necessary to develop a
-benchmark tool to produce updated results.
+appear that SVG was the most natural choice for network maps that require user
+interaction for nodes and edges. However, previous tests have shown scalability
+performance problems with SVG \cite{Johnson_2008}. These tests are four years
+old relative to this project so it was deemed necessary to develop a benchmark
+tool to produce updated results.
 
 The benchmark tool was developed using JavaScript to run across all modern
 browsers. It generates a given number of rectangles and begins moving them
@@ -549,13 +548,13 @@ versions of the Firefox, Safari, Internet Explorer and Chrome browsers.
 The results of the tests are shown in Figure \ref{fig:benchmark-graph}. At the
 500 particle mark the top three lines are all Canvas based frame rates. SVG
 performance is shown to drop significantly in the first 50 to 100 particles
-where as Canvas achieves a much more level gradient. NetMapJs needs to be able
-to visualise networks that will potentially have many more nodes than the
-performance limits of SVG allow for. As a result, Canvas was chosen as the web
-graphics technology for this visualisation. However, the graphics generation
-system was kept separate from the rest of the code. This means that if
-performance of these technologies shift in the future, a new graphic system
-could be implemented and slotted in to reflect the change.
+where as Canvas achieves a much more level gradient. As NetMapJs needs to be
+able to visualise networks that will potentially have many more nodes than the
+performance limits of SVG allow for, Canvas was chosen as the web graphics
+technology for this visualisation. However, the graphics generation system was
+kept separate from the rest of the code. This means that if the performance of
+these technologies shift in the future, a new graphic system could be
+implemented and slotted in to reflect the change.
 
 
 \subsection{Libraries}
@@ -566,22 +565,22 @@ could be implemented and slotted in to reflect the change.
   % How did I pick them?
 
 NetMapJs makes use of the jQuery, JavaScript InfoVis Toolkit and Arbor libraries
-in its design. JQuery was used for several reasons \cite{jQuery_website}. Cross
-browser support is important to ensure that each user gets the same experience
-across different systems. JQuery functions are portable and are especially
-useful for eliminating browser specific code. JQuery also simplifies HTML
+in its design. JQuery was used for several reasons \cite{jQuery_website}. JQuery
+functions are portable and are especially useful for eliminating browser
+specific code. Cross browser support is important to ensure that each user gets
+the same experience across different systems. JQuery also simplifies HTML
 document manipulation, event handling and AJAX interactions. The JavaScript
 InfoVis Toolkit provides a framework for producing interactive, web based
 visualisations \cite{thejit_website}. The toolkit includes many useful features
-such as node-edge graph manipulation functions, complex number arithmetic,
-animation transitions and so on, which are needed for this project.
+which are needed for this project such as node-edge graph manipulation
+functions, complex number arithmetic and animation transitions.
 
 NetMapJs includes some automatic layout algorithms for initially deciding where
 to position nodes in the network map. One of these layouts is a force directed
-algorithm. This are a class of algorithms that lay out the graph in an
-aesthetically pleasing way by applying forces to nodes and edges. The Arbor
-JavaScript library was used for this as it performs well and provides mechanisms
-for changing physics parameters such as gravity and friction
+algorithm. Force directed algorithms are a class of algorithms that lay out the
+graph in an aesthetically pleasing way by applying forces to nodes and edges.
+The Arbor JavaScript library was used for this as it performs well and provides
+mechanisms for changing physics parameters such as gravity and friction
 \cite{Arbor_website}. The QUnit library is a unit testing library plug-in for
 jQuery. This assisted with test driven development during the implementation
 stage of the project.
@@ -617,18 +616,18 @@ relationship or connection between then. Subnetworks are a specific group of
 devices that relate to each other by a common subnet. Subnetworks may consist of
 other subnetworks of their own and altogether they can be seen as a single
 network. It is possible to apply this concept to nodes when designing a
-visualisation. Nodes can visually contain sub nodes and so on for a given number
+visualisation. Nodes can visually contain sub-nodes for a given number
 of depth levels. Nodes that fall into this category will be referred to as
 group nodes.
 
 Figure \ref{fig:nodes1.0} shows the Hamilton (HLZ) PoP for the KAREN network.
 The outer circle marks the HLZ node and the smaller, solid circles inside
-illustrate the sub nodes of that PoP. This grouped effect causes the viewer the
-assume that the sub nodes are related to each other through a common parent
+illustrate the sub-nodes of that PoP. This grouped effect causes the viewer the
+assume that the sub-nodes are related to each other through a common parent
 node. Figure \ref{fig:nodes1.1} shows a zoomed in view of the same HLZ group
 node. The parent node and edges are now faded out so that the focus is now on
-the sub nodes and edges. This idea of zooming and adding detail is explained in
-Section \ref{sec:navigation.vis}. The layout of the sub nodes within a group is
+the sub-nodes and edges. This idea of zooming and adding detail is explained in
+Section \ref{sec:navigation.vis}. The layout of the sub-nodes within a group is
 also an important design decision as different group nodes may make sense to be
 laid out differently. The HLZ group node is using a star layout. Layout
 considerations are discussed in Section \ref{sec:layouts.vis}.
@@ -1017,7 +1016,7 @@ user is interacting with. The helpers interface allows new edges and node types
 to be easily implemented.
 
 NetMapJs implements several different node and edge types to cater for various
-functions. In particular, group nodes need to visually contain sub nodes and
+functions. In particular, group nodes need to visually contain sub-nodes and
 edges need to consider the current level of zoom. As the user zooms into the
 network map, edge widths are scaled in proportion such that they always remain
 the same. This is required because in NetMapJs, quantitative variables may be
