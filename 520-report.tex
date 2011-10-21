@@ -257,7 +257,7 @@ the benefits of adding dynamic features \cite{Becker_1990}. They recognise the
 difficulty of deriving good heuristics for determining visual parameters such as
 line width and node sizing. Dynamic maps have the advantage of incorporating
 sliders or other controls that allow parameters to be adjusted and viewed in
-real time. They recognise that it is often useful to follow paths through an
+real time. They recognise that it is often useful to follow paths through a
 network. This becomes difficult for larger, more cluttered networks using
 a static map. The design of the network map for this project considers these
 advantages as well as the benefits from being able to utilise the latest
@@ -323,7 +323,7 @@ network visualisation in the browser.
   % Pulished implementations Becker 1995, Paul 2000.
 Paul, et al. produced a Java 3D implementation of a network weather map and a
 performance data poller \cite{Paul_2000}. The map incorporates an idea of
-subnetworks having specific layout types such as star, ring and sphere. More
+sub-networks having specific layout types such as star, ring and sphere. More
 node detail is made available as the user moves through the 3D space.
 Complicated graphs displayed using three dimensions make depth perception
 difficult due to occlusion. Movement through the space is helpful for
@@ -358,7 +358,7 @@ generates an image representation of the network topology
 \cite{PHP_Network_Weathermap_website}. The image that is sent to the client side
 includes some interaction through the use of HTML image maps but requires a
 complete regeneration for a change of view. This limits interactivity and makes
-it difficult for a user to effectively navigate into deeper subnetworks. A user
+it difficult for a user to effectively navigate into deeper sub-networks. A user
 must click on a given node group and then wait for the page to reload completely
 with a new display of the internal nodes. This project attempts to address
 these shortcomings by using techniques described in Section
@@ -368,7 +368,7 @@ Another web based implementation comes as part of the Nagios network management
 system (NMS) \cite{Nagios_website}. This network mapping tool only supports
 networks laid out in a tree structure, does not support interaction of any kind
 and does not visualise performance data. Networks that include redundant, non
-tree like links are visualised by multiple paths to compensate. The map does
+treelike links are visualised by multiple paths to compensate. The map does
 have a way of visualising whether or not a link between devices is up or down by
 highlighting areas of the tree green or red. An advantage of visualisations that
 are integrated into network management systems is that no additional
@@ -378,7 +378,7 @@ processing is taken care of.
 The Zenoss NMS also includes networking mapping functionality
 \cite{Zenoss_website}. This tool takes a different approach to the zooming and
 panning method used in this project. Filters let the user immediately jump to a
-view of the network centered around a particular device. The amount of the
+view of the network centred around a particular device. The amount of the
 network shown is adjusted using a slider that controls the number of hops from
 the central node. The automatic layout algorithm used is also adjusted by a
 slider that alters the level of node repulsion. This approach works well for
@@ -440,7 +440,7 @@ viewed in Appendix \ref{app:karenphp}.
   % Crcnet
 The second dataset was sourced from Rural Link's wireless network based in both
 rural and urban areas across Waikato. The network core is located in Hamilton
-city and branches out across wireless access points in a tree like structure
+city and branches out across wireless access points in a treelike structure
 with some redundant links. The dataset obtained includes device information and
 relationships without performance data. Rural Link uses a network management
 system called Nagios that also includes its own network map tool. The Nagios
@@ -475,18 +475,19 @@ design.
   % Adapters Why use them. How did I use them. Relate to Datasets
 It is useful to separate code dealing with the raw network configuration and
 performance data from the visualisation. This means that when network data
-collection practices or data structures change the visualisation can continue to
-function without alterations. This project uses a generic graph data structure
-on the visualisation side which will support any type of map. The data structure
-simply defines a set of nodes each with their own set of adjacencies.  Nodes and
-adjacencies both may have data attached which allows for the addition of any
-number of parameters. Raw networking data, perhaps stored in RRDs or other
-databases, can be processed on the server side by an adapter and converted into
-the generic form that the visualisation understands. The generic visualisation
-structure uses JavaScript Object Notation (JSON) which makes it trivial to
-transmit between the server and client side \cite{rfc4627}. For example, to
-convert the Rural Link configuration files to the generic visualisation form, a
-python script was written to act as an adapter between the two formats. 
+collection practices or data structures change, the visualisation can continue
+to function without alterations. This project uses a generic graph data
+structure on the visualisation side which will support any type of map. The data
+structure simply defines a set of nodes each with their own set of adjacencies.
+Nodes and adjacencies both may have data attached which allows for the addition
+of any number of parameters. Raw networking data, perhaps stored in RRDs or
+other databases, can be processed on the server side by an adapter and converted
+into the generic form that the visualisation understands. The generic
+visualisation structure uses JavaScript Object Notation (JSON) which makes it
+trivial to transmit between the server and client side \cite{rfc4627}. For
+example, to convert the Rural Link configuration files to the generic
+visualisation form, a python script was written to act as an adapter between the
+two formats. 
 
 % technologies
 The NetMapJs application is implemented using JavaScript as the client side
@@ -498,8 +499,7 @@ visualisation generation. Topology and networking data is exchanged with the
 server using JSON. The visualisation is displayed to the user through the use of
 native HTML, CSS and Canvas. HTML and CSS were a natural choice for laying out
 elements on a web page as browser support is native and the standards are well
-defined. The choice of the web graphics technology however required some
-deliberation. 
+defined.
 
 
 \subsubsection{Graphics Technologies}
@@ -548,7 +548,7 @@ versions of the Firefox, Safari, Internet Explorer and Chrome browsers.
 The results of the tests are shown in Figure \ref{fig:benchmark-graph}. At the
 500 particle mark the top three lines are all Canvas based frame rates. SVG
 performance is shown to drop significantly in the first 50 to 100 particles
-where as Canvas achieves a much more level gradient. As NetMapJs needs to be
+whereas Canvas achieves a much more level gradient. As NetMapJs needs to be
 able to visualise networks that will potentially have many more nodes than the
 performance limits of SVG allow for, Canvas was chosen as the web graphics
 technology for this visualisation. However, the graphics generation system was
@@ -598,23 +598,23 @@ screen shots taken from NetMapJs views.
 \subsection{Nodes}
 \label{sec:nodes.vis}
   % Design considerations for nodes
-  % Nodes can be sub networks
+  % Nodes can be sub-networks
   %   > Helps for scalability
   % Grouping, hiding nodes
   % Combining with symantic zooming
   % Screenshots
 
   % What are nodes with respect to network maps?
-  % What are subnetworks?
+  % What are sub-networks?
   % How have I combined the two?
   % Screenshot 1
   % What is the advantages of this?
 
 Nodes in network maps are traditionally used to express a particular physical or
 virtual device. Nodes are joined together by edges which represent the
-relationship or connection between then. Subnetworks are a specific group of
-devices that relate to each other by a common subnet. Subnetworks may consist of
-other subnetworks of their own and altogether they can be seen as a single
+relationship or connection between then. Sub-networks are a specific group of
+devices that relate to each other by a common subnet. Sub-networks may consist of
+other sub-networks of their own and altogether they can be seen as a single
 network. It is possible to apply this concept to nodes when designing a
 visualisation. Nodes can visually contain sub-nodes for a given number
 of depth levels. Nodes that fall into this category will be referred to as
@@ -622,7 +622,7 @@ group nodes.
 
 Figure \ref{fig:nodes1.0} shows the Hamilton (HLZ) PoP for the KAREN network.
 The outer circle marks the HLZ node and the smaller, solid circles inside
-illustrate the sub-nodes of that PoP. This grouped effect causes the viewer the
+illustrate the sub-nodes of that PoP. This grouped effect causes the viewer to
 assume that the sub-nodes are related to each other through a common parent
 node. Figure \ref{fig:nodes1.1} shows a zoomed in view of the same HLZ group
 node. The parent node and edges are now faded out so that the focus is now on
@@ -762,7 +762,7 @@ and provide a good starting point over purely static layouts. A complete network
 map tool would include many more layout algorithms to cope with a wider range of
 network layout structures \cite{Paul_2000}. Figure \ref{fig:edges1.0} shows
 Rural Link's network laid out using the force directed algorithm. The algorithm
-lays out the network particularly well due to its tree like structure. In
+lays out the network particularly well due to its treelike structure. In
 particular, there are no overlapping edges or nodes in the map. Redundant
 connections are shown clearly by branches that join up to form a loop. 
 
@@ -773,13 +773,13 @@ contains statically defined node positions that are based on layout designs by a
 graphic designer. When the user zooms in to a particular PoP, it can be seen
 that the layout of that group is a star layout. One central node, the
 distribution router, connects to all the other devices in that PoP, making the
-star layout particularly appropriate for displaying subnetworks at the PoP
+star layout particularly appropriate for displaying sub-networks at the PoP
 level.
 
 \begin{figure}
 \centering
 \includegraphics[width=170mm,height=49.34mm]{assets/layouts1-1.eps}
-\caption{An overall view of the KAREN network is on the left that uses a static
+\caption{On the left is an overall view of the KAREN network that uses a static
 layout. On the right is a zoomed in view that shows the Massey sub group having 
 a star layout applied.}
 \label{fig:layouts1.1}
@@ -811,7 +811,7 @@ and patterns from such large networks. It is therefore useful to combine layout
 algorithms with other techniques in order to remain scalable \cite{Herman_2000}.
 One way this can be done is through reduction techniques which decrease the
 amount of information being presented in the view. Grouping devices into
-subnetworks is one reduction technique that was previously described in Section
+sub-networks is one reduction technique that was previously described in Section
 \ref{sec:nodes.vis}. 
 
 Another technique for reducing networks is semantic zooming \cite{Perlin_1993}.
@@ -846,7 +846,7 @@ that connects the two. An event triggered tooltip is displayed over an edge to
 notify the user of the node that lies on the other end of it. This is shown in
 Figure \ref{fig:nav1.1}. The addition of animated transitions between view
 changes allow users to keep context and to absorb the change
-\cite{Lamping_1995}.  NetMapJs uses animation this way to transport the user to
+\cite{Lamping_1995}. NetMapJs uses animation this way to transport the user to
 the new view such that they get a sense of where in the network they are moving
 to. A direct jump from the source to destination node risks confusing their
 perceived location in the overall network.
@@ -865,7 +865,7 @@ out.
 \begin{figure}[h]
 \centering
 \includegraphics[width=170mm,height=88.01mm]{assets/nav1-1.eps}
-\caption{A tooltip is shown by the mouse pointer that indicated where the user
+\caption{A tooltip is shown by the mouse pointer that indicates where the user
 will end up if they click on the edge.}
 \label{fig:nav1.1}
 \end{figure}
@@ -886,8 +886,8 @@ view shows where they would end up after the animated movement.}
   %   > 
 
 As a user zooms in to deeper levels of the network map, it becomes easy for them
-lose context about where in the overall network they are. It is not ideal
-for the user to have to zoom out just to regain this context. To address this,
+to lose context about where in the overall network they are. It is not ideal for
+the user to have to zoom out just to regain this context. To address this,
 NetMapJs makes use of multiple overview maps that each display a particular
 level of the network. A level is defined as a zoom range in which no detail is
 added or removed. Starting from an initial zoomed out view, as the user zooms
@@ -1022,9 +1022,9 @@ edges need to consider the current level of zoom. As the user zooms into the
 network map, edge widths are scaled in proportion such that they always remain
 the same. This is required because in NetMapJs, quantitative variables may be
 encoded by the edge widths. If the scale for the widths changed as the user
-zoomed in, it would be difficult maintain an understanding of quantity. As more
-edges are added at greater zoom levels, multiple scales would have to coexist
-which would cause more confusion.
+zoomed in, it would be difficult to maintain an understanding of quantity. As
+more edges are added at greater zoom levels, multiple scales would have to
+coexist which would cause more confusion.
 
 The main edge type that was implemented for NetMapJs was the bidirectional
 divided pipe as described in Section \ref{sec:edges.vis}. Figure
@@ -1307,10 +1307,10 @@ project, and later requested for the KAREN map, is the displaying of virtual
 local area networks (VLANs). Different VLANs may take separate paths through a
 given network and may have their own set of performance metrics. An overlay that
 visualises VLAN flows separately for the KAREN network is shown in Figure
-\ref{fig:overlays1.0}. The purple lines shows the edges that the VLAN is
-attached to. Zooming into the map further would show the connections within sub
-groups. VLANs can be changed or turned off using the drop down box on the right
-hand side on the display.
+\ref{fig:overlays1.0}. The purple lines show the edges that the VLAN is attached
+to. Zooming into the map further would show the connections within sub groups.
+VLANs can be changed or turned off using the drop down box on the right hand
+side on the display.
 
 \begin{figure} 
 \centering
@@ -1689,9 +1689,9 @@ features of NetMapJs developed for this project are:
 
 \begin{itemize}
   \item Data adapters that separate raw data from the actual visualisation.
-  \item Semantic zooming and panning combined with sub network hierarchy for
+  \item Semantic zooming and panning combined with sub-network hierarchy for
   improved scalability.
-  \item Automatic layout algorithms that can be applied to sub network groups.
+  \item Automatic layout algorithms that can be applied to sub-network groups.
   \item Stacked overview boxes that help users maintain a sense of positioning
   as they navigate the map.
   \item An overlay system that provides a generic way for developers to add in
