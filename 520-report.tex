@@ -1383,17 +1383,143 @@ the editor.
 
 \section{Evaluation}
 \label{sec:evaluation}
+%
 
-% An evaluation with network engineers from Rural Link and KAREN was performed to
-% analyse the strengths and weaknesses of NetMapJs. The redesigns of their network
-% maps were sent along with a set of questions (see Appendix
-% \ref{app:evaluation-questions}) to people in the respective networks.
+An evaluation with network engineers from Rural Link and KAREN was performed to
+analyse the strengths and weaknesses of NetMapJs. The redesigns of their network
+maps were sent along with a set of questions (see Appendix
+\ref{app:evaluation-questions}) to people in the respective networks.
 
-% Both networks found the edge graphics to be effective at displaying bandwidth
-% data. Rural Link noted that the dynamic sizing of edge widths would be
-% particularly interesting to test with live data. The ability the view VLAN
-% traffic separately through the use of overlays was another advantage identified
-% by both of the networks.
+%   > Edges
+%     * Both thought edges were effective
+%     * Rural Link would like to see live data
+%     * Why do I think live data would be a good idea?
+%       - movement of arrows over time, would it be distracting etc
+%       - 
+%   > Nodes
+%     * Groups are good at showing distant sub-network detail
+%     * At a high level view can see which nodes/pops have the most connected
+%     sites
+%     * Work well at hiding detail to simplify large maps also
+%     * Navigation combined with overviews useful
+%
+%   > VLANs
+%     * Both liked being able to view VLANs separately
+%     * Discussion?
+%       - Shows that the overlay system is very useful
+%       - Other tools haven't separated out VLAN paths
+%       - Useful for visualising shape of VLANs.
+%       - Could separate out traffic is data available...
+
+
+Both networks found the edge graphics to be effective at displaying bandwidth
+data. Rural Link noted that the dynamic sizing of edge widths would be
+particularly interesting to test with live data. The example network maps
+produced in this project used static, randomly generated bandwidth values for
+drawing the edge graphics and as described earlier, NetMapJs supports polling this
+data and updating the map in real time. Live data updating the visualisation may
+raise other issues such as whether consistent large changes in bandwidth usage
+would distract users from other parts of the map. 
+
+The networks identified nodes as being effective at showing distant sub-network
+detail while still hiding information. Showing some limited detail of deeper
+sub-network levels indicates that the nodes exist and show at a higher level
+what group nodes have the most connected devices. The hiding of detail is
+effective at simplifying large network maps. Rural Link identified areas of the
+network map that could be converted to groups. Automatically deciding on what
+nodes to assign to a group can be difficult to get right and so it would be
+useful for NetMapJs to include an easy way of manually building groups.
+Selecting a set of nodes through user interaction in the map editor and then
+assigning that selection to a group would be a good way of implementing this.
+
+The ability to view VLAN traffic separately through the use of overlays was
+another advantage identified by both of the networks. The shape of the VLAN as a
+subset of the overall network can be visualised using this feature. This shows
+that the overlay system is useful for supporting the development of add-ons to
+the network map. The VLAN overlay simply showed flows by drawing coloured lines
+over top of the normal edge graphics. There is much more potential for this
+overlay such as: visualising VLAN specific metrics, comparing overall link
+statistics with VLAN specific data and showing multiple VLAN flows at once using
+different colours.
+
+% What they both didn't like
+%   > Aspects of the UI
+%     * Not immediately clear of some features - like follow paths
+%     * Need to add more visual cues such as...
+%     * Need to be able to customise with own colours, fonts, branding etc
+%       - how have I developed to easily support own colours schemes.
+%     * Zooming - should have limits and should center around mouse position
+%       - expand, expand, expand
+%     * Resize window?
+%
+%
+% Evaluation of how NetMapJs compares with both other maps
+%   > ...
+%
+%
+% Other comments?
+%   > Karen - provoked thought in their team
+%   > Rural Link - geographical, logical or automatic.
+%
+%
+% Both Networks would consider using NetMapJs once polished
+%   * What does this show?
+%   * NetMapJs is an improvement over their existing network maps
+
+The weaknesses of NetMapJs as identified by the networks were mostly user
+interface problems. In particular, more visual cues should be present to make
+some features more obvious and the styles used make aspects of the map hard to
+see. The visual cue, a tooltip, for following edges to the node on the other end
+only appear when the user hovers the mouse over the edge. A graphic that
+appears when following an edge without the user having to provide interaction
+would make this feature much more obvious. 
+
+Some of the colour choices on the map designs such as red on black make parts of
+the map hard to see. While more of the focus in this project has been placed on
+the development of new network map display techniques, it is still important to
+make the design visually appealing. Users are not going to care about the
+advanced network map functionality if it does not look good. In NetMapJs all of
+the styles, colours, fonts, node and edge graphics and user interface layout are
+customisable. The visual styles were separated from the implementation to make
+it trivial for developers to customise the look of the map to suit the networks
+requirements.
+
+Two issues with the user interaction around the zooming functionality were
+identified. When the user zooms in and out of the map, there should be hard
+limits imposed to stop them going to far in either direction. This would support
+the user to get an idea of the size of the network without having to guess based
+on the fact that no more detail is being added from zooming in or there are no
+more nodes off the screen when zooming out. The zooming out limit could be based
+on the minimum and maximum coordinates of the furtherest nodes in each direction
+on the screen. Zooming in could be restricted to the deepest sub-network in the
+map.
+
+The other issue with zooming is that it is based on the center of the screen not
+the mouse position. So when the user wants to zoom in on a particular area of
+the network map, they must perform suitable translations of the view to center
+it around that area before zooming. More panning may be required if the view
+port is not exactly centered over the area of interest. A much more natural way
+of doing this is to zoom towards the mouse position in an attempt to center the
+view port around that. This way, the panning and zooming are easily achieved
+together using the mouse pointer position.
+
+A comparison of NetMapJs to the networks existing network maps found it to be
+much more interactive, even more so than the new Icinga network management
+system \cite{Icinga_website}. NetMapJs was able to visualise the redundant loops
+in Rural Link's network where the Nagios map could not. Static layouts and the
+visualisation of networking performance data are also improvements of NetMapJs
+over Nagios. The PHP Network Weathermap is a more complete application that
+includes support for common database integration and animation of static images
+that show how bandwidth is changing over time. However, the dynamic nature of
+NetMapJs which allows for improvements such as easy overlay integration,
+semantic zooming and live update support will make it an improvement over this
+tool when the issues with the user interface have been addressed.
+
+Both of the networks that evaluated NetMapJs would consider using it as a
+replacement to their current network map and mentioned that it would make a good
+upgrade. KAREN noted that NetMapJs had provoked some thought in their team.
+Overall, this feedback shows that this project had been effective at developing
+improvements to computer network maps.
 
   %
   % How was the evaluation conducted:
@@ -1424,30 +1550,30 @@ the editor.
   % Same for Rural Link
   %
 
-An evaluation with network engineers from Rural Link and KAREN was performed to
-analyse the strengths and weaknesses of NetMapJs. The redesigns of their network
-maps were sent along with a set of questions to people in the respective
-networks.
+%An evaluation with network engineers from Rural Link and KAREN was performed to
+%analyse the strengths and weaknesses of NetMapJs. The redesigns of their network
+%maps were sent along with a set of questions to people in the respective
+%networks.
 
-\subsection{KAREN}
+%\subsection{KAREN}
 
-KAREN liked that, at a high level of the map, they could still see which PoPs
-have the most connected sites due to distant nodes being shown in basic detail.
-They found that the pipe edge widths were effective at showing differences in
-bandwidth between nodes. Being able to view VLAN traffic separately was another
-advantage. KAREN also identified weaknesses of the map. Zooming in and out
-should have hard limits such that the user can not accidentally scale too far in
-either direction. Some of the design choices such as font and colours also made 
-some parts of the map hard to see. 
+%KAREN liked that, at a high level of the map, they could still see which PoPs
+%have the most connected sites due to distant nodes being shown in basic detail.
+%They found that the pipe edge widths were effective at showing differences in
+%bandwidth between nodes. Being able to view VLAN traffic separately was another
+%advantage. KAREN also identified weaknesses of the map. Zooming in and out
+%should have hard limits such that the user can not accidentally scale too far in
+%either direction. Some of the design choices such as font and colours also made 
+%some parts of the map hard to see. 
 
-When asked to compare NetMapJs to PHP Network Weathermap, KAREN stated that some
-of the zoom functionality and the ability to view VLANs separately were the most
-significant advantages over their current implementation. They reported that
-once the discussed weaknesses were ironed out, NetMapJs would make a good upgrade
-to their current tool and they would consider using NetMapJs as a replacement
-network map. They noted that the ability to add specific branding aspects such as
-colours and fonts would be required. Overall, they liked the look of the network
-map and mentioned that it has provoked some thought within the KAREN team.
+%When asked to compare NetMapJs to PHP Network Weathermap, KAREN stated that some
+%of the zoom functionality and the ability to view VLANs separately were the most
+%significant advantages over their current implementation. They reported that
+%once the discussed weaknesses were ironed out, NetMapJs would make a good upgrade
+%to their current tool and they would consider using NetMapJs as a replacement
+%network map. They noted that the ability to add specific branding aspects such as
+%colours and fonts would be required. Overall, they liked the look of the network
+%map and mentioned that it has provoked some thought within the KAREN team.
 
   % Strengths 
   %   > Also think dynamic sizes for links and nodes could be really interesting
@@ -1479,26 +1605,26 @@ map and mentioned that it has provoked some thought within the KAREN team.
   % Any other feedback?
   %
 
-\subsection{Rural Link}
+%\subsection{Rural Link}
 
-Rural Link commented that the dynamic sizes for links and nodes could be really
-interesting given live networking data to view them with. They thought
-navigation combined with the overview plots supported effective interactivity.
-It was suggested, like with KAREN, that the overall user interface needs some
-improvement. For example, more visual hints for moving between sub groups along
-the edges would make that feature more obvious. Rural Link suggested using
-multiple, selectable layout types to allow the user to decide on the best
-positioning. Geographic, logical and automatic are possible layouts types that
-were suggested.
+%Rural Link commented that the dynamic sizes for links and nodes could be really
+%interesting given live networking data to view them with. They thought
+%navigation combined with the overview plots supported effective interactivity.
+%It was suggested, like with KAREN, that the overall user interface needs some
+%improvement. For example, more visual hints for moving between sub groups along
+%the edges would make that feature more obvious. Rural Link suggested using
+%multiple, selectable layout types to allow the user to decide on the best
+%positioning. Geographic, logical and automatic are possible layouts types that
+%were suggested.
 
-Rural Link was also asked to compare NetMapJs to their existing Nagios network
-mapping tool. They found it to be much more interactive, even more so than the
-new Icinga network management system \cite{Icinga_website}. Nagios does not deal
-with loops, its layouts are not very stable and there is no integration of
-performance data in the maps. They would consider using it as a replacement to
-their current map provided that it is easy to import networking data and that
-the user interface is suitably improved. This is particularly important because
-a large screen is used in their office for viewing visualisations. 
+%Rural Link was also asked to compare NetMapJs to their existing Nagios network
+%mapping tool. They found it to be much more interactive, even more so than the
+%new Icinga network management system \cite{Icinga_website}. Nagios does not deal
+%with loops, its layouts are not very stable and there is no integration of
+%performance data in the maps. They would consider using it as a replacement to
+%their current map provided that it is easy to import networking data and that
+%the user interface is suitably improved. This is particularly important because
+%a large screen is used in their office for viewing visualisations. 
 
 \newpage
 
