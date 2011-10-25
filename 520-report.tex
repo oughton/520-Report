@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper]{article}
+\documentclass[11pt, a4paper]{report}
 
 \usepackage{graphicx}
 \usepackage{url}
@@ -13,40 +13,90 @@
 %\addtolength{\textwidth}{1.75in}
 \linespread{1.5}
 
+\makeatletter
+\newcommand\ackname{Acknowledgements}
+\if@titlepage
+  \newenvironment{acknowledgements}{%
+      \null\vfil
+      \@beginparpenalty\@lowpenalty
+      \begin{center}%
+        \bfseries \ackname
+        \@endparpenalty\@M
+      \end{center}}%
+     {\par\vfil\null}
+\else
+  \newenvironment{acknowledgements}{%
+      \if@twocolumn
+        \section*{\abstractname}%
+      \else
+        \small
+        \begin{center}%
+          {\bfseries \ackname\vspace{-.5em}\vspace{\z@}}%
+        \end{center}%
+        \quotation
+      \fi}
+      {\if@twocolumn\else\endquotation\fi}
+\fi
+\makeatother
+
 \begin{document}
+
 \innertitle{Joel Oughton}{Improved Network Map Display}
-\date{26/10/2011}
 
-%\maketitle
-\tableofcontents
+\setcounter{page}{2}
+\pagenumbering{Roman}
 
+\begin{abstract}
+\setcounter{page}{2}
+\thispagestyle{plain}
+
+\noindent Advances in web browser technologies have allowed for highly
+interactive, cross platform applications that have not been fully utilised in
+the computer network industry. The aim of this project has been to use these
+technologies to produce an improved implementation of a network map that
+effectively communicates topology and performance data to its users. The
+development of a map has involved assessing HTML5 technologies, identifying
+important features of network maps, researching relevant information
+visualisation theory and developing working prototypes. Representing computer
+networks in particular can be difficult when the number of nodes and links is
+large. For this project, a network mapping tool called NetMapJs was implemented
+to address weaknesses in current tools. Visualisation techniques were identified
+and used that were effective in addressing the scalability of displays, such as
+semantic zooming and layout grouping. This, along with an expressive way of
+displaying network bandwidth, has resulted in an improved presentation of
+network map displays. To evaluate the implementation, network maps for two
+operational networks were developed which received good feedback from the
+engineers in those organisations.
+
+\end{abstract}
 \newpage
 
-\abs{
+\begin{acknowledgements}
+\setcounter{page}{3}
+\thispagestyle{plain}
 
-Advances in web browser technologies have allowed for highly interactive, cross
-platform applications that have not been fully utilised in the computer network
-industry. The aim of this project has been to use these technologies to produce
-an improved implementation of a network map that effectively communicates
-topology and performance data to its users. The development of a map has
-involved assessing HTML5 technologies, identifying important features of network
-maps, researching relevant information visualisation theory and developing
-working prototypes. Representing computer networks in particular can be
-difficult when the number of nodes and links is large. For this project, a
-network mapping tool called NetMapJs was implemented to address weaknesses in
-current tools. Visualisation techniques were identified and used that were
-effective in addressing the scalability of displays, such as semantic zooming
-and layout grouping. This, along with an expressive way of displaying network
-bandwidth, has resulted in an improved presentation of network map displays. To
-evaluate the implementation, network maps for two operational networks were
-developed which received good feedback from the engineers in those
-organisations.
+\noindent I take this opportunity with great pleasure to thank all of the people
+who provided time and resources to support this project. In particular I would
+like to thank, Dr Richard Nelson, for supervising the project and for supporting
+my understanding of complex network concepts. Professor Mark Apperley, for also
+being a supervisor and for his visualisation insight. Jamie Curtis and David
+Brownlie from Rural Link and KAREN respectively, for providing networking
+datasets and for their descriptive evaluation of NetMapJs. Shane Alcock for the
+hours he spent reviewing this report. Finally, I would like to thank Waikato
+University for hosting my honours year.
 
-}
+\end{acknowledgements}
+\newpage
 
-\section{Introduction}
+\tableofcontents
+
+\chapter{Introduction}
 \label{sec:introduction}
-  % Motivation for my project
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+% Motivation for my project
   % List the achievements (refer to sections)
   %
   %
@@ -182,9 +232,7 @@ results of evaluation by network engineers are discussed. Finally, conclusions
 are drawn and some possible directions of future work are mentioned in Section
 \ref{sec:conclusion}.
 
-\newpage
-
-\section{Related Work}
+\chapter{Related Work}
 \label{sec:related-work}
   % ** General Related Work Topics **
   %   Web graphics sclability 
@@ -215,14 +263,14 @@ network graphing issues and published implementations is analysed. Section
 \ref{sec:current-implementations} looks at some of the popular network map
 implementations and how this project attempts to address the weaknesses of them.
 
-\subsection{Research}
+\section{Research}
 \label{sec:research}
 
 The research related work to this project can be divided into three areas:
 issues relating to computer network visualisation, web based displays and actual
 network map implementations. 
 
-\subsubsection{Computer Network Visualisation}
+\subsection{Computer Network Visualisation}
 \label{sec:computer-network-vis}
 
 Computer network visualisation work includes the related key issues such as
@@ -265,7 +313,7 @@ interactivity technologies available in the browser.
 
 
 
-\subsubsection{Web Based Displays}
+\subsection{Web Based Displays}
 \label{sec:web-based-displays}
 
   % Web Visualisation
@@ -317,7 +365,7 @@ network visualisation in the browser.
 
 
 
-\subsubsection{Published Implementations}
+\subsection{Published Implementations}
 \label{sec:published-implementations}
 
   % Pulished implementations Becker 1995, Paul 2000.
@@ -344,7 +392,7 @@ tool demonstrates useful concepts but is quite dated, so there are many
 improvements possible.
 
 
-\subsection{Current Implementations}
+\section{Current Implementations}
 \label{sec:current-implementations}
   % 
   %  * Add PHP Network weathermap, Nagios etc into this section
@@ -386,9 +434,8 @@ smaller networks and in cases where a specific area of interest is known. In
 this project, zooming and panning is presented as a more effective way of
 navigating the information space of large computer networks.
 
-\newpage
 
-\section{Background}
+\chapter{Background}
 \label{sec:background}
   % Background section
   % What can't I assume that people will have as a general background
@@ -403,7 +450,7 @@ producing network maps. Sections \ref{sec:technologies} and \ref{sec:libraries}
 note the technologies and libraries used and the reasons behind why they were
 chosen.
 
-\subsection{Datasets}
+\section{Datasets}
 \label{sec:datasets}
   %
   % * What datasets did I use?
@@ -449,7 +496,7 @@ paths. Appendix \ref{app:crcnetnagios} contains an example of the Rural Link
 network map. 
 
 
-\subsection{Technologies}
+\section{Technologies}
 \label{sec:technologies}
   % Go over the key technologies used
   %   > eg Javascript, Canvas, HTML/CSS
@@ -502,7 +549,7 @@ elements on a web page as browser support is native and the standards are well
 defined.
 
 
-\subsubsection{Graphics Technologies}
+\subsection{Graphics Technologies}
 
 \begin{figure}
 \centering
@@ -557,7 +604,7 @@ these technologies shift in the future, a new graphic system could be
 implemented and slotted in to reflect the change.
 
 
-\subsection{Libraries}
+\section{Libraries}
 \label{sec:libraries}
   % Go over the key libraries used
   %   > eg jQuery, Javascript Infovis Toolkit, arbor, QUnit
@@ -585,9 +632,8 @@ mechanisms for changing physics parameters such as gravity and friction
 jQuery. This assisted with test driven development during the implementation
 stage of the project.
 
-\newpage
 
-\section{Visual Design} 
+\chapter{Visual Design} 
 \label{sec:visual-design}
   % Overview of visual design
 
@@ -595,7 +641,7 @@ In this section, the most significant design aspects of NetMapJs are explained.
 Justification for each of the design decisions is given along with example
 screen shots taken from NetMapJs views.
 
-\subsection{Nodes}
+\section{Nodes}
 \label{sec:nodes.vis}
   % Design considerations for nodes
   % Nodes can be sub-networks
@@ -650,7 +696,7 @@ node.}
 \label{fig:nodes1.1}
 \end{figure}
 
-\subsection{Edges}
+\section{Edges}
 \label{sec:edges.vis}
   % Simple line between two nodes
   % Can make use of this space more effectively
@@ -659,13 +705,20 @@ node.}
   %   > Quantitative vs qualitative
   % Screenshots
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=170mm,height=102.54mm]{assets/edges1-0.eps}
+\caption{An overall view of the Rural Link network. Nodes are positioned to
+reduce edge crossings using a force directed layout.}
+\label{fig:edges1.0}
+\end{figure}
+
 Edges between nodes in a network map indicate that two or more devices are
 connected to each other by some medium. A single line between two nodes is
 enough to show this relationship. If this line is thin then it reduces the
 amount of clutter for the same number of edges \cite{Tufte_2007}. Figure
 \ref{fig:edges1.0} shows the display of a network with many nodes using thin
 lines.
-% TODO: fill out paragraph more?
 
 In the case of network maps, there is often monitoring data available that
 directly relates to the performance of a given edge medium. This data could be
@@ -702,14 +755,6 @@ and Wellington PoPs in the KAREN map.
 
 \begin{figure}
 \centering
-\includegraphics[width=170mm,height=102.54mm]{assets/edges1-0.eps}
-\caption{An overall view of the Rural Link network. Nodes are positioned to
-reduce edge crossings using a force directed layout.}
-\label{fig:edges1.0}
-\end{figure}
-
-\begin{figure}
-\centering
 \includegraphics[width=170mm,height=59.03mm]{assets/edges1-1.eps}
 \caption{A diagram showing how edge data can be visualised effectively.}
 \label{fig:edges1.1}
@@ -723,7 +768,7 @@ Wellington and Palmerston North PoPs in the KAREN network.}
 \label{fig:edges1.2}
 \end{figure}
 
-\subsection{Layouts}
+\section{Layouts}
 \label{sec:layouts.vis}
   % Explain importance of node layout
   %   > Different subgroups - different layouts
@@ -786,7 +831,7 @@ a star layout applied.}
 \end{figure}
 
 
-\subsection{Navigation}
+\section{Navigation}
 \label{sec:navigation.vis}
   % Details of navigation
   % Why is getting it right important
@@ -878,7 +923,7 @@ view shows where they would end up after the animated movement.}
 \label{fig:nav1.2}
 \end{figure}
 
-\subsection{Overviews}
+\section{Overviews}
 \label{sec:overviews.vis}
   % The problem - 
   % How is it solved - 
@@ -915,9 +960,8 @@ and the view port boxes change size and position accordingly.}
 \label{fig:overviews1.0}
 \end{figure}
 
-\newpage
 
-\section{Implementation} 
+\chapter{Implementation} 
 \label{sec:implementation}
   % Overall implementation
   % Client side / server side
@@ -931,7 +975,7 @@ rest of the sections describe how aspects of the visual design were implemented.
 Supporting functions such as overlays and an editor are discussed in sections
 \ref{sec:overlays.impl} and \ref{sec:editor.impl} respectively.
 
-\subsection{Client / Server Model}
+\section{Client / Server Model}
 \label{sec:client-server-model.impl}
   % Give diagram of the over all structure of application
   %   * How the client side works in a lot of detail
@@ -992,7 +1036,7 @@ client through the use of the web API.
 \label{fig:implementation-overview}
 \end{figure}
 
-\subsection{Nodes and Edges}
+\section{Nodes and Edges}
 \label{sec:nodes-and-edges.impl}
   % How were nodes and edges implemented
   %   * Both have display method and contains method
@@ -1061,7 +1105,7 @@ multiplied by the half of the rectangle's length.
 
 % image nodes
 
-\subsection{Groups}
+\section{Groups}
 \label{sec:groups.impl}
   % How were groups implemented?
   %   * Nodes can have parents
@@ -1101,7 +1145,7 @@ applies the specified layout algorithm to the group or the default if none has
 been chosen. 
 
 
-\subsection{Layouts}
+\section{Layouts}
 \label{sec:layouts.impl}
   % Overview of layout system
   %   How it is designed to be extendible
@@ -1160,7 +1204,7 @@ the particle system and the compute method transfers the positions from Arbor to
 the node objects. This way, the compute method can be continuously called in
 order to give an animated effect as the nodes move toward their ideal positions.
 
-\subsection{Navigation}
+\section{Navigation}
 \label{sec:navigation.impl}
   % How is navigation implemented overall:
   %   > Canvas translate/scale offset methods
@@ -1206,6 +1250,14 @@ as shown in Figure \ref{fig:nav2.0}. Group nodes are automatically assigned a
 depth based on the number of parent nodes between them and the top level.
 Manual assignment of depth values is also possible. 
 
+\begin{figure}[h]
+\includegraphics[width=120mm,height=87.2mm]{assets/nav2-0.pdf}
+\caption{A space-scale diagram showing different levels of magnification being
+mapped to depth levels where the detail changes. (Adapted from Furnas and
+Bederson \cite{Furnas_1995}.) } 
+\label{fig:nav2.0} 
+\end{figure}
+
 A rendering function handles when and how each visualisation aspect should be
 displayed. Nodes, labels and edges that have a depth value that is less than or
 equal to the zoom offset are visible in the map. Nodes and edges that have a
@@ -1232,15 +1284,7 @@ difference required for centering and the scale offset necessary to zoom in on
 the destination node. A JavaScript interval is set to animate the view port into
 the new position by incrementing coordinates in each step.
 
-\begin{figure} \centering
-\includegraphics[width=120mm,height=87.2mm]{assets/nav2-0.pdf}
-\caption{A space-scale diagram showing different levels of magnification being
-mapped to depth levels where the detail changes. (Adapted from Furnas and
-Bederson \cite{Furnas_1995}.) } 
-\label{fig:nav2.0} 
-\end{figure}
-
-\subsection{Overviews}
+\section{Overviews}
 \label{sec:overviews.impl}
   % How are overviews implemented?
   %
@@ -1272,7 +1316,7 @@ the main network map. When the event is triggered, the overview calculates new
 coordinates and dimensions for the view port box, and then redraws it.
 
 
-\subsection{Overlays}
+\section{Overlays}
 \label{sec:overlays.impl}
   % Similar to overviews in that there is an overlay manager and overlays
   % 
@@ -1320,7 +1364,7 @@ functionality.}
 \label{fig:overlays1.0} 
 \end{figure}
 
-\subsection{Editor}
+\section{Editor}
 \label{sec:editor.impl}
   % Overview of the editor
   %   Why do we need it?
@@ -1367,21 +1411,20 @@ the editor.
 \end{figure}
 
 %TODO
-%\subsection{Layers}
+%\section{Layers}
 % how I tried and failed (Network descriptor language) how somewhat allow for
 % manual layering
 % Maybe just add a Problems Faced section?? - No add Discussion section just
 % before conclusion
 
-%\subsection{Debugger}
+%\section{Debugger}
 %\label{sec:debugger.impl}
 
-\newpage
 
 %\section{Deployment Examples}
 %\label{sec:deployment-examples}
 
-\section{Evaluation}
+\chapter{Evaluation}
 \label{sec:evaluation}
 %
 
@@ -1624,13 +1667,12 @@ implemented improvements to existing computer network maps.
 %the user interface is suitably improved. This is particularly important because
 %a large screen is used in their office for viewing visualisations. 
 
-\newpage
 
 %\section{Future Work}
 %\label{sec:future-work}
 %\newpage
 
-\section{Conclusions and Future Work}
+\chapter{Conclusions and Future Work}
 \label{sec:conclusion}
 
   % What were my results? (Don't state here, but important to think about)
@@ -1753,8 +1795,6 @@ extension to allow NetMapJs to be used with a minimal installation and setup
 overhead.
 
 
-\newpage
-
 %TODO
 %\section{Acknowledgements}
 %\label{Acknowlements}
@@ -1762,26 +1802,22 @@ overhead.
 \bibliographystyle{plain}
 \bibliography{520-report}
 
-\newpage
-
 \appendix
 \appendixpage
 
-\section{KAREN PHP Network Weathermap}
+\chapter{KAREN PHP Network Weathermap}
 \label{app:karenphp}
 \centering
 \includegraphics[width=170mm,height=90.76mm]{assets/karen-phpweathermap.eps}
 
-\newpage
 
-\section{Rural Link Nagios Network Map}
+\chapter{Rural Link Nagios Network Map}
 \label{app:crcnetnagios}
 \centering
 \includegraphics[width=170mm,height=136mm]{assets/rurallink-nagios.eps}
 
-\newpage
 
-\section{Evaluation Question Set}
+\chapter{Evaluation Question Set}
 \label{app:evaluation-questions}
 
 \begin{enumerate}
